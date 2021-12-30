@@ -1,0 +1,87 @@
+<div class="animated fadeIn">
+    <div class="row" *ngIf="isLoading else elseBlock">
+        <div class="col">
+            <span class="fa fa-spinner fa-spin fa-pulse"></span>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <div class="row mb-4">
+            <div class="col">
+                <h4>Branch</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <span>NAME</span>
+                        <span class="pull-right">
+                            <button class="btn btn-light btn-icon btn-sm ">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                        </span>
+                        <h3>{{branch.name}}</h3>
+                        <span>CODE</span>
+                        <h3>{{branch.code}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <h4>Manager</h4>
+                <div class="card">
+                    <div *ngIf="!isEditManager else mangerForm" class="card-body">
+                        <span class="pull-right">
+                            <button (click)="editBranchManager()" class="btn btn-light btn-icon btn-sm ">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                        </span>
+                        <span *ngIf="branch.managerId else managerNA">
+                            <span *ngIf="branch.manager.fullName">
+                                <span>Full name</span>
+                                <h4>{{branch.manager.fullName}}</h4>
+                            </span>
+                            <span *ngIf="branch.manager.email">
+                                <span>Email</span>
+                                <h4>{{branch.manager.email}}</h4>
+                            </span>
+                            <span *ngIf="branch.manager.username">
+                                <span>Username</span>
+                                <h4>{{branch.manager.username}}</h4>
+                            </span>
+                        </span>
+                        <ng-template #managerNA>
+                            <p>N/A</p>
+                        </ng-template>
+                    </div>
+                    <ng-template #mangerForm>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span *ngIf="!isLoadingManager else loadingManagerBlock">
+                                        <select [(ngModel)]="selectedManagerId" class="form-control">
+                                            <option [ngValue]="null">None</option>
+                                            <option *ngFor="let m of managersPage.items" [ngValue]="m.id">
+                                                {{m.username}}</option>
+                                            </select>
+                                    </span>
+                                    <ng-template #loadingManagerBlock>
+                                        <span class="fa fa-spinner fa-spin fa-pulse"></span>
+                                    </ng-template>
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="pull-right">
+                                        <span *ngIf="!savingBranchManager else savingBranchManagerLoader">
+                                            <button (click)="cancelEditBranchManager()" class="btn btn-default btn-icon btn-sm">cancle</button>
+                                            <button (click)="saveBranchManager()" class="btn btn-primary btn-icon btn-sm ">save</button>
+                                        </span>
+                                        <ng-template #savingBranchManagerLoader>
+                                            <span class="fa fa-spinner fa-spin fa-pulse"></span>
+                                        </ng-template>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

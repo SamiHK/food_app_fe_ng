@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+    <div class="row mb-4">
+        <div class="col">
+            <button routerLink="register" class="btn btn-primary pull-right">Register New Manager</button>
+        </div>
+    </div>
+    <!-- <div class="card">
+        <div class="card-body">
+        </div>
+    </div> -->
+    <div class="card">
+        <div class="card-header">
+            <strong>Filter</strong>
+            <div class="card-header-actions">
+                <button class="btn btn-sm btn-default" (click)="isCollapsed = !isCollapsed">
+                    <span class="fa animated" [ngClass]="isCollapsed ? 'fa-plus':'fa-minus'"></span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body animated fadeIn" [collapse]="isCollapsed">
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="search">Search</label>
+                        <input id="search" class="form-control" type="search" placeholder="Search by full name, email and username">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <table class="table table-hover table-hover-link">
+            <thead>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Branch</th>
+            </thead>
+            <tbody>
+                <tr *ngIf="listLoading else elseBlock">
+                    <td colspan="4" class="text-center">
+                        <span class="fa fa-spinner fa-spin fa-pulse"></span>
+                        Loading...
+                    </td>
+                </tr>
+                <ng-template #elseBlock>
+                    <tr *ngFor="let i of page.items" [routerLink]="[i.id]">
+                        <td>{{i.fullName}}</td>
+                        <td>{{i.username}}</td>
+                        <td>{{i.email}}</td>
+                        <td>
+                            <app-then-na [content]="i.branch"></app-then-na>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <div class="row p-3">
+            <div class="col">
+                <pagination [totalItems]="page.total" [(ngModel)]="page.number"
+                    [itemsPerPage]="page.size" (pageChanged)="pageChanged($event)" class="m-0"></pagination>
+            </div>
+        </div>
+    </div>
+</div>

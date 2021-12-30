@@ -1,0 +1,8 @@
+<span *ngIf="control.errors && control.dirty && control.touched">
+    <p *ngIf="control.errors.required else elseBlock" class="text-danger">
+        This field is required
+    </p>
+    <ng-template #elseBlock>
+        {{control.errors | json}}
+    </ng-template>
+</span>

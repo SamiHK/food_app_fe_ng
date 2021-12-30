@@ -1,0 +1,108 @@
+<div class="animated fadeIn">
+    <div class="row" *ngIf="isLoading else elseBlock">
+        <div class="col">
+            <span class="fa fa-spinner fa-spin fa-pulse"></span>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <div class="row mb-4">
+            <div class="col">
+                <h4>Manager</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <span>USERNAME</span>
+                        <h3>{{manager.username}}</h3>
+                        <ng-template [ngIf]="!editEmail" [ngIfElse]="emailForm">
+                            <span>EMAIL</span>
+                            <span class="">
+                                <button (click)="editEmail = !editEmail" class="btn btn-light btn-pill btn-sm ml-2">
+                                    <span class="fa fa-pencil"></span>
+                                </button>
+                            </span>
+                            <h3>{{manager.email}}</h3>
+                        </ng-template>
+                        <ng-template #emailForm>
+                            <form (ngSubmit)="updateEmail()">
+                                <fieldset [disabled]="savingEmail">
+                                    <div class="row align-items-end">
+                                        <div class="col-md-4">
+                                            <label>Email</label>
+                                            <input [(ngModel)]="manager.email" name="email" type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button (click)="editEmail = !editEmail" class="btn btn-light" type="button">
+                                                Cancel
+                                            </button>
+                                            <button class="btn btn-primary" type="submit">
+                                                Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </ng-template>
+                        <span>Full Name</span>
+                        <span class="">
+                            <button class="btn btn-light btn-pill btn-sm ml-2">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                        </span>
+                        <h3>{{manager.fullName}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <h4>Branch</h4>
+                <div class="card">
+                    <div *ngIf="!isEditBranch else branchForm" class="card-body">
+                        <span class="pull-right">
+                            <button (click)="editBranch()" class="btn btn-light btn-icon btn-sm ">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                        </span>
+                        <span *ngIf="manager.branchId else branchNA">
+                            <span>NAME</span>
+                            <h3>{{manager.branch.name}}</h3>
+                            <span>CODE</span>
+                            <h3>{{manager.branch.code}}</h3>
+                        </span>
+                        <ng-template #branchNA>
+                            <span>Not Assigned</span>
+                        </ng-template>
+                    </div>
+                    <ng-template #branchForm>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span *ngIf="!isLoadingBranch else loadingBranchBlock">
+                                        <select [(ngModel)]="selectedBranchId" class="form-control">
+                                            <option [ngValue]="null">None</option>
+                                            <option *ngFor="let b of branchPage.items" [ngValue]="b.id">
+                                                {{b.code}} ({{b.name}})</option>
+                                            </select>
+                                    </span>
+                                    <ng-template #loadingBranchBlock>
+                                        <span class="fa fa-spinner fa-spin fa-pulse"></span>
+                                    </ng-template>
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="pull-right">
+                                        <span *ngIf="!savingBranchManager else savingBranchManagerLoader">
+                                            <button (click)="cancleEditBranch()" class="btn btn-default btn-icon btn-sm">cancle</button>
+                                            <button (click)="saveBranchManager()" class="btn btn-primary btn-icon btn-sm ">save</button>
+                                        </span>
+                                        <ng-template #savingBranchManagerLoader>
+                                            <span class="fa fa-spinner fa-spin fa-pulse"></span>
+                                        </ng-template>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

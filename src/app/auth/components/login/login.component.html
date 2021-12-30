@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card-group">
+            <div class="card p-4">
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <h1>Login</h1>
+                        <p class="text-muted">Sign In to your account</p>
+                        {{form.submitted}}
+                        <alert *ngFor="let alert of alerts" [type]="alert.type" 
+                            dismissible='true' (onClosed)="closeAlert(alert)">
+                            <p><strong>{{alert.title}}</strong> {{alert.message}}</p>
+                        </alert>
+                        <fieldset [disabled]="submitting">
+                            <div class="form-group mb-3">
+                                <label for="username">Username</label>
+                                <input formControlName='username' id="username" class="form-control" placeholder="username or youremail@domain.com" autocomplete="username" required autofocus tabindex="1">
+                                <app-input-error-helper [control]="form.controls.username"></app-input-error-helper>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="password">Password</label>
+                                <a routerLink="/forgotPassword" class="pull-right" tabindex="4">Forgot password?</a>
+                                <input formControlName='password' id="password" type="password" class="form-control" placeholder="Password" required tabindex="2">
+                                <app-input-error-helper [control]="form.controls.password"></app-input-error-helper>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-block btn-primary px-4" tabindex="3">Login</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                <div class="card-body text-center">
+                    <div>
+                    <h2>Sign up</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <button routerLink="/register" type="button" class="btn btn-primary active mt-3" tabindex="5">Register Now!</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
