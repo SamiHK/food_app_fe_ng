@@ -9,7 +9,9 @@
                         {{form.submitted}}
                         <alert *ngFor="let alert of alerts" [type]="alert.type" 
                             dismissible='true' (onClosed)="closeAlert(alert)">
-                            <p><strong>{{alert.title}}</strong> {{alert.message}}</p>
+                            <strong>{{alert.title}}</strong>
+                            <hr>
+                            <p class="m-0">{{alert.message}}</p>
                         </alert>
                         <fieldset [disabled]="submitting">
                             <div class="form-group mb-3">

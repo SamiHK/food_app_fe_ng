@@ -2,14 +2,19 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h1>Register New Manager</h1>
+                <h1 class="mb-4">Register New Manager</h1>
+                <alert *ngFor="let a of alerts" [type]="a.type" dismissible='true'>
+                    <h5>{{a.title}}</h5>
+                    <hr>
+                    {{a.message}}
+                </alert>
                 <tabset justified="true" #formTabs>
-                    <tab heading="Username" id="username-tab">
+                    <tab heading="Step 1" id="username-tab">
                         <form [formGroup]="form_1" (ngSubmit)="onSumbitForm1()">
                             <fieldset [disabled]="isForm1Saving">
                                 <div class="form-group">
-                                    <!-- <label>username</label> -->
-                                    <input formControlName="username" class="form-control" type="text" >
+                                    <label>username</label>
+                                    <input formControlName="username" class="form-control" type="text" autofocus >
                                     <app-input-error-helper [control]="form_1.controls.username"></app-input-error-helper>
                                 </div>
                                 <div class="row">
@@ -20,42 +25,23 @@
                             </fieldset>
                         </form>
                     </tab>
-                    <tab heading="Email" id="email-tab" disabled="false">
+                    <tab heading="Step 2" id="password-tab" disabled="false" >
                         <form [formGroup]="form_2" (ngSubmit)="onSumbitForm2()">
                             <fieldset [disabled]="isForm2Saving">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input formControlName="email" class="form-control" type="text" >
-                                    <app-input-error-helper [control]="form_2.controls.email"></app-input-error-helper>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="pull-right">
-                                            <button (click)="skipForm2()" type="submit" class="btn btn-default">Skip</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </span>
-                                    </div>
-                                </div>        
-                            </fieldset>
-                        </form>
-                        
-                    </tab>
-                    <tab heading="Password" id="password-tab" disabled="false" >
-                        <form [formGroup]="form_3" (ngSubmit)="onSumbitForm3()">
-                            <fieldset [disabled]="isForm3Saving">
-                                <div class="form-group">
                                     <label>Password</label>
                                     <input formControlName="password" class="form-control" type="password" autocomplete="false" >
-                                    <app-input-error-helper [control]="form_3.controls.password"></app-input-error-helper>
+                                    <app-input-error-helper [control]="form_2.controls.password"></app-input-error-helper>
                                 </div>
                                 <div class="form-group">
                                     <label>Confrm Password</label>
                                     <input formControlName="confirmPassword" class="form-control" type="password" autocomplete="false">
-                                    <app-input-error-helper [control]="form_3.controls.confirmPassword"></app-input-error-helper>
+                                    <app-input-error-helper [control]="form_2.controls.confirmPassword"></app-input-error-helper>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <span class="pull-right">
+                                            <button (click)="skipForm2()" type="button" class="btn btn-light">Skip</button>
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </span>
                                     </div>

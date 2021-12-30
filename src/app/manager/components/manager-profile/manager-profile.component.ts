@@ -28,11 +28,15 @@ export class ManagerProfileComponent implements OnInit {
     }
   }
 
+  async loadManager(){
+    this.isLoading = true;
+    this.manager = await this.managerService.get(this.manager.id).toPromise();
+    this.isLoading = false;
+  }
+
   async ngOnInit() {
     if(this.manager.id){
-      this.isLoading = true;
-      this.manager = await this.managerService.get(this.manager.id).toPromise();
-      this.isLoading = false;
+      this.loadManager();
     }
   }
 
@@ -53,22 +57,20 @@ export class ManagerProfileComponent implements OnInit {
   }
   
   async saveBranchManager(){
-    this.savingBranchManager = true;
-    await this.branchService.saveManager(this.selectedBranchId, this.manager.id).toPromise();
-    this.manager = await this.managerService.get(this.manager.id).toPromise();
-    this.branchPage = await this.branchService.available().toPromise();
-    this.savingBranchManager = false;
+    if(this.selectedBranchId){
+      this.savingBranchManager = true;
+      await this.branchService.saveManager(this.selectedBranchId, this.manager.id).toPromise();
+      this.savingBranchManager = false;
+      this.manager = await this.managerService.get(this.manager.id).toPromise();
+      this.branchPage = await this.branchService.available().toPromise();
+      this.selectedBranchId = null;
+    }
     this.isEditBranch = !this.isEditBranch;
-    this.selectedBranchId = null;
   }
 
-  editEmail = false;
-  savingEmail = false;
-  async updateEmail(){
-    this.savingEmail = true;
-    await this.managerService.updateEmail(this.manager.id, {email: this.manager.email}).toPromise();
-    this.savingEmail = false;
-    this.editEmail = false;
+  onUpdateUser(e){
+    // console.log(this.manager);
+    Object.assign(this.manager, e);
+    // console.log(this.manager);
   }
-
 }

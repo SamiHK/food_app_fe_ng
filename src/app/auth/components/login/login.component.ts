@@ -47,33 +47,32 @@ export class LoginComponent implements OnInit {
     if(this.form.valid){
       this.alerts = [];
       this.submitting = true;
-      let response = await this.authService.login(this.form.value).toPromise();
-      if(response.error){
-        // this.errorResponse = response;
+      await this.authService.login(this.form.value).toPromise()
+      .then(response => {
+        // console.log(response);
+        if(response && response.error){
+          // this.errorResponse = response;
+          this.alerts.push({
+            type: 'danger',
+            title: response.error,
+            message: response.message
+          });
+        } else if(response){
+          let authUser : AuthUser = response;
+          this.store.dispatch(loginAction(authUser));
+          this.router.navigate(['/dashboard']);  
+        }
+      })
+      .catch(e => {
         this.alerts.push({
           type: 'danger',
-          title: response.error,
-          message: response.message
-        });
-      } else {
-        let authUser : AuthUser = response;
-        this.store.dispatch(loginAction(authUser));
-        this.router.navigate(['dashboard']);  
-        // if(authUser && authUser.role){
-        //   switch(authUser.role){
-        //     case 'ADMIN':
-        //       this.router.navigateByUrl(adminNavItems[0].url as string);  
-        //       break;
-        //     case 'MANAGER':
-        //       this.router.navigateByUrl(managerNavItems[0].url as string);  
-        //       break;
-        //     case 'SALESPERSON':
-        //       this.router.navigateByUrl(salespersonNavItems[0].url as string);  
-        //       break;
-        //   }
-        // }
-      }
-      this.submitting = false;
+          title: e.code,
+          message: e.message
+        });        
+      })
+      .finally(() => {
+        this.submitting = false;
+      });
     }
   }
 

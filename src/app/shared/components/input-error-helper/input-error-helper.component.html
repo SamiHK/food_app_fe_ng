@@ -1,8 +1,26 @@
-<span *ngIf="control.errors && control.dirty && control.touched">
-    <p *ngIf="control.errors.required else elseBlock" class="text-danger">
-        This field is required
+<span *ngIf="control.errors && (control.dirty || control.touched)">
+    <p *ngIf="control.errors.required" class="text-danger mt-1">
+        this field is required
     </p>
-    <ng-template #elseBlock>
+    <p *ngIf="control.errors.email" class="text-danger mt-1">
+        not a valid email
+    </p>
+    <p *ngIf="control.errors.duplicate" class="text-danger mt-1">
+        this email is already registered. try another one.
+    </p>
+    <p *ngIf="control.errors.passwordNotMatch" class="text-danger mt-1">
+        password does not match
+    </p>
+    <p *ngIf="control.errors.minlength" class="text-danger mt-1">
+        min characters should be {{control.errors.minlength.requiredLength}}
+    </p>
+    <p *ngIf="control.errors.maxlength" class="text-danger mt-1">
+        max characters should be {{control.errors.maxlength.requiredLength}}
+    </p>
+    <p *ngIf="control.errors.custom" class="text-danger mt-1">
+        {{control.errors.custom}}
+    </p>
+    <!-- <ng-template #elseBlock>
         {{control.errors | json}}
-    </ng-template>
+    </ng-template> -->
 </span>

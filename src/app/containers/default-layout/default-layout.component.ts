@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AppSidebarComponent } from '@coreui/angular';
 import { Store } from '@ngrx/store';
 import { logoutAction } from '../../auth/ngrx/actions';
 import { AuthGuard } from '../../auth/services/auth.guard';
-import { User } from '../../models/user';
-import { navItems, loadingNavItem, adminNavItems, managerNavItems, salespersonNavItems } from '../../_nav';
+import { loadingNavItem, adminNavItems, managerNavItems, salespersonNavItems } from '../../_nav';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +15,7 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   // public navItemsLoading = false;
   public navItems = loadingNavItem;
+  @ViewChild('appSidebar') appSidebar: AppSidebarComponent;
 
   constructor(private store: Store<{authReducer: AuthGuard}>){}
   

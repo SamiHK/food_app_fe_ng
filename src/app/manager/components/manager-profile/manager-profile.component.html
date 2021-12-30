@@ -5,67 +5,28 @@
         </div>
     </div>
     <ng-template #elseBlock>
-        <div class="row mb-4">
+        <div class="row">
             <div class="col">
-                <h4>Manager</h4>
-                <div class="card">
-                    <div class="card-body">
-                        <span>USERNAME</span>
-                        <h3>{{manager.username}}</h3>
-                        <ng-template [ngIf]="!editEmail" [ngIfElse]="emailForm">
-                            <span>EMAIL</span>
-                            <span class="">
-                                <button (click)="editEmail = !editEmail" class="btn btn-light btn-pill btn-sm ml-2">
-                                    <span class="fa fa-pencil"></span>
-                                </button>
-                            </span>
-                            <h3>{{manager.email}}</h3>
-                        </ng-template>
-                        <ng-template #emailForm>
-                            <form (ngSubmit)="updateEmail()">
-                                <fieldset [disabled]="savingEmail">
-                                    <div class="row align-items-end">
-                                        <div class="col-md-4">
-                                            <label>Email</label>
-                                            <input [(ngModel)]="manager.email" name="email" type="text" class="form-control">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button (click)="editEmail = !editEmail" class="btn btn-light" type="button">
-                                                Cancel
-                                            </button>
-                                            <button class="btn btn-primary" type="submit">
-                                                Save
-                                            </button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </ng-template>
-                        <span>Full Name</span>
-                        <span class="">
-                            <button class="btn btn-light btn-pill btn-sm ml-2">
-                                <span class="fa fa-pencil"></span>
-                            </button>
-                        </span>
-                        <h3>{{manager.fullName}}</h3>
-                    </div>
-                </div>
+                <app-user-profile-card title="Manager" [user]="manager" (updateUser)="onUpdateUser($event)"></app-user-profile-card>
             </div>
         </div>
-        <div class="row mb-4">
+        <div class="row">
             <div class="col">
                 <h4>Branch</h4>
                 <div class="card">
                     <div *ngIf="!isEditBranch else branchForm" class="card-body">
-                        <span class="pull-right">
-                            <button (click)="editBranch()" class="btn btn-light btn-icon btn-sm ">
+                        <span class="pull-right">   
+                            <button (click)="editBranch()" class="btn btn-light btn-sm ">
                                 <span class="fa fa-pencil"></span>
+                            </button>
+                            <button *ngIf="manager.branchId" [routerLink]="['/branches', manager.branchId]" class="btn btn-dark btn-sm">
+                                <span class="fa fa-eye"></span>
                             </button>
                         </span>
                         <span *ngIf="manager.branchId else branchNA">
-                            <span>NAME</span>
+                            <span>Name</span>
                             <h3>{{manager.branch.name}}</h3>
-                            <span>CODE</span>
+                            <span>Code</span>
                             <h3>{{manager.branch.code}}</h3>
                         </span>
                         <ng-template #branchNA>

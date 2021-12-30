@@ -10,6 +10,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    AlertModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
     TabsModule.forRoot()

@@ -9,20 +9,20 @@
         </div>
     </div> -->
     <div class="card">
-        <div class="card-header">
+        <!-- <div class="card-header">
             <strong>Filter</strong>
             <div class="card-header-actions">
                 <button class="btn btn-sm btn-default" (click)="isCollapsed = !isCollapsed">
                     <span class="fa animated" [ngClass]="isCollapsed ? 'fa-plus':'fa-minus'"></span>
                 </button>
             </div>
-        </div>
+        </div> -->
         <div class="card-body animated fadeIn" [collapse]="isCollapsed">
-            <form>
+            <form [formGroup]="filterForm" (ngSubmit)="filter()">
                 <div class="row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-12">
                         <label for="search">Search</label>
-                        <input id="search" class="form-control" type="search" placeholder="Search by full name, email and username">
+                        <input formControlName='search' class="form-control" type="search" placeholder="Search by name, code or address">
                     </div>
                 </div>
             </form>
@@ -31,7 +31,7 @@
     <div class="card">
         <table class="table table-hover table-hover-link">
             <thead>
-                <th>CODE</th>
+                <th>Code</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Manager</th>

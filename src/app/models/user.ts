@@ -4,6 +4,8 @@ export class User extends Audit {
     id: string;
     username: string;
     email: string;
+    firstName: string;
+    lastName: string;
     fullName: string;
     enabled: boolean;
     lastLogin: string;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Manager } from '../../../models/manager';
 import { Page } from '../../../models/page';
+import { AuthService } from '../../../shared/services/auth.service';
 import { ManagerService } from '../../services/manager.service';
 
 @Component({
@@ -13,11 +15,21 @@ export class ManagerListComponent implements OnInit {
 
   page = new Page<Manager>();
   listLoading = false;
+  filterForm = new FormGroup({
+    'search': new FormControl(null, [Validators.required])
+  });
 
-  constructor(private managerService: ManagerService) { }
+  constructor(private managerService: ManagerService, private authService: AuthService) { }
 
   async ngOnInit() {
     await this.loadPage();
+  }
+
+  async filter(){
+    if(this.filterForm.valid)
+      this.loadPage(this.filterForm.value)
+    else 
+      this.loadPage()
   }
   
   async loadPage(params?){
@@ -28,9 +40,28 @@ export class ManagerListComponent implements OnInit {
   
   async pageChanged($event) {
     console.log($event);
-    await this.loadPage({
+    let params = {
       number: $event.page
-    });
+    }
+    if(this.filterForm.valid){
+      Object.assign(params, this.filterForm.value);
+    }
+    await this.loadPage(params);
   }
+
+  async onEnableChange($event, user){
+    await this.authService.enabled(user.id, $event).toPromise()
+    .then(r => {
+      // console.log(r)
+      Object.assign(user, r);
+    })
+    .then(e => {
+      console.log(e)
+    })
+    .finally(() => {
+      // console.log(r)
+    })
+  }
+
 
 }

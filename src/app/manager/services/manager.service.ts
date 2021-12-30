@@ -24,13 +24,6 @@ export class ManagerService {
     return this.httpClient.post<Manager>(`${this.BASE_URL}`, body).pipe(catchError(this.modalService.showErrorModal));
   }
 
-  updateEmail(id, body) {
-    return this.httpClient.post<Manager>(`${this.BASE_URL}/${id}/email`, body).pipe(catchError(this.modalService.showErrorModal));
-  }
-
-  updatePassword(id, body) {
-    return this.httpClient.post<Manager>(`${this.BASE_URL}/${id}/password`, body).pipe(catchError(this.modalService.showErrorModal));
-  }
 
   filter(params?) {
     return this.httpClient.get<Page<Manager>>(`${this.BASE_URL}`, {

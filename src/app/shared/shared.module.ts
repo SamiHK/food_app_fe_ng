@@ -5,6 +5,9 @@ import { ErrorModalComponent } from './components/error-modal/error-modal.compon
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ThenNaComponent } from './components/then-na/then-na.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 
 
@@ -13,16 +16,21 @@ import { LoaderComponent } from './components/loader/loader.component';
     InputErrorHelperComponent,
     ErrorModalComponent,
     ThenNaComponent,
-    LoaderComponent
+    LoaderComponent,
+    UserProfileCardComponent,
+    AlertModalComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ModalModule.forRoot()
   ],
   exports: [
     InputErrorHelperComponent,
     ThenNaComponent,
-    LoaderComponent
+    LoaderComponent,
+    UserProfileCardComponent
   ]
 })
 export class SharedModule { }

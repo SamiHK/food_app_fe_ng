@@ -24,9 +24,20 @@ export class BranchSaveComponent implements OnInit {
   async onSubmit(){
     if(this.form.valid){
       this.isSubmitting = true;
-      let branch = await this.branchService.save(this.form.value).toPromise()
-      this.isSubmitting = false;
-      this.router.navigate(['branches', branch.id]);
+      await this.branchService.save(this.form.value).toPromise()
+      .then(e => {
+        this.router.navigate(['branches', e.id]);
+      })
+      .catch(e => {
+        if(e && e.code == 'ER_DUP_ENTRY'){
+          this.form.controls.code.setErrors({
+            custom: 'this code is already assigned. Try another one'
+          })
+        }
+      })
+      .finally(() => {
+        this.isSubmitting = false;
+      })
     }
   }
 
