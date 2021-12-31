@@ -29,20 +29,6 @@ export class UserProfileCardComponent implements OnInit {
   
   ngOnInit(): void {
   }
-
-  async onEnableChange($event){
-    await this.authService.enabled(this.user.id, $event).toPromise()
-    .then(r => {
-      // console.log(r)
-      Object.assign(this.user, r);
-    })
-    .then(e => {
-      console.log(e)
-    })
-    .finally(() => {
-      // console.log(r)
-    })
-  }
   
   editAuthForm(){
     this.isEditAuth = true;

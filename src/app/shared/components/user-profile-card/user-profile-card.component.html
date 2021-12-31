@@ -8,12 +8,7 @@
                     <span class="fa fa-pencil"></span>
                 </button>
             </span>
-            <span class="pull-right">
-                <label class="switch switch-pill switch-primary">
-                    <input [(ngModel)]="user.enabled" (ngModelChange)="onEnableChange($event)" type="checkbox" class="switch-input" checked>
-                    <span class="switch-slider"></span>
-                </label>
-            </span>
+            <app-user-activation-switch [user]="user" cssClass="pull-right"></app-user-activation-switch>
             <h3>{{user.fullName}}</h3>       
         </ng-template>
         <ng-template #profileFormBlock>

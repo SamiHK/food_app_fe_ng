@@ -8,6 +8,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { UserActivationSwitchComponent } from './components/user-activation-switch/user-activation-switch.component';
 
 
 
@@ -18,7 +19,8 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     ThenNaComponent,
     LoaderComponent,
     UserProfileCardComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    UserActivationSwitchComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     InputErrorHelperComponent,
     ThenNaComponent,
     LoaderComponent,
-    UserProfileCardComponent
+    UserProfileCardComponent,
+    UserActivationSwitchComponent
   ]
 })
 export class SharedModule { }

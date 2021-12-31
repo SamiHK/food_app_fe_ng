@@ -36,24 +36,26 @@
                     </td>
                 </tr>
                 <ng-template #elseBlock>
-                    <tr *ngFor="let i of page.items" [ngClass]="{'text-muted': !i.enabled}">
-                        <td [routerLink]="[i.id]" [ngClass]="{'disabled-chip-left': !i.enabled}">
-                            {{i.username}}
-                        </td>
-                        <td [routerLink]="[i.id]">{{i.email}}</td>
-                        <td [routerLink]="[i.id]">{{i.fullName}}</td>
-                        <td>
-                            <app-then-na [content]="i.branch"></app-then-na>
-                        </td>
-                        <td>
-                            <span class="pull-right">
-                                <label class="switch switch-sm switch-pill switch-primary m-0">
-                                    <input [(ngModel)]="i.enabled" (ngModelChange)="onEnableChange($event, i)" type="checkbox" class="switch-input" checked>
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </span>
-                        </td>
-                    </tr>
+                    <ng-template #emptyBlock>
+                        <td colspan="4" class="text-center">
+                            Empty
+                        </td>                        
+                    </ng-template>
+                    <ng-template [ngIf]="page && page.items && page.items.length > 0" [ngIfElse]="emptyBlock">
+                        <tr *ngFor="let i of page.items" [ngClass]="{'text-muted': !i.enabled}">
+                            <td [routerLink]="[i.id]" [ngClass]="{'disabled-chip-left': !i.enabled}">
+                                {{i.username}}
+                            </td>
+                            <td [routerLink]="[i.id]">{{i.email}}</td>
+                            <td [routerLink]="[i.id]">{{i.fullName}}</td>
+                            <td>
+                                <app-then-na [content]="i.branch"></app-then-na>
+                            </td>
+                            <td>
+                                <app-user-activation-switch [user]="i" cssClass="pull-right" switchCssClass="switch-sm mb-0"></app-user-activation-switch>
+                            </td>
+                        </tr>
+                    </ng-template>
                 </ng-template>
             </tbody>
         </table>

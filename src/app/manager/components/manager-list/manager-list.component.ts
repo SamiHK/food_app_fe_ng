@@ -19,7 +19,7 @@ export class ManagerListComponent implements OnInit {
     'search': new FormControl(null, [Validators.required])
   });
 
-  constructor(private managerService: ManagerService, private authService: AuthService) { }
+  constructor(private managerService: ManagerService) { }
 
   async ngOnInit() {
     await this.loadPage();
@@ -48,20 +48,5 @@ export class ManagerListComponent implements OnInit {
     }
     await this.loadPage(params);
   }
-
-  async onEnableChange($event, user){
-    await this.authService.enabled(user.id, $event).toPromise()
-    .then(r => {
-      // console.log(r)
-      Object.assign(user, r);
-    })
-    .then(e => {
-      console.log(e)
-    })
-    .finally(() => {
-      // console.log(r)
-    })
-  }
-
 
 }

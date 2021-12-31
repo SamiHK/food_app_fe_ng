@@ -44,14 +44,21 @@
                     </td>
                 </tr>
                 <ng-template #elseBlock>
-                    <tr *ngFor="let i of page.items" [routerLink]="[i.id]">
-                        <td>{{i.code}}</td>
-                        <td>{{i.name}}</td>
-                        <td>{{i.address}}</td>
-                        <td>
-                            <app-then-na [content]="i.managerFullName"></app-then-na>
-                        </td>
-                    </tr>
+                    <ng-template #emptyBlock>
+                        <td colspan="4" class="text-center">
+                            Empty
+                        </td>                        
+                    </ng-template>
+                    <ng-template [ngIf]="page && page.items && page.items.length > 0" [ngIfElse]="emptyBlock">
+                        <tr *ngFor="let i of page.items" [routerLink]="[i.id]">
+                            <td>{{i.code}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.address}}</td>
+                            <td>
+                                <app-then-na [content]="i.managerFullName"></app-then-na>
+                            </td>
+                        </tr>
+                    </ng-template>
                 </ng-template>
             </tbody>
         </table>

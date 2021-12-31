@@ -1,0 +1,13 @@
+<span [ngClass]="cssClass">
+    <ng-template [ngIf]="loading" [ngIfElse]="elseBlock">
+        <span class="p-2">
+            <span class="fa fa-spinner fa-spin fa-pulse"></span>
+        </span>
+    </ng-template>
+    <ng-template #elseBlock>
+        <label class="switch switch-pill switch-primary" [ngClass]="switchCssClass">
+            <input [(ngModel)]="user.enabled" (ngModelChange)="onEnableChange($event)" type="checkbox" class="switch-input" checked>
+            <span class="switch-slider"></span>
+        </label>
+    </ng-template>
+</span>
