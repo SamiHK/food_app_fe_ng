@@ -42,6 +42,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
+import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { StoreModule } from '@ngrx/store';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
+    VerifyEmailComponent,
   ],
   providers: [
     {

@@ -18,4 +18,9 @@ export class UserService {
     .pipe(catchError(this.modalService.showErrorModal));
   }
 
+  verifyEmail(token) {
+    return this.httpClient.get(`${this.BASE_URL}/email/${token}`)
+    .pipe(catchError(this.modalService.showErrorModal));
+  }
+
 }

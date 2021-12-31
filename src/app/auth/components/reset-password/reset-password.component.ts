@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, SelectControlValueAccessor, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalService } from '../../../shared/services/modal.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class ResetPasswordComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, 
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private modalService: ModalService) { }
 
   private token: string;
 
@@ -47,11 +49,18 @@ export class ResetPasswordComponent implements OnInit {
           message: response.error.message,
         });
       } else {
-        this.alerts.push({
+        this.modalService.showAlertModal({
           type: 'success',
-          title: 'SUCCESS',
-          message: 'Password has been reset, Now login with your new password',
-        });
+          title: 'Password reset done',
+          message: 'Your password has been reset, Login with your new password'
+        }).onHide.subscribe(() => {
+          this.router.navigate(['login'])
+        })
+        // this.alerts.push({
+        //   type: 'success',
+        //   title: 'SUCCESS',
+        //   message: 'Password has been reset, Now login with your new password',
+        // });
       }
       // console.log(response);
       this.isSubmitting = false;

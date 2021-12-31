@@ -8,6 +8,7 @@ import { CardsComponent } from './views/base/cards.component';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
+import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
     data: {
       title: 'Page 500'
     }
+  },
+  {
+    path: 'verifyEmail/:token',
+    component: VerifyEmailComponent
   },
   {
     path: '',

@@ -78,10 +78,8 @@ export class ManagerRegisterComponent implements OnInit {
       this.isForm2Saving = true;
       await this.authService.updatePassword(this.manager.id, this.form_2.value).toPromise()
       .then(response => {
-        console.log(response);
-        if(response){
-          this.router.navigate(['managers', this.manager.id]);
-        }
+        // console.log(response);
+        this.router.navigate(['managers', this.manager.id]);
       })
       .catch(e => console.log(e))
       .finally(() => 
