@@ -23,6 +23,15 @@ export class AdminManagerService {
     );
   }
 
+  available(params?: any) {
+    return this.http.get<Page<Manager>>(`${this.BASE_URL}/available`, {
+      params: params
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
   filter(params?: any) {
     return this.http.get<Page<Manager>>(`${this.BASE_URL}`, {
       params: params

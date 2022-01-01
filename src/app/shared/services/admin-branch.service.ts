@@ -39,4 +39,11 @@ export class AdminBranchService {
       catchError(this.commonService.catchError)
     );
   }
+
+  get(id: string) {
+    return this.http.get<Branch>(`${this.BASE_URL}/${id}`)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
 }
