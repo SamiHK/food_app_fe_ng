@@ -5,8 +5,8 @@ export class Branch {
     name: string = '';
     code: string = '';
     address?: string;
-    maangerId?: string;
-    maangerEmail?: string;
-    maangerUsername?: string;
+    managerId?: string;
+    managerEmail?: string;
+    managerUsername?: string;
     managerFullName?: string;
 }

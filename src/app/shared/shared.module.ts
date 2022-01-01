@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 import { UserActiveSwitchComponent } from './components/user-active-switch/user-active-switch.component';
 
-const CORE_UI_COMPONENTS = [FormModule,
+const CORE_UI_MODULES = [FormModule,
   ButtonModule,
   SpinnerModule,
   GridModule,
@@ -29,7 +29,7 @@ const CORE_UI_COMPONENTS = [FormModule,
   ],
   imports: [
     CommonModule,
-    ...CORE_UI_COMPONENTS,
+    ...CORE_UI_MODULES,
     ReactiveFormsModule,
     FormsModule
   ],

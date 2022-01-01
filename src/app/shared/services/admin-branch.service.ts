@@ -15,6 +15,15 @@ export class AdminBranchService {
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
+  filter(params?:any) {
+    return this.http.get<Page<Branch>>(`${this.BASE_URL}`, {
+      params: params
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
   available(params?:any) {
     return this.http.get<Page<Branch>>(`${this.BASE_URL}/available`, {
       params: params

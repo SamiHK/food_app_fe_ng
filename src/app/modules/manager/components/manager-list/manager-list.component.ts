@@ -21,11 +21,11 @@ export class ManagerListComponent implements OnInit {
   constructor(private amService: AdminManagerService) { }
 
   ngOnInit(): void {
-    this.loadManager();
+    this.loadManagers();
   }
 
   isLoading = false;
-  async loadManager(params?:any){
+  async loadManagers(params?:any){
     this.isLoading = true;
     await this.amService.filter(params)
       .forEach(v => this.page = v)
@@ -34,9 +34,9 @@ export class ManagerListComponent implements OnInit {
 
   filter(){
     if(this.form.valid){
-      this.loadManager(this.form.value);
+      this.loadManagers(this.form.value);
     } else {
-      this.loadManager();
+      this.loadManagers();
     }
   }
 
@@ -44,9 +44,9 @@ export class ManagerListComponent implements OnInit {
     // console.log(page);
     if(this.form.valid){
       Object.assign(page, this.form.value)
-      this.loadManager(page);
+      this.loadManagers(page);
     } else {
-      this.loadManager({number: page.page})
+      this.loadManagers({number: page.page})
     }
   }
 
