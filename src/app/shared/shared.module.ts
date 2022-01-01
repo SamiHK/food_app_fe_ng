@@ -1,39 +1,42 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputErrorHelperComponent } from './components/input-error-helper/input-error-helper.component';
-import { ErrorModalComponent } from './components/error-modal/error-modal.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ThenNaComponent } from './components/then-na/then-na.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';
+import { UserRegisterFormComponent } from './components/user-register-form/user-register-form.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { FormModule, ButtonModule, SpinnerModule, GridModule, CardModule, AlertModule } from '@coreui/angular';
+import { XFormInputDirective } from './directive/x-form-input.directive';
+import { InputErrorComponent } from './components/input-error/input-error.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
-import { UserActivationSwitchComponent } from './components/user-activation-switch/user-activation-switch.component';
+import { UserActiveSwitchComponent } from './components/user-active-switch/user-active-switch.component';
 
-
+const CORE_UI_COMPONENTS = [FormModule,
+  ButtonModule,
+  SpinnerModule,
+  GridModule,
+  CardModule,
+  ButtonModule,
+  AlertModule,
+]
 
 @NgModule({
   declarations: [
-    InputErrorHelperComponent,
-    ErrorModalComponent,
-    ThenNaComponent,
-    LoaderComponent,
-    UserProfileCardComponent,
+    UserRegisterFormComponent,
+    UserProfileFormComponent,
+    XFormInputDirective,
+    InputErrorComponent,
     AlertModalComponent,
-    UserActivationSwitchComponent
+    UserActiveSwitchComponent,
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ...CORE_UI_COMPONENTS,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    FormsModule
   ],
   exports: [
-    InputErrorHelperComponent,
-    ThenNaComponent,
-    LoaderComponent,
-    UserProfileCardComponent,
-    UserActivationSwitchComponent
+    XFormInputDirective,
+    InputErrorComponent, UserProfileFormComponent,
+    UserActiveSwitchComponent
   ]
 })
 export class SharedModule { }

@@ -1,60 +1,38 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { AppSidebarComponent } from '@coreui/angular';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { logoutAction } from '../../auth/ngrx/actions';
-import { AuthGuard } from '../../auth/services/auth.guard';
-import { loadingNavItem, adminNavItems, managerNavItems, salespersonNavItems } from '../../_nav';
+import { AuthUser } from 'src/app/models/auth-user';
+import { adminNavItems, managerNavItems, navItems } from './_nav';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './default-layout.component.html'
+  templateUrl: './default-layout.component.html',
 })
 export class DefaultLayoutComponent implements OnInit {
 
-  public user = null;
-  public sidebarMinimized = false;
-  // public navItemsLoading = false;
-  public navItems = loadingNavItem;
-  @ViewChild('appSidebar') appSidebar: AppSidebarComponent;
+  public navItems = navItems;
+  public user?: AuthUser;
 
-  constructor(private store: Store<{authReducer: AuthGuard}>){}
-  
-  async ngOnInit() {
-    // this.navItemsLoading = true;
-    this.store.select('authReducer').subscribe(e => {
-      this.user = e;
-      if(this.user && this.user.role){
-        switch(this.user.role){
-          case "ADMIN":
-            this.navItems = adminNavItems;
-            break;
-          case "MANAGER":
-            this.navItems = managerNavItems;
-            break;
-          case "SALESPERSON":
-            this.navItems = salespersonNavItems;
-            break;
+  public perfectScrollbarConfig = {
+    suppressScrollX: true,
+  };
+
+  constructor(private router: Router, private store: Store<{ 'auth': AuthUser }>) {}
+
+  ngOnInit(): void {
+    this.store.select('auth').forEach(v => {
+      // console.log(v);
+      if (v == null) {
+        this.router.navigate(['login']);
+      } else {
+        this.user = v;
+        switch(this.user.role) {
+          case 'ADMIN': this.navItems = adminNavItems; break;
+          case 'MANAGER': this.navItems = managerNavItems; break;
+          // default: 
         }
       }
-    } );
+    });
   }
 
-  get userFullName(){
-    let _userFullName = this.user.fullName;
-    if(_userFullName == null){
-      _userFullName = this.user.username;
-    }
-    if(_userFullName == null){
-      _userFullName = this.user.email;
-    }
-    return _userFullName;
-  }
-
-  toggleMinimize(e) {
-    this.sidebarMinimized = e;
-  }
-
-  logout(){
-    this.store.dispatch(logoutAction());      
-  }
 }

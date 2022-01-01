@@ -1,0 +1,7 @@
+<ng-template [ngIf]="control && control.invalid && (control.dirty || control.touched) && control.errors">
+    <p class="m-0 text-danger" *ngIf="control.errors['required']">this field is required</p>
+    <p class="m-0 text-danger" *ngIf="control.errors['email']">invalid email</p>
+    <p class="m-0 text-danger" *ngIf="control.errors['minlength']">min {{ control.errors['minlength'].requiredLength }} characters are required</p>
+    <p class="m-0 text-danger" *ngIf="control.errors['maxlength']">max {{ control.errors['maxlength'].requiredLength }} characters are required</p>
+    <p class="m-0 text-danger" *ngIf="control.errors['else']">{{control.errors['else']}}</p>
+</ng-template>

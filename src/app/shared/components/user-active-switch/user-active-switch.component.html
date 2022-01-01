@@ -1,0 +1,7 @@
+<c-spinner *ngIf="isLoading else elseBlock" size="sm"></c-spinner>
+<ng-template #elseBlock>
+    <c-form-check *ngIf="user" [switch]="true">
+        <input [(ngModel)]="user.enabled" cFormCheckInput (change)="onChange($event)" type="checkbox" />
+        <label cFormCheckLabel>{{label}}</label>
+    </c-form-check>
+</ng-template>

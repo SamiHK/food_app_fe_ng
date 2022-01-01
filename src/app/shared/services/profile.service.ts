@@ -1,21 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
-import { ModalService } from './modal.service';
+import { catchError } from 'rxjs';
+import { AuthUser } from 'src/app/models/auth-user';
+import { CommonService } from 'src/app/services/common.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  private BASE_URL = `${environment.API_HOST}/profile`
+  private BASE_URL = `${environment.BASE_URL}/profile`;
 
-  constructor(private httpClient: HttpClient, private modalService: ModalService) {}
+  constructor(private http: HttpClient, private commonService: CommonService) {}
 
-  updateProfile(id, body) {
-    return this.httpClient.post(`${this.BASE_URL}/${id}`, body)
-    .pipe(catchError(this.modalService.showErrorModal));
+  update(id: string, body: AuthUser) {
+    return this.http.post<AuthUser>(`${this.BASE_URL}/${id}`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
   }
-
 }

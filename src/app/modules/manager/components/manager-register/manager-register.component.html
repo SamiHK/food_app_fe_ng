@@ -1,0 +1,45 @@
+<c-card class="mb-4">
+    <c-card-body>
+        <c-alert [color]="alert.type" [(visible)]="alert.visible" [dismissible]="true">
+            <h6 cAlertHeading>{{alert.title}}</h6>
+            <p class="m-0" *ngIf="alert.message">{{alert.message}}</p>
+        </c-alert>
+        <form cForm [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- <h1 class="mb-3">Register New Manager</h1> -->
+            <fieldset [disabled]="isLoading">
+                <div cFormFloating class="mb-3">
+                    <input formControlName="username" cFormControl [valid]="form.controls['username'].valid"
+                        id="username" placeholder="enter your username or email" autofocus>
+                    <label cLabel id="username">Username</label>
+                    <app-input-error [control]="form.controls['username']"></app-input-error>
+                </div>
+                <div cFormFloating class="mb-3">
+                    <input formControlName="password" cFormControl
+                        id="password" placeholder="password" type="password">
+                    <label cLabel id="password">Password</label>
+                    <app-input-error [control]="form.controls['password']"></app-input-error>
+                </div>
+                <p *ngIf="!form.controls['password'].value">Note: by default password will be same as username: {{form.controls['username'].value}}</p>
+                <div cFormFloating class="mb-3">
+                    <input formControlName="confirmPassword" cFormControl
+                        id="confirmPassword" placeholder="confirmPassword" type="password">
+                    <label cLabel id="confirmPassword">Confirm Password</label>
+                    <app-input-error [control]="form"></app-input-error>
+                </div>
+                <c-row>
+                    <c-col>
+                        <button cButton type="submit" color="primary">
+                            <span *ngIf="isLoading else elseBlock">
+                                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                                Registering...
+                            </span>
+                            <ng-template #elseBlock>
+                                Register
+                            </ng-template>
+                        </button>
+                    </c-col>
+                </c-row>
+            </fieldset>
+        </form>
+    </c-card-body>
+</c-card>
