@@ -1,9 +1,9 @@
 {
-  "name": "coreui-free-angular-admin-template",
-  "version": "4.0.0-alpha.3",
+  "name": "foodapp",
+  "version": "2.0.0-alpha.3",
   "config": {
-    "coreui_library_short_version": "4.0",
-    "coreui_library_docs_url": "https://coreui.io/angular/docs/"
+    "coreui_library_short_version": "2.0",
+    "coreui_library_docs_url": "https://foodaap/"
   },
   "scripts": {
     "ng": "ng",
