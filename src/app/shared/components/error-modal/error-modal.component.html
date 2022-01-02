@@ -1,9 +1,0 @@
-<div class="card text-whie bg-danger text-center m-0">
-    <div class="card-body">
-        <h6 *ngIf="err.name">{{err.name}}</h6>
-        <h4>{{err.status}} {{err.statusText}}</h4>
-        <p>{{err.message}}</p>
-        <p *ngIf="err.error && err.error.error">{{err.error.error.message}}</p>
-        <button class="btn btn-danger" (click)="bsModalRef.hide()" autofocus>close</button>
-    </div>
-</div>

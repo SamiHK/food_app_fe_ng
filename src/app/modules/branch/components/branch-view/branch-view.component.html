@@ -1,0 +1,115 @@
+<c-row class="" *ngIf="isLoading else elseBlock">
+    <c-col class="">
+        <c-spinner size="sm"></c-spinner>
+        <span class="d-flex-inline my-auto">
+            Loading...
+        </span>
+    </c-col>
+</c-row>
+<ng-template #elseBlock>
+    <c-row class="justify-content-center">
+        <c-col md="8">
+            
+            <c-card class="mb-4">
+                <ng-template [ngIf]="!isEditBranch" [ngIfElse]="branchFormBlock">
+                    <c-card-body>
+                        <c-row>
+                            <c-col>
+                                <h4>{{branch.name}}</h4>
+                                <strong>{{branch.code}}</strong>
+                            </c-col>
+                            <c-col xs="1">
+                                <span class="float-end">
+                                    <button cButton (click)="editBranch()" size="sm" color="light">Edit</button>
+                                </span>
+                            </c-col>
+                        </c-row>
+                    </c-card-body>                            
+                </ng-template>
+                <ng-template #branchFormBlock>
+                    <c-card-body>
+                        <form [formGroup]="branchForm" (ngSubmit)="saveBranch()">
+                            <fieldset [disabled]="savingBranch">
+                                <c-row>
+                                    <c-col sm="4">
+                                        <input formControlName="code" cFormControl [valid]="branchForm.controls['code'].valid" id="code" placeholder="Code" type="text" autofocus> 
+                                        <app-input-error [control]="branchForm.controls['code']"></app-input-error>
+                                    </c-col>
+                                    <c-col sm="4">
+                                        <input formControlName="name" cFormControl [valid]="branchForm.controls['name'].valid" id="name" placeholder="Name" type="text"> 
+                                        <app-input-error [control]="branchForm.controls['name']"></app-input-error>
+                                    </c-col>
+                                    <c-col sm="4">
+                                        <span class="d-grid gap-2 d-flex float-end">
+                                            <button cButton (click)="cancelEditBranch()" type="button" color="light">Cancel</button>
+                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..." type="submit" color="primary">
+                                                Save
+                                            </button>
+                                        </span>                                        
+                                    </c-col>
+                                </c-row>
+                            </fieldset>
+                        </form>
+                    </c-card-body>
+                </ng-template>
+            </c-card>
+
+
+            <ng-template [ngIf]="branch.id">
+                <h4>Manager</h4>
+                <c-card>
+                    <c-card-body>
+                        <c-row *ngIf="!isEditManager else managerForm">
+                            <c-col>
+                                <span *ngIf="branch.managerId else na">
+                                    <h4>{{branch.manager?.fullName}}</h4>
+                                    <a cButton [routerLink]="['/manager', branch.managerId]" color="light" size="sm">
+                                        {{branch.manager?.username}}
+                                    </a>
+                                </span>
+                                <ng-template #na>N/A</ng-template>
+                            </c-col>
+                            <c-col xs="2">
+                                <span class="float-end">
+                                    <button cButton (click)="editManager()" color="light" size="sm">Edit</button>
+                                </span>
+                            </c-col>
+                        </c-row>
+                        <ng-template #managerForm>
+                            <form (ngSubmit)="saveBranchManager()">
+                                <fieldset [disabled]="savingManager">
+                                    <c-row>
+                                        <c-col>
+                                            <span *ngIf="!managerLoading else loader">
+                                                <select cSelect [(ngModel)]="selectedManagerId" name="branch">
+                                                    <option value="null">None</option>
+                                                    <option *ngFor="let i of managerPage.items" [value]="i.id">
+                                                        {{i.fullName}} 
+                                                    </option>
+                                                </select>
+                                            </span>
+                                            <ng-template #loader>
+                                                <c-spinner size="sm"></c-spinner>
+                                            </ng-template>
+                                        </c-col>
+                                        <c-col xs="4">
+                                            <span class="d-grid gap-2 d-flex float-end">
+                                                <button cButton (click)="cancelEditManager()" color="light"
+                                                    size="sm">Cancel</button>
+                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..." type="submit" size="sm">
+                                                        Save
+                                                </button>
+                                            </span>
+                                        </c-col>
+                                    </c-row>
+                                </fieldset>
+                            </form>
+                        </ng-template> 
+                        <!-- #managerForm -->
+                    </c-card-body>
+                </c-card>
+            </ng-template> 
+            <!-- [ngIf]="branch.id" then show branch card -->
+        </c-col>
+    </c-row>
+</ng-template>

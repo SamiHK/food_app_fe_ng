@@ -1,36 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputErrorHelperComponent } from './components/input-error-helper/input-error-helper.component';
-import { ErrorModalComponent } from './components/error-modal/error-modal.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ThenNaComponent } from './components/then-na/then-na.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';
+import { UserRegisterFormComponent } from './components/user-register-form/user-register-form.component';
+import { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';
+import { FormModule, ButtonModule, SpinnerModule, GridModule, CardModule, AlertModule } from '@coreui/angular';
+import { InputErrorComponent } from './components/input-error/input-error.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { UserActiveSwitchComponent } from './components/user-active-switch/user-active-switch.component';
+import { XcButtonDirective } from './directives/xc-button.directive';
 
-
+const CORE_UI_MODULES = [FormModule,
+  ButtonModule,
+  SpinnerModule,
+  GridModule,
+  CardModule,
+  ButtonModule,
+  AlertModule,
+]
 
 @NgModule({
   declarations: [
-    InputErrorHelperComponent,
-    ErrorModalComponent,
-    ThenNaComponent,
-    LoaderComponent,
-    UserProfileCardComponent,
-    AlertModalComponent
+    UserRegisterFormComponent,
+    UserProfileFormComponent,
+    InputErrorComponent,
+    AlertModalComponent,
+    UserActiveSwitchComponent,
+    XcButtonDirective
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ...CORE_UI_MODULES,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    FormsModule
   ],
   exports: [
-    InputErrorHelperComponent,
-    ThenNaComponent,
-    LoaderComponent,
-    UserProfileCardComponent
+    InputErrorComponent, UserProfileFormComponent,
+    UserActiveSwitchComponent, XcButtonDirective
   ]
 })
 export class SharedModule { }

@@ -3,34 +3,40 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { AuthComponent } from './auth.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AlertModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerModule } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
-import * as authReducers from './ngrx/reducers';
-import { AlertModule } from 'ngx-bootstrap/alert';
+import { authReducer } from '../ngrx/auth/reducers';
 import { SharedModule } from '../shared/shared.module';
 
+const CORE_UI_COMPONENET = [
+  CardModule, IconModule, GridModule, FormModule, ButtonModule, AlertModule, 
+  SpinnerModule
+]
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent,
+    ForgetPasswordComponent,
     ResetPasswordComponent,
     AuthComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ... CORE_UI_COMPONENET,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
-    AlertModule.forRoot(),
-    StoreModule.forFeature(authReducers.key, authReducers.authReducer)
-  ],
+    StoreModule.forFeature('auth', authReducer)
+  ]
 })
 export class AuthModule { }

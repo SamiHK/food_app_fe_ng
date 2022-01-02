@@ -2,29 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { IconSetService } from '@coreui/icons-angular';
-import { freeSet } from '@coreui/icons';
+import { iconSubset } from './icons/icon-subset';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  // tslint:disable-next-line
+  // tslint:disable-next-line:component-selector
   selector: 'body',
-  template: '<router-outlet></router-outlet>',
-  providers: [IconSetService],
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  title = environment.appName;
+
   constructor(
     private router: Router,
-    public iconSet: IconSetService
+    private titleService: Title,
+    private iconSetService: IconSetService
   ) {
+    titleService.setTitle(this.title);
     // iconSet singleton
-    iconSet.icons = { ...freeSet };
+    iconSetService.icons = { ...iconSubset };
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0);
     });
   }
 }
