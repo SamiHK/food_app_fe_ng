@@ -64,7 +64,9 @@ export class ManagerViewComponent implements OnInit {
       await this.abService.updateManager(this.selectedBranchId, {
         managerId: this.manager.id
       }).forEach(v => {
-        console.log(v)
+        // console.log(v)
+        this.manager.branchId = v.id;
+        this.manager.branch = new Branch()
         Object.assign(this.manager.branch, v);
         this.isEditBranch = false;
         this.loadBranch();

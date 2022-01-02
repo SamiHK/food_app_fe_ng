@@ -32,14 +32,10 @@
                                 </c-col>
                                 <c-col sm="4">
                                     <span class="float-end">
-                                        <button cButton type="button" (click)="cancelEditProfile()" size="sm"
+                                        <button cButton type="button" (click)="cancelEditProfile()"
                                             color="light">Cancel</button>
-                                        <button cButton type="submit" size="sm" class="ml-2">
-                                            <span *ngIf="!savingProfile else saving">Save</span>
-                                            <ng-template #saving>
-                                                <c-spinner size="sm"></c-spinner>
-                                                Saving...
-                                            </ng-template>
+                                        <button xcButton [loading]="savingProfile" loadingLabel="Saving..." type="submit" class="ml-2">
+                                            Save
                                         </button>
                                     </span>
                                 </c-col>
@@ -75,14 +71,10 @@
                                 </c-col>
                                 <c-col sm="4">
                                     <span class="float-end">
-                                        <button cButton type="button" (click)="cancelEditUser()" size="sm"
+                                        <button cButton type="button" (click)="cancelEditUser()" 
                                             color="light">Cancel</button>
-                                        <button cButton type="submit" size="sm" class="ml-2">
-                                            <span *ngIf="!savingUser else saving">Save</span>
-                                            <ng-template #saving>
-                                                <c-spinner size="sm"></c-spinner>
-                                                Saving...
-                                            </ng-template>
+                                        <button xcButton [loading]="savingUser" loadingLabel="Saving..." type="submit"  class="ml-2">
+                                            Save
                                         </button>
                                     </span>
                                 </c-col>
@@ -132,14 +124,10 @@
                         </c-col>
                         <c-col sm="4">
                             <span class="float-end">
-                                <button cButton type="button" (click)="cancelUpdatePassword()" size="sm"
+                                <button cButton type="button" (click)="cancelUpdatePassword()" 
                                     color="light">Cancel</button>
-                                <button cButton type="submit" size="sm" class="ml-2">
-                                    <span *ngIf="!updatingPassword else saving">Save</span>
-                                    <ng-template #saving>
-                                        <c-spinner size="sm"></c-spinner>
-                                        Saving...
-                                    </ng-template>
+                                <button xcButton [loading]="updatingPassword" loadingLabel="Saving..." type="submit" class="ml-2">
+                                    Save
                                 </button>
                             </span>
                         </c-col>

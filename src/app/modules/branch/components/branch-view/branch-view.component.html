@@ -42,7 +42,7 @@
                                     <c-col sm="4">
                                         <span class="d-grid gap-2 d-flex float-end">
                                             <button cButton (click)="cancelEditBranch()" type="button" color="light">Cancel</button>
-                                            <button cButton type="submit" color="primary">
+                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..." type="submit" color="primary">
                                                 Save
                                             </button>
                                         </span>                                        
@@ -96,14 +96,8 @@
                                             <span class="d-grid gap-2 d-flex float-end">
                                                 <button cButton (click)="cancelEditManager()" color="light"
                                                     size="sm">Cancel</button>
-                                                <button cButton type="submit" size="sm">
-                                                    <span *ngIf="!savingManager else loader">
+                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..." type="submit" size="sm">
                                                         Save
-                                                    </span>
-                                                    <ng-template #loader>
-                                                        <c-spinner size="sm"></c-spinner>
-                                                        Saving...
-                                                    </ng-template>
                                                 </button>
                                             </span>
                                         </c-col>

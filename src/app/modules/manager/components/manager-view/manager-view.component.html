@@ -58,14 +58,8 @@
                                         <span class="d-grid gap-2 d-flex float-end">
                                             <button cButton (click)="cancelEditBranch()" color="light"
                                                 size="sm">Cancel</button>
-                                            <button cButton type="submit" size="sm">
-                                                <span *ngIf="!savingBranch else loader">
-                                                    Save
-                                                </span>
-                                                <ng-template #loader>
-                                                    <c-spinner size="sm"></c-spinner>
-                                                    Saving...
-                                                </ng-template>
+                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..." type="submit">
+                                                Save
                                             </button>
                                         </span>
                                     </c-col>
