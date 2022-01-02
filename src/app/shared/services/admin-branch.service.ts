@@ -33,6 +33,13 @@ export class AdminBranchService {
     );
   }
 
+  save(body: Branch) {
+    return this.http.post<Branch>(`${this.BASE_URL}`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
   updateManager(branchId: string, body: {managerId: string}) {
     return this.http.post<Page<Branch>>(`${this.BASE_URL}/${branchId}/manager`, body)
     .pipe(

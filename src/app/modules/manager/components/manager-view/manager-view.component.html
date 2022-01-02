@@ -23,8 +23,14 @@
                 <c-card-body>
                     <c-row *ngIf="!isEditBranch else branchForm">
                         <c-col>
-                            <span *ngIf="manager.branchId else na">({{manager.branch.code}})
-                                {{manager.branch.name}}</span>
+                            <span *ngIf="manager.branchId else na">
+                                <h4>
+                                    {{manager.branch.name}}
+                                </h4>
+                                <a cButton [routerLink]="['/branch', manager.branchId]" color="light" size="sm">
+                                    {{manager.branch.code}}
+                                </a>
+                            </span>
                             <ng-template #na>N/A</ng-template>
                         </c-col>
                         <c-col xs="2">
