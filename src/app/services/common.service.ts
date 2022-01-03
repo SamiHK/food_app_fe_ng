@@ -12,27 +12,27 @@ export class CommonService {
 
   constructor(private modalService: ModalService) { }
 
-  hideAlert(a: Alert) {
-    a.title = ''
-    a.message = ''
-    a.type = ''
-    a.visible = false
-  }
+  // hideAlert(a: Alert) {
+  //   a.title = ''
+  //   a.message = ''
+  //   a.type = ''
+  //   a.visible = false
+  // }
 
-  showAlert(a: Alert, title: string, message: string, type = 'danger') {
-    a.title = title
-    a.message = message
-    a.type = type
-    a.visible = true
-  }
+  // showAlert(a: Alert, title: string, message: string, type = 'danger') {
+  //   a.title = title
+  //   a.message = message
+  //   a.type = type
+  //   a.visible = true
+  // }
 
-  showErrorAlert(a: Alert, err: {code: string, message: string}) {
-    this.showAlert(a, err.code, err.message)
-  }
+  // showErrorAlert(a: Alert, err: {code: string, message: string}) {
+  //   this.showAlert(a, err.code, err.message)
+  // }
 
-  showSuccessAlert(a: Alert, message: string) {
-    this.showAlert(a, 'SUCCESS', message, 'success');
-  }
+  // showSuccessAlert(a: Alert, message: string) {
+  //   this.showAlert(a, 'SUCCESS', message, 'success');
+  // }
 
   private EXEMPTED_ERRORS = ["ER_DUP_ENTRY"]
 
@@ -52,13 +52,13 @@ export class CommonService {
     return throwError(() => err.error.error);
   }
 
-  checkPassword: ValidatorFn = (control: AbstractControl) => {
-    let error = control.value['password'] !== control.value['confirmPassword'] ?
-      {
-        else: 'Password not match'
-      } : null;
+  // checkPassword: ValidatorFn = (control: AbstractControl) => {
+  //   let error = control.value['password'] !== control.value['confirmPassword'] ?
+  //     {
+  //       else: 'Password not match'
+  //     } : null;
 
-    // (control.parent?.controls?['confirmPassword'] as FormControl).setErrors(error); 
-    return error;
-  }
+  //   // (control.parent?.controls?['confirmPassword'] as FormControl).setErrors(error); 
+  //   return error;
+  // }
 }
