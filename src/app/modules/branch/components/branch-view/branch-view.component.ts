@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Alert } from 'src/app/models/alert';
 import { Branch } from 'src/app/models/branch';
 import { Manager } from 'src/app/models/manager';
 import { Page } from 'src/app/models/page';
-import { CommonService } from 'src/app/services/common.service';
-import { AdminBranchService } from 'src/app/shared/services/admin-branch.service';
-import { AdminManagerService } from 'src/app/shared/services/admin-manager.service';
+import { AdminBranchService } from 'src/app/services/admin-branch.service';
+import { AdminManagerService } from 'src/app/services/admin-manager.service';
 
 @Component({
   selector: 'app-branch-view',
@@ -18,10 +17,8 @@ export class BranchViewComponent implements OnInit {
 
   branch: Branch = new Branch();
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private amService: AdminManagerService,
-    private abService: AdminBranchService,
-    private commonService: CommonService) {
+  constructor(private route: ActivatedRoute, private amService: AdminManagerService,
+    private abService: AdminBranchService) {
     let id = this.route.snapshot.params['id'];
     if (id) {
       this.branch.id = id;
@@ -68,9 +65,7 @@ export class BranchViewComponent implements OnInit {
       } 
 
       this.abService.save(b).forEach(v => {
-        if(v && v.error){
-
-        } else if(v){
+        if(v){
           Object.assign(this.branch, v);
           this.isEditBranch = false;
         }
@@ -121,7 +116,6 @@ export class BranchViewComponent implements OnInit {
         Object.assign(this.branch, v);
         this.isEditManager = false;
         this.loadManager();
-        // this.commonService.showSuccessAlert(this.alert, "Branch Updated")
       })
         .catch(e => console.log(e))
         .finally(() => {

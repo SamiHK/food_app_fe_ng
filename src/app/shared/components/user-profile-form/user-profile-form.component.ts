@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Alert } from 'src/app/models/alert';
 import { User } from 'src/app/models/user';
-import { CommonService } from 'src/app/services/common.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { UserService } from 'src/app/services/user.service';
-import { ProfileService } from '../../services/profile.service';
+import { checkPassword } from '../../form-input-validatorsFn';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +20,7 @@ export class UserProfileFormComponent implements OnInit {
   constructor(private authService: AuthService,
     private userService: UserService,
     private profileService: ProfileService,
-    private commonService: CommonService) { }
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
   }
@@ -45,9 +46,9 @@ export class UserProfileFormComponent implements OnInit {
       this.userService.updateEmail(this.user.id, this.userForm.value).forEach(
         v => {
           if (v && v.error) {
-            this.commonService.showAlert(this.alert, v.error.code, v.error.message);
+            this.alertService.showAlert(this.alert, v.error.code, v.error.message);
           } else {
-            this.commonService.showSuccessAlert(this.alert, 'Email has been updated');
+            this.alertService.showSuccessAlert(this.alert, 'Email has been updated');
             this.user.email = v.email
           }
         }
@@ -62,7 +63,7 @@ export class UserProfileFormComponent implements OnInit {
               else: "email already registered. try another one"
             })
           } else {
-            this.commonService.showErrorAlert(this.alert, e);
+            this.alertService.showErrorAlert(this.alert, e);
           }
         })
         .finally(() => {
@@ -91,16 +92,16 @@ export class UserProfileFormComponent implements OnInit {
     this.profileService.update(this.user.id, this.profileForm.value).forEach(
       v => {
         if (v && v.error) {
-          this.commonService.showAlert(this.alert, v.error.code, v.error.message);
+          this.alertService.showAlert(this.alert, v.error.code, v.error.message);
         } else {
-          this.commonService.showSuccessAlert(this.alert, 'Profile has been updated');
+          this.alertService.showSuccessAlert(this.alert, 'Profile has been updated');
           // this.user.email = v.email
           Object.assign(this.user, v);
         }
       }
     )
       .catch(e => {
-        this.commonService.showErrorAlert(this.alert, e);
+        this.alertService.showErrorAlert(this.alert, e);
       })
       .finally(() => {
         this.isEditProfile = false;
@@ -112,7 +113,7 @@ export class UserProfileFormComponent implements OnInit {
   passwordForm = new FormGroup({
     'password': new FormControl(null, Validators.required),
     'confirmPassword': new FormControl(null)
-  }, this.commonService.checkPassword)
+  }, checkPassword)
   isUpdatePassword = false;
   editUpdatePassword() {
     this.isUpdatePassword = true;
@@ -127,17 +128,15 @@ export class UserProfileFormComponent implements OnInit {
       this.updatingPassword = true;
       this.authService.updatePassword(this.user.id, this.passwordForm.value)
         .forEach(v => {
-          if(v && v.error){
-
-          } else {
+          if(v) {
             Object.assign(this.user, v);
-            this.commonService.showSuccessAlert(this.alert, 'Password has been updated');
+            this.alertService.showSuccessAlert(this.alert, 'Password has been updated');
             this.isUpdatePassword = false;
             this.passwordForm.reset()
           }
         })
         .catch(e => {
-          this.commonService.showErrorAlert(this.alert, e)
+          this.alertService.showErrorAlert(this.alert, e)
         })
         .finally(() => {
           this.updatingPassword = false;

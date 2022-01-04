@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
-import { Branch } from 'src/app/models/branch';
-import { Page } from 'src/app/models/page';
-import { CommonService } from 'src/app/services/common.service';
+import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Branch } from '../models/branch';
+import { Page } from '../models/page';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class AdminBranchService {
   }
 
   updateManager(branchId: string, body: {managerId: string}) {
-    return this.http.post<Page<Branch>>(`${this.BASE_URL}/${branchId}/manager`, body)
+    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/manager`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
-import { AuthUser } from 'src/app/models/auth-user';
-import { Manager } from 'src/app/models/manager';
-import { Page } from 'src/app/models/page';
-import { CommonService } from 'src/app/services/common.service';
+import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthUser } from '../models/auth-user';
+import { Manager } from '../models/manager';
+import { Page } from '../models/page';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,6 @@ export class AdminManagerService {
   register(body: AuthUser) {
     return this.http.post<Manager>(`${this.BASE_URL}`, body)
     .pipe(
-      catchError(this.commonService.catchError)
-    );
+      catchError(this.commonService.catchError)    );
   }
 }

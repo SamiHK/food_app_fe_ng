@@ -1,0 +1,14 @@
+<c-card class="bg-danger text-white">
+    <c-card-body>
+        <h4 cCardTitle>{{er?.name}}-{{er?.status}}</h4>
+        <h2>{{er?.statusText}}</h2>
+        <small>url: {{er?.url}}</small>
+        <hr>
+        <!-- <p>Message: {{er?.message}}</p> -->
+        <p>{{er?.error.name}}</p>
+        <p>Message: {{er?.error.message}}</p>
+        <span class="float-end">
+            <button cButton (click)="bsModalRef.hide()" color="danger">Close</button>
+        </span>
+    </c-card-body>
+</c-card>

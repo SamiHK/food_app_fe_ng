@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Alert } from 'src/app/models/alert';
-import { CommonService } from 'src/app/services/common.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
   }, this.checkPassword)
 
   constructor(private authService: AuthService, 
-    private commonService: CommonService,
+    private alertService: AlertService,
     private route: ActivatedRoute) { }
 
   token?: string
@@ -41,7 +41,7 @@ export class ResetPasswordComponent implements OnInit {
 
   async onSubmit  (){
     if(this.form.valid){
-      this.commonService.hideAlert(this.alert);
+      this.alertService.hideAlert(this.alert);
       if(this.token != undefined){
         this.isLoading = true;
         this.authService.resetPassword(this.token, this.form.value)
@@ -49,12 +49,12 @@ export class ResetPasswordComponent implements OnInit {
             console.log(v)
             if(v && v.error){
               if(v.error.code == 'INVALID_OR_EXPIRED'){
-                this.commonService.showAlert(this.alert, "FAILED", "Invalid   or expired token");
+                this.alertService.showAlert(this.alert, "FAILED", "Invalid   or expired token");
               } else {
-                this.commonService.showAlert(this.alert, v.error.code, v.error.message);
+                this.alertService.showAlert(this.alert, v.error.code, v.error.message);
               }
             } else {
-              this.commonService.showAlert(this.alert, 'DONE', `Password has been reset. Login with your new password` , 'success');
+              this.alertService.showAlert(this.alert, 'DONE', `Password has been reset. Login with your new password` , 'success');
               // this.store.dispatch(loginAction(v));
             }
           })

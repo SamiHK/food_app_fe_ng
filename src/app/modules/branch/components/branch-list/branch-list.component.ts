@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Branch } from 'src/app/models/branch';
 import { Page } from 'src/app/models/page';
-import { AdminBranchService } from 'src/app/shared/services/admin-branch.service';
+import { AdminBranchService } from 'src/app/services/admin-branch.service';
 
 @Component({
   selector: 'app-branch-list',

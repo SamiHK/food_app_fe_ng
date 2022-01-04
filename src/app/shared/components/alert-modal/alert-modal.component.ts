@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalComponent } from '@coreui/angular';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-alert-modal',
@@ -8,11 +10,12 @@ import { ModalComponent } from '@coreui/angular';
 })
 export class AlertModalComponent implements OnInit {
 
-  constructor() {
+  constructor(public bsModalRef: BsModalRef) {
     // super()
   }
 
   ngOnInit(): void {
+    // this.er?.statusText
   }
 
 }

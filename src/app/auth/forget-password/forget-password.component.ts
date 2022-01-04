@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Alert } from 'src/app/models/alert';
-import { CommonService } from 'src/app/services/common.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class ForgetPasswordComponent implements OnInit {
   })
 
   constructor(private authService: AuthService,
-  private commonService: CommonService) { }
+  private alertService: AlertService) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +26,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   async onSubmit  (){
     if(this.form.valid){
-      this.commonService.hideAlert(this.alert);
+      this.alertService.hideAlert(this.alert);
       this.isLoading = true;
       this.authService.forgetPassword(this.form.value)
         .forEach(v => {
@@ -37,10 +37,10 @@ export class ForgetPasswordComponent implements OnInit {
                 else: 'Invalid email or email is not registered'
               })
             } else {
-              this.commonService.showAlert(this.alert, v.error.code, v.error.message);
+              this.alertService.showAlert(this.alert, v.error.code, v.error.message);
             }
           } else {  
-            this.commonService.showAlert(this.alert, 'SENT', `Reset password link sent to your registered email. check your inbox or spam folder` , 'success');
+            this.alertService.showAlert(this.alert, 'SENT', `Reset password link sent to your registered email. check your inbox or spam folder` , 'success');
           }
         })
         .catch(e => {
