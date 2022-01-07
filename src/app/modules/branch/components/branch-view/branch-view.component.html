@@ -1,5 +1,5 @@
-<c-row class="" *ngIf="isLoading else elseBlock">
-    <c-col class="">
+<c-row class="justify-content-center" *ngIf="isLoading else elseBlock">
+    <c-col md="8" class="">
         <c-spinner size="sm"></c-spinner>
         <span class="d-flex-inline my-auto">
             Loading...
@@ -8,8 +8,7 @@
 </c-row>
 <ng-template #elseBlock>
     <c-row class="justify-content-center">
-        <c-col md="8">
-            
+        <c-col md="8">            
             <c-card class="mb-4">
                 <ng-template [ngIf]="!isEditBranch" [ngIfElse]="branchFormBlock">
                     <c-card-body>
@@ -54,6 +53,18 @@
                 </ng-template>
             </c-card>
 
+            <c-card class="mb-4">
+                <c-card-body>
+                    <c-row>
+                        <c-col>
+                            {{branch.address}}
+                        </c-col>
+                        <c-col xs="1">
+                            <button (click)="editLocation()" cButton color="light" size="sm">Edit</button>
+                        </c-col>
+                    </c-row>
+                </c-card-body>
+            </c-card>
 
             <ng-template [ngIf]="branch.id">
                 <h4>Manager</h4>
@@ -94,11 +105,8 @@
                                         </c-col>
                                         <c-col xs="4">
                                             <span class="d-grid gap-2 d-flex float-end">
-                                                <button cButton (click)="cancelEditManager()" color="light"
-                                                    size="sm">Cancel</button>
-                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..." type="submit" size="sm">
-                                                        Save
-                                                </button>
+                                                <button cButton (click)="cancelEditManager()" color="light">Cancel</button>
+                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..." type="submit">Save</button>
                                             </span>
                                         </c-col>
                                     </c-row>

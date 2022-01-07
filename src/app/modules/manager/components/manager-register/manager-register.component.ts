@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +22,8 @@ export class ManagerRegisterComponent implements OnInit {
 
   constructor(private amService: AdminManagerService,
     private router: Router,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    public location: Location) {
     this.form.addValidators(checkPassword)
   }
 
@@ -44,8 +46,14 @@ export class ManagerRegisterComponent implements OnInit {
           }
         })
         .catch(e => {
-          console.log(e);
-          this.alertService.showAlert(this.alert, e.code, e.message);
+          // console.log(e);
+          if(e.code == 'ER_DUP_ENTRY'){
+            this.form.controls['username'].setErrors({
+              else: 'Username not available'
+            })
+          } else {
+            this.alertService.showAlert(this.alert, e.code, e.message);
+          }
         })
         .finally(() => this.isLoading = false);
     }

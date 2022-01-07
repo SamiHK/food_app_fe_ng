@@ -1,0 +1,41 @@
+<c-card>
+    <c-card-body>
+        <c-row>
+            <c-col #mapCol>
+                <span *ngIf="apiLoaded">
+                    <google-map
+                        height="360"
+                        width="760"
+                        [center]="mapCenter"
+                        (mapClick)="mapClick($event)">
+                        <map-marker *ngIf="marker && marker.position"
+                            [position]="marker.position"
+                            [options]="marker.options"
+                            [clickable]="true"></map-marker>
+                    </google-map>
+                </span>
+            </c-col>
+        </c-row>
+        <c-row class="my-2">
+            <c-col>
+                <div>
+                    <input cFormControl
+                        [(ngModel)]="search"
+                        [typeahead]="results$"
+                        [adaptivePosition]="true"
+                        [typeaheadAsync]="true"
+                        typeaheadOptionField="formatted_address"
+                        (typeaheadOnSelect)="onSelectGeocodeAddress($event)"
+                        placeholder="Search by area, town, city, or region"
+                        sizing="sm">
+                </div>
+            </c-col>
+        </c-row>
+    </c-card-body>
+    <c-card-footer>
+        <span class="d-grid gap-2 d-flex float-end">
+            <button cButton (click)="modal.hide()" color="light">Close</button>
+            <button cButton (click)="save()" color="primary">Save</button>
+        </span>
+    </c-card-footer>
+</c-card>

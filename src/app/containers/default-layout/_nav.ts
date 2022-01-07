@@ -20,12 +20,8 @@ export const managerNavItems: INavData[] = [
     url: '/dashboard'
   },
   {
-    name: 'M-Manager',
-    url: '/manager'
-  },
-  {
-    name: 'M-Branch',
-    url: '/branch'
+    name: 'Salesperson',
+    url: '/salesperson'
   },
 ]
 

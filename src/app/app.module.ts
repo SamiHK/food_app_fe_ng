@@ -46,12 +46,13 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule as BsModalModule } from 'ngx-bootstrap/modal';
 import { HttpErrorModalComponent } from './views/http-error-modal/http-error-modal.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -93,11 +94,13 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     ModalModule,
     SharedModule,
     BsModalModule.forChild(),
     StoreModule.forRoot({}, {}),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [
     {
