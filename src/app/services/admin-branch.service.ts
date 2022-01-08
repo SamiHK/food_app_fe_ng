@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from '../models/branch';
+import { Location } from '../models/loaction';
 import { Page } from '../models/page';
 import { CommonService } from './common.service';
 
@@ -35,6 +36,13 @@ export class AdminBranchService {
 
   save(body: Branch) {
     return this.http.post<Branch>(`${this.BASE_URL}`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
+  updateLocation(branchId: string, body: Location) {
+    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/location`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );

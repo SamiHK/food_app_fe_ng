@@ -1,14 +1,17 @@
-<c-card class="bg-danger text-white">
-    <c-card-body>
+<c-card class="text-danger">
+    <c-card-body class="">
         <h4 cCardTitle>{{er?.name}}-{{er?.status}}</h4>
         <h2>{{er?.statusText}}</h2>
         <small>url: {{er?.url}}</small>
-        <hr>
-        <!-- <p>Message: {{er?.message}}</p> -->
-        <p>{{er?.error.name}}</p>
-        <p>Message: {{er?.error.message}}</p>
-        <span class="float-end">
-            <button cButton (click)="bsModalRef.hide()" color="danger">Close</button>
+        <span *ngIf="er?.error && er?.error.name">
+            <hr>
+            <!-- <p>Message: {{er?.message}}</p> -->
+            <p>{{er?.error.name}}</p>
+            <p>{{er?.error.message}}</p>
+            <span class="d-grid gap-2 d-flex float-end">
+                <button cButton (click)="bsModalRef.hide()" color="light">Close</button>
+                <button *ngIf="isLogin" cButton (click)="login()" color="primary">Login</button>
+            </span>
         </span>
     </c-card-body>
 </c-card>

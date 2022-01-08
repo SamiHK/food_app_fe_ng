@@ -9,6 +9,7 @@ import { AlertModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerM
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { IconModule } from '@coreui/icons-angular';
 
 const CORE_UI_MODULES = [GridModule,
   CardModule,
@@ -16,7 +17,8 @@ const CORE_UI_MODULES = [GridModule,
   FormModule,
   ButtonModule,
   SpinnerModule,
-  TableModule
+  TableModule,
+  IconModule
 ]
 
 @NgModule({

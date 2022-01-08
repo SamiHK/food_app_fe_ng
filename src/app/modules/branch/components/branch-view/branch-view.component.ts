@@ -51,10 +51,16 @@ export class BranchViewComponent implements OnInit {
   editLocation(){
     let modalRef = this.cModalService.showMapModal(this.branch.location);
     modalRef.onHide?.subscribe(
-      e => {
-        console.log(e);
+      async (e) => {
+        // console.log(e);
         if(e){
-          // console.log(modalRef.content?.geoLocation)
+          // console.log(e)
+          // console.log(modalRef.content?.location)
+          if(modalRef && modalRef.content && modalRef.content.location && modalRef.content.location.formattedAddress){
+            await this.abService.updateLocation(this.branch.id, modalRef.content.location)
+            .forEach(v => this.branch.location = v)
+            // this.branch.location = modalRef.content?.location
+          }
         }
       }
     )

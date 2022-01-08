@@ -8,9 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GoogleMapService {
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) {}
 
   load(){
     return this.http.jsonp<boolean>(`https://maps.googleapis.com/maps/api/js?key=${environment.GOOGLE_MAP_API_KEY}`, 'callback')

@@ -22,6 +22,7 @@ export class CommonService {
       this.modalService.show(HttpErrorModalComponent, {
         animated: true,
         backdrop: true,
+        ignoreBackdropClick: true,
         class: 'modal-dialog-centered',
         initialState: {
           er: err

@@ -57,7 +57,13 @@
                 <c-card-body>
                     <c-row>
                         <c-col>
-                            {{branch.address}}
+                            <span *ngIf="branch && branch.location else na">
+                                <svg cIcon name="cilLocationPin"></svg>
+                                {{branch.location.formattedAddress}}
+                            </span>
+                            <ng-template #na>
+                                N/A
+                            </ng-template>
                         </c-col>
                         <c-col xs="1">
                             <button (click)="editLocation()" cButton color="light" size="sm">Edit</button>

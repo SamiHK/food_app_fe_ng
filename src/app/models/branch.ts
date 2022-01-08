@@ -1,13 +1,12 @@
-import { GeoLocation } from "./location";
+import { Location } from "./loaction";
 import { Manager } from "./manager";
 
 export class Branch {
     id: string = '';
     name: string = '';
     code: string = '';
-    address?: string;
-    cityId?: string;
-    location?: GeoLocation;
+    location?: Location
+    branchAddress?: string
     manager?: Manager
     managerId?: string;
     managerEmail?: string;
