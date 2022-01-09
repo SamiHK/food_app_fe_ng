@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IconModule } from '@coreui/icons-angular';
+import { BranchSalespersonListComponent } from './components/branch-salesperson-list/branch-salesperson-list.component';
 
 const CORE_UI_MODULES = [GridModule,
   CardModule,
@@ -25,7 +26,8 @@ const CORE_UI_MODULES = [GridModule,
   declarations: [
     BranchComponent,
     BranchListComponent,
-    BranchViewComponent
+    BranchViewComponent,
+    BranchSalespersonListComponent
   ],
   imports: [
     CommonModule,

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerListComponent } from './components/manager-list/manager-list.component';
 import { ManagerViewComponent } from './components/manager-view/manager-view.component';
-import { AlertModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerModule, TableModule } from '@coreui/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -20,7 +20,8 @@ const CORE_UI_MODULES = [
   TableModule,
   SpinnerModule,
   AlertModule,
-  IconModule
+  IconModule,
+  BadgeModule
 ]
 
 @NgModule({

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Branch } from '../models/branch';
 import { Location } from '../models/loaction';
 import { Page } from '../models/page';
+import { SalesPerson } from '../models/sales-person';
 import { CommonService } from './common.service';
 
 @Injectable({
@@ -15,6 +16,15 @@ export class AdminBranchService {
   private BASE_URL = `${environment.BASE_URL}/admin/branch`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
+
+  salesperson(branchId: string, params?:any) {
+    return this.http.get<Page<SalesPerson>>(`${this.BASE_URL}/${branchId}/salespersons`, {
+      params: params
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
 
   filter(params?:any) {
     return this.http.get<Page<Branch>>(`${this.BASE_URL}`, {
