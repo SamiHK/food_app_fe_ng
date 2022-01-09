@@ -23,6 +23,10 @@
                                 </span>
                             </c-col>
                         </c-row>
+                        <hr>
+                        <a cButton [routerLink]="['salespersons']" color="light">
+                            Salesperson <c-badge shape="rounded-pill" color="success">{{branch.totalActiveSalespersons}}</c-badge>
+                        </a>
                     </c-card-body>                            
                 </ng-template>
                 <ng-template #branchFormBlock>
@@ -52,7 +56,8 @@
                     </c-card-body>
                 </ng-template>
             </c-card>
-
+            
+            <h4>Location</h4>
             <c-card class="mb-4">
                 <c-card-body>
                     <c-row>

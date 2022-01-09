@@ -5,7 +5,7 @@ import { BranchRoutingModule } from './branch-routing.module';
 import { BranchComponent } from './components/branch/branch.component';
 import { BranchListComponent } from './components/branch-list/branch-list.component';
 import { BranchViewComponent } from './components/branch-view/branch-view.component';
-import { AlertModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerModule, TableModule } from '@coreui/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -19,7 +19,8 @@ const CORE_UI_MODULES = [GridModule,
   ButtonModule,
   SpinnerModule,
   TableModule,
-  IconModule
+  IconModule,
+  BadgeModule
 ]
 
 @NgModule({

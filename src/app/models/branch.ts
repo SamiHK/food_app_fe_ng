@@ -1,5 +1,6 @@
 import { Location } from "./loaction";
 import { Manager } from "./manager";
+import { SalesPerson } from "./sales-person";
 
 export class Branch {
     id: string = '';
@@ -12,4 +13,6 @@ export class Branch {
     managerEmail?: string;
     managerUsername?: string;
     managerFullName?: string;
+    totalActiveSalespersons: number = 0;
+    salespersons?: SalesPerson[]
 }
