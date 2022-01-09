@@ -3,7 +3,7 @@
         <h4 cCardTitle>{{er?.name}}-{{er?.status}}</h4>
         <h2>{{er?.statusText}}</h2>
         <small>url: {{er?.url}}</small>
-        <span *ngIf="er?.error && er?.error.name">
+        <span *ngIf="er?.error && (er?.error.name || er?.error.code)">
             <hr>
             <!-- <p>Message: {{er?.message}}</p> -->
             <p>{{er?.error.name}}</p>

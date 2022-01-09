@@ -11,7 +11,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ManagerComponent } from './components/manager/manager.component';
 import { ManagerRegisterComponent } from './components/manager-register/manager-register.component';
 import { IconModule } from '@coreui/icons-angular';
-import { ModalModule } from 'ngx-bootstrap/modal';
 
 const CORE_UI_MODULES = [
   CardModule,
