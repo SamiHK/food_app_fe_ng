@@ -23,6 +23,7 @@ export class BranchViewComponent implements OnInit {
     private amService: AdminManagerService,
     private abService: AdminBranchService,
     private location: Location,
+    private router: Router,
     private cModalService: CommonModalService) {
     let id = this.route.snapshot.params['id'];
     if (id) {
@@ -94,8 +95,12 @@ export class BranchViewComponent implements OnInit {
 
       this.abService.save(b).forEach(v => {
         if(v){
-          Object.assign(this.branch, v);
-          this.isEditBranch = false;
+          if(!this.branch.id){
+            this.router.navigate(['branch', v.id])
+          } else {
+            Object.assign(this.branch, v);
+            this.isEditBranch = false;
+          }
         }
       })
       .catch(e => {

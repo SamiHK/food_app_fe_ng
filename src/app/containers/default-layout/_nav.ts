@@ -13,6 +13,10 @@ export const adminNavItems: INavData[] = [
     name: 'Branch',
     url: '/branch'
   },
+  {
+    name: 'Menu',
+    url: '/menu/admin'
+  },
 ]
 export const managerNavItems: INavData[] = [
   {
@@ -29,15 +33,7 @@ export const salespersonNavItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard'
-  },
-  {
-    name: 'SP-Manager',
-    url: '/manager'
-  },
-  {
-    name: 'SP-Branch',
-    url: '/branch'
-  },
+  }
 ]
 
 export const navItems: INavData[] = [

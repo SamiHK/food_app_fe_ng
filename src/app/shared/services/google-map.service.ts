@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
+import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class GoogleMapService {
         .pipe(
           map(() => true),
           catchError((e, c) => {
-            console.log(e);
+            // console.log(e);
             return of(false);
           }),
         );
