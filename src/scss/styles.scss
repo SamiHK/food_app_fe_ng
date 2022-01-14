@@ -5,6 +5,10 @@
 $enable-ltr: true;
 $enable-rtl: true;
 
+/* Importing Bootstrap SCSS file. */
+// @import "~bootstrap/scss/bootstrap";
+
+
 // Import styles with default layout.
 @import "~@coreui/coreui/scss/coreui";
 
@@ -25,11 +29,3 @@ $enable-rtl: true;
 // If you want to add something do it here
 @import "custom";
 
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";

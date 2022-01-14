@@ -8,10 +8,14 @@
             <!-- <p>Message: {{er?.message}}</p> -->
             <p>{{er?.error.name}}</p>
             <p>{{er?.error.message}}</p>
-            <span class="d-grid gap-2 d-flex float-end">
-                <button cButton (click)="bsModalRef.hide()" color="light">Close</button>
-                <button *ngIf="isLogin" cButton (click)="login()" color="primary">Login</button>
-            </span>
         </span>
+        <c-row>
+            <c-col>
+                <span class="d-grid d-flex gap-2 float-end">
+                    <button cButton (click)="bsModalRef.hide()" color="light">Close</button>
+                    <button *ngIf="isLogin" cButton (click)="login()" color="primary" shape="outline">Login</button>
+                </span>
+            </c-col>
+        </c-row>
     </c-card-body>
 </c-card>
