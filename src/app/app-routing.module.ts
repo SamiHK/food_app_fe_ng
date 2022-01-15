@@ -34,12 +34,12 @@ const routes: Routes = [
           import('./modules/branch/branch.module').then((m) => m.BranchModule)
       },
       {
-        path: 'salesperson',
+        path: 'salesperson', data: {title: 'Salesperson'},
         loadChildren: () =>
           import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
       },
       {
-        path: 'menu',
+        path: 'menu', data: {title: 'Menu'},
         loadChildren: () =>
           import('./modules/menu/menu.module').then((m) => m.MenuModule)
       },

@@ -1,0 +1,18 @@
+<c-card *ngIf="isLoading else loadedBlock">
+    <c-card-body>
+        <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+    </c-card-body>
+</c-card>
+<ng-template #loadedBlock>
+    <c-card *ngIf="menu">
+        <c-card-body>
+            <span class="d-flex justify-content-between">
+                <h3>{{menu.title}}</h3>
+                <span class="d-block-inline">
+                    <button routerLink="edit" cButton color="light" size="sm">Edit</button>
+                </span>
+            </span>
+            <p>{{menu.description}}</p>
+        </c-card-body>
+    </c-card>
+</ng-template>

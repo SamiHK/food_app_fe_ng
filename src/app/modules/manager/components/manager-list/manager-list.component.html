@@ -1,8 +1,10 @@
 <c-card class="mb-4">
     <c-card-body>
         <c-row>
-            <c-col class="text-right">
-                <button cButton color="primary" routerLink="register">Register New Manager</button>
+            <c-col class="">
+                <span class="float-end">
+                    <button cButton color="primary" routerLink="register">Register New Manager</button>
+                </span>
             </c-col>
         </c-row>
     </c-card-body>
@@ -56,7 +58,7 @@
                         </ng-template>
                     </tbody>
                 </table>
-                <pagination [totalItems]="page.total" [(ngModel)]="page.number" 
+                <pagination [totalItems]="page.total" [(ngModel)]="page.number" [itemsPerPage]="page.size"
                  (pageChanged)="onPageChange($event)"></pagination>
             </c-col>
         </c-row>
