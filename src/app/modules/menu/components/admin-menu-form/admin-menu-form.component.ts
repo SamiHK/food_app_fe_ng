@@ -49,9 +49,9 @@ export class AdminMenuFormComponent implements OnInit {
 
   close(){
     if(this.menu && this.menu.id)
-      this.router.navigate(['menu', 'admin', this.menu.id]);
+      this.router.navigate(['admin', 'menu', this.menu.id]);
     else 
-      this.router.navigate(['menu', 'admin']);
+      this.router.navigate(['admin', 'menu']);
   }
 
   isSaving = false;
@@ -62,12 +62,12 @@ export class AdminMenuFormComponent implements OnInit {
       if(this.menu && this.menu.id){
          await this.amService.update(body, this.menu.id)
           .forEach(v => {
-            this.router.navigate(['menu', 'admin', v.id])
+            this.router.navigate(['admin', 'menu', v.id])
           })
       } else {
         await this.amService.create(body)
           .forEach(v => {
-            this.router.navigate(['menu', 'admin', v.id])
+            this.router.navigate(['admin', 'menu', v.id])
           })
       }
       this.isSaving = false;

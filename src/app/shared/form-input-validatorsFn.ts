@@ -12,3 +12,16 @@ export const checkPassword: ValidatorFn = (control: AbstractControl) => {
   // (control.parent?.controls?['confirmPassword'] as FormControl).setErrors(error); 
   return error;
 }
+
+// export const lessThan(field1: string, field2: string): ValidatorFn => (control: AbstractControl) => {
+//   if(!control.value[field1] && !control.value[field2]){
+//     return null;
+//   }
+//   let error = (control.value[field1] > control.value[field2]) ?
+//     {
+//       else: 'Password not match'
+//     } : null;
+
+//   // (control.parent?.controls?['confirmPassword'] as FormControl).setErrors(error); 
+//   return error;
+// }

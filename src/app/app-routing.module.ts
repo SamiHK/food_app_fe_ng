@@ -39,7 +39,7 @@ const routes: Routes = [
           import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
       },
       {
-        path: 'menu', data: {title: 'Menu'},
+        path: 'admin', data: {title: 'Menu'},
         loadChildren: () =>
           import('./modules/menu/menu.module').then((m) => m.MenuModule)
       },

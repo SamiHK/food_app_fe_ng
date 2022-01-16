@@ -11,14 +11,15 @@
                     <c-row class="mb-3">
                         <c-col class="">
                             <span class="float-end">
-                                <button routerLink="../create" cButton color="primary">Create New Menu</button>
+                                <a routerLink="../create" cButton color="primary">Create New Menu</a>
                             </span>
                         </c-col>
                     </c-row>
                     <perfect-scrollbar>
-                        <ul flush cListGroup>
-                            <a *ngFor="let m of menus" [active]="selectedMenu ? selectedMenu.id == m.id: false"
-                             cListGroupItem [routerLink]="['../', m.id]" class="d-flex w-100 justify-content-between align-items-center border-0 my-1 rounded">
+                        <ul flush cListGroup dragula="menus" [(dragulaModel)]="menus">
+                            <a *ngFor="let m of menus" cListGroupItem 
+                                [routerLink]="['../', m.id]" routerLinkActive="active"
+                                class="d-flex justify-content-between align-items-center border-0 my-1 rounded">
                                 <span>
                                     <h6 class="my-1">{{m.title}}</h6>
                                 </span>
@@ -30,6 +31,34 @@
             </c-card>
         </c-col>
         <c-col sm="6" md="8">
+            <ng-template [ngIf]="selectedMenu" [ngIfElse]="emptyblock">
+                <c-card>
+                    <c-card-body>
+                        <span class="d-flex justify-content-between">
+                            <h3>{{selectedMenu.title}}</h3>
+                            <span class="d-block-inline">
+                                <a routerLink="edit" cButton color="light" size="sm">Edit</a>
+                            </span>
+                        </span>
+                        <p>{{selectedMenu.description}}</p>
+                    </c-card-body>
+                </c-card>
+                <c-card class="mb-3">
+                    <c-card-body>
+                        <a routerLink="edit" color="light" cButton>Update Menu Image</a>
+                        <span class="float-end">
+                            <a routerLink="item/create" routerLinkActive="disabled" cButton>Add New Item</a>
+                        </span>
+                    </c-card-body>
+                </c-card>
+            </ng-template>
+            <ng-template #emptyblock>
+                <c-card>
+                    <c-card-body>
+                        Something gone wrong
+                    </c-card-body>
+                </c-card>
+            </ng-template>
             <router-outlet></router-outlet>
         </c-col>
     </c-row>

@@ -10,8 +10,9 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminMenuItemListComponent } from './components/admin-menu-item-list/admin-menu-item-list.component';
-import { AdminMenuItemCreateComponent } from './components/admin-menu-item-create/admin-menu-item-create.component';
 import { AdminMenuFormComponent } from './components/admin-menu-form/admin-menu-form.component';
+import { DragulaModule } from 'ng2-dragula';
+import { AdminMenuItemFormComponent } from './components/admin-menu-item-form/admin-menu-item-form.component';
 
 const CORE_UI_MODULES = [
   CardModule, ButtonModule, ButtonGroupModule, FormModule, AlertModule, TableModule, SpinnerModule,
@@ -24,15 +25,16 @@ const CORE_UI_MODULES = [
     AdminMenuListComponent,
     AdminMenuComponent,
     AdminMenuItemListComponent,
-    AdminMenuItemCreateComponent,
-    AdminMenuFormComponent
+    AdminMenuFormComponent,
+    AdminMenuItemFormComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
     ...CORE_UI_MODULES,
     SharedModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    DragulaModule.forRoot()
   ], providers: [
     IconSetService
   ]

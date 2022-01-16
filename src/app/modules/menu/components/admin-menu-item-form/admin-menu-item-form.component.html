@@ -1,0 +1,50 @@
+<c-row class="justify-content-center">
+    <c-col>
+        <c-card>
+            <c-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <fieldset [disabled]="isSaving">
+                        <c-row>
+                            <c-col>
+                                <div class="mb-3">
+                                    <label cLabel for="title">Title</label>
+                                    <input cFormControl formControlName="title" id="title" type="text" autofocus>
+                                    <app-input-error [control]="form.controls['title']"></app-input-error>
+                                </div>                                
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col md="6">
+                                <div class="mb-3">
+                                    <label cLabel for="price">Price</label>
+                                    <input cFormControl formControlName="price" id="price" type="number">
+                                </div>
+                            </c-col>
+                            <c-col md="6">
+                                <div class="mb-3">
+                                    <label cLabel for="oldPrice">Old Price</label>
+                                    <input cFormControl formControlName="oldPrice" id="oldPrice" type="number">
+                                </div>
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col>
+                                <div class="mb-3">
+                                    <label cLabel for="description">Description</label>
+                                    <textarea cFormControl formControlName="description" id="description" type="text"></textarea>
+                                </div>
+                            </c-col>
+                        </c-row>
+                        <div class="">
+                            <span class="d-grid gap-2 d-flex float-end">
+                                <button (click)="close()" cButton type="button" color="light">Close</button>
+                                <button (click)="reset()" cButton type="button" color="secondary">Reset</button>
+                                <button xcButton [loading]="isSaving" loadingLabel="Saving..." type="submit">Save</button>
+                            </span>
+                        </div>
+                    </fieldset>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

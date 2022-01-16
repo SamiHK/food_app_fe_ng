@@ -4,15 +4,37 @@
     </c-card-body>
 </c-card>
 <ng-template #loadedBlock>
-    <c-card *ngIf="menu">
-        <c-card-body>
-            <span class="d-flex justify-content-between">
-                <h3>{{menu.title}}</h3>
-                <span class="d-block-inline">
-                    <button routerLink="edit" cButton color="light" size="sm">Edit</button>
-                </span>
-            </span>
-            <p>{{menu.description}}</p>
-        </c-card-body>
-    </c-card>
+    <ng-template [ngIf]="menuItems && menuItems.length > 0" [ngIfElse]="emptyblock">
+        <c-row [md]="2" [sm]="1" [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems">
+            <c-col *ngFor="let i of menuItems">
+                <c-card>
+                    <c-card-body>
+                        <span class="d-flex justify-content-between">
+                            <h6>{{i.title}}</h6>
+                            <a [routerLink]="['item', i.id, 'edit']" cButton color="light" size="sm">Edit</a>
+                        </span>
+                        <p>{{i.description}}</p>
+                        <span class="d-flex justify-content-between">
+                            <c-badge color="danger" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
+                            <span *ngIf="i.oldPrice">
+                                Old Price
+                                <c-badge color="dark" shape="rounded-pill">
+                                    <span class="text-decoration-line-through">
+                                        {{ i.oldPrice | currency:'Pkr '}}
+                                    </span>
+                                </c-badge>
+                            </span>
+                        </span>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+    </ng-template>
+    <ng-template #emptyblock>        
+        <c-card >
+            <c-card-body>
+                Empty
+            </c-card-body>
+        </c-card>
+    </ng-template>
 </ng-template>
