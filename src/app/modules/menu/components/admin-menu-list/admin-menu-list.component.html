@@ -34,21 +34,22 @@
             <ng-template [ngIf]="selectedMenu" [ngIfElse]="emptyblock">
                 <c-card>
                     <c-card-body>
+                        <img *ngIf="selectedMenu.primaryImg" [cCardImg] class="mb-3" [src]="selectedMenu.primaryImg">
                         <span class="d-flex justify-content-between">
-                            <h3>{{selectedMenu.title}}</h3>
+                            <h3 cCardTitle>{{selectedMenu.title}}</h3>
                             <span class="d-block-inline">
                                 <a routerLink="edit" cButton color="light" size="sm">Edit</a>
                             </span>
                         </span>
-                        <p>{{selectedMenu.description}}</p>
+                        <p cCardText>{{selectedMenu.description}}</p>
                     </c-card-body>
                 </c-card>
                 <c-card class="mb-3">
-                    <c-card-body>
-                        <a routerLink="edit" color="light" cButton>Update Menu Image</a>
-                        <span class="float-end">
-                            <a routerLink="item/create" routerLinkActive="disabled" cButton>Add New Item</a>
+                    <c-card-body class="d-flex d-grid gap-2 justify-content-between">
+                        <span>
+                            <app-upload-button (imageChange)="updateImages($event)" label='Update Image'></app-upload-button>
                         </span>
+                        <a routerLink="item/create" routerLinkActive="disabled" cButton>Add New Item</a>
                     </c-card-body>
                 </c-card>
             </ng-template>

@@ -9,24 +9,30 @@
             <c-col *ngFor="let i of menuItems">
                 <c-card>
                     <c-card-body>
+                        <img *ngIf="i.primaryImg" [cCardImg] class="mb-3" [src]="i.primaryImg">
                         <span class="d-flex justify-content-between">
                             <h6>{{i.title}}</h6>
                             <a [routerLink]="['item', i.id, 'edit']" cButton color="light" size="sm">Edit</a>
                         </span>
                         <p>{{i.description}}</p>
-                        <span class="d-flex d-grid gap-2">
-                            <span *ngIf="i.oldPrice">
-                                <!-- <small>Old Price</small> -->
-                                <c-badge color="dark" shape="rounded-pill">
-                                    <span class="text-decoration-line-through">
-                                        {{ i.oldPrice | currency:'Pkr '}}
-                                    </span>
-                                </c-badge>
+                        <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
+                            <span class="d-flex d-grid gap-2">
+                                <span *ngIf="i.oldPrice">
+                                    <!-- <small>Old Price</small> -->
+                                    <c-badge color="dark" shape="rounded-pill">
+                                        <span class="text-decoration-line-through">
+                                            {{ i.oldPrice | currency:'Pkr '}}
+                                        </span>
+                                    </c-badge>
+                                </span>
+                                <span>
+                                    <c-badge color="primary" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
+                                </span>
                             </span>
                             <span>
-                                <c-badge color="primary" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
+                                <app-upload-button (imageChange)="updateImages($event)" size="sm" label='Update Image' [id]="i.id"></app-upload-button>
                             </span>
-                        </span>
+                        </div>
                     </c-card-body>
                 </c-card>
             </c-col>

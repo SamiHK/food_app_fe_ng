@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { INavData } from '@coreui/angular';
 import { DragulaService } from 'ng2-dragula';
-import { Menu, MenuItem } from 'src/app/models/menu';
-import { Page } from 'src/app/models/page';
+import { Menu } from 'src/app/models/menu';
+import { AdminFileService } from 'src/app/services/admin-file.service';
 import { AdminMenuService } from 'src/app/services/admin-menu.service';
 
 @Component({
@@ -16,12 +14,16 @@ export class AdminMenuListComponent implements OnInit, OnDestroy {
 
   menus: Menu[] = [];
   selectedMenu?: Menu | null = null;
+  selectedMenuImages: File[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private amService: AdminMenuService,
-    private dragulaService: DragulaService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private amService: AdminMenuService,
+    private dragulaService: DragulaService,
+    private afService: AdminFileService) {
     this.dragulaService.drop('menus').subscribe(v => {
       // console.log(v);
-      this.menus.forEach((m, i) => m.sortOrder = (i+1))
+      this.menus.forEach((m, i) => m.sortOrder = (i + 1))
       let sortMap = this.menus.map((m, i) => {
         return {
           id: m.id,
@@ -70,6 +72,22 @@ export class AdminMenuListComponent implements OnInit, OnDestroy {
       this.router.navigate(['admin', 'menu', id])
     }
     this.isLoading = false;
+  }
+
+  updateImages(data: {
+    files: FileList
+  }){
+    console.log(data)
+    if(this.selectedMenu && this.selectedMenu.id && data && data.files){
+      // console.log(event.target.files);
+      this.afService.menu(this.selectedMenu.id, data.files[0]).forEach(v => {
+        // console.log(v);
+        if(this.selectedMenu){
+          this.selectedMenu.primaryImg = v.path;
+        }
+      })
+    }
+    // console.log(this.selectedMenuImages);
   }
 
 }

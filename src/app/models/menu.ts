@@ -3,6 +3,7 @@ export class Menu {
     title: string | null = null;
     sortOrder: number = 0;
     description: string | null = null;
+    primaryImg: string|null = null;
     totalItems: number = 0;
     items: MenuItem[] = []
 }
@@ -13,6 +14,7 @@ export class MenuItem {
     title: string | null = null;
     description: string | null = null;
     menuId: number | null = null;
+    primaryImg: string | null = null;
     price: number = 0;
     oldPrice: number | null = null;
     sortOrder: number = 0;

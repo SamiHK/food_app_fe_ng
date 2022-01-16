@@ -13,6 +13,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { SalespersonListComponent } from './components/salesperson-list/salesperson-list.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 
 const CORE_UI_MODULES = [FormModule,
   ButtonModule,
@@ -34,6 +35,7 @@ const CORE_UI_MODULES = [FormModule,
     XcButtonDirective,
     MapModalComponent,
     SalespersonListComponent,
+    UploadButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,7 @@ const CORE_UI_MODULES = [FormModule,
     TypeaheadModule.forRoot()
   ],
   exports: [
-    InputErrorComponent, UserProfileFormComponent,
+    InputErrorComponent, UserProfileFormComponent, UploadButtonComponent,
     UserActiveSwitchComponent, XcButtonDirective, SalespersonListComponent
   ]
 })
