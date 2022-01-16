@@ -48,7 +48,7 @@ export class AdminMenuItemListComponent implements OnInit, OnDestroy {
               id: m.id, 
               sortOrder: m.sortOrder}
           })
-          this.amService.updateItemSorting(sortMap).subscribe(v => console.log(v))
+          this.amService.updateItemSorting(sortMap).subscribe(v => v)
         })
       )
     }

@@ -29,7 +29,7 @@ export class AdminMenuItemFormComponent implements OnInit {
 
   async ngOnInit() {
     this.menuId = this.route.snapshot.parent?.params['id'];
-    console.log(`menuId: ${this.menuId}`)
+    // console.log(`menuId: ${this.menuId}`)
     this.menuItemId = this.route.snapshot.params['itemId'];
     if(this.menuItemId){
       this.isLoading = true;

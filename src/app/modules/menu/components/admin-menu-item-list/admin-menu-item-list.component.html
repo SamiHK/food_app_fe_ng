@@ -14,15 +14,17 @@
                             <a [routerLink]="['item', i.id, 'edit']" cButton color="light" size="sm">Edit</a>
                         </span>
                         <p>{{i.description}}</p>
-                        <span class="d-flex justify-content-between">
-                            <c-badge color="danger" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
+                        <span class="d-flex d-grid gap-2">
                             <span *ngIf="i.oldPrice">
-                                Old Price
+                                <!-- <small>Old Price</small> -->
                                 <c-badge color="dark" shape="rounded-pill">
                                     <span class="text-decoration-line-through">
                                         {{ i.oldPrice | currency:'Pkr '}}
                                     </span>
                                 </c-badge>
+                            </span>
+                            <span>
+                                <c-badge color="primary" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
                             </span>
                         </span>
                     </c-card-body>
