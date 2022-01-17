@@ -58,7 +58,7 @@ export class AdminMenuListComponent implements OnInit, OnDestroy {
   }) {
     this.isLoading = true;
     await this.amService.filter(params).forEach(v => this.menus = v)
-    if (this.menus) {
+    if (this.menus && this.menus.length > 0) {
       let id = this.route.snapshot.params['id'];
       let m = this.menus.find(v => v.id == id);
       // console.log('loadMenu', m)

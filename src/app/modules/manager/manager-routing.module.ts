@@ -8,6 +8,12 @@ import { ManagerComponent } from './components/manager/manager.component';
 
 const routes: Routes = [
   {
+    path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule)
+  },
+  {
+    path: 'salesperson', loadChildren: () => import('./modules/salesperson/salesperson.module').then(m => m.SalespersonModule)
+  },
+  {
     path: '', component: ManagerComponent, data: { title: 'Manager' },
     children: [
       { path: '', component: ManagerListComponent, data: { title: 'Search' },},
