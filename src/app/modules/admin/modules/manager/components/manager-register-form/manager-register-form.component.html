@@ -41,8 +41,8 @@
                         <p *ngIf="!form.controls['password'].value">Note: by default password will be same as username: {{form.controls['username'].value}}</p>
                         <c-row>
                             <c-col>
-                                <span class="float-end">
-                                    <button (click)="location.back()" class="mr-2" xcButton type="button" color="light">
+                                <span class="d-flex d-grid gap-2 float-end">
+                                    <button (click)="location.back()" cButton type="button" color="light">
                                         Cancel
                                     </button>
                                     <button xcButton [loading]="isLoading" loadingLabel="Registering..." type="submit" color="primary">

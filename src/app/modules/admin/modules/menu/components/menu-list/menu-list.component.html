@@ -1,70 +1,52 @@
-<c-row *ngIf="isLoading else loadedBlock">
+<!-- <c-row *ngIf="isLoading else loadedBlock">
     <c-col>
         <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
     </c-col>
-</c-row>
-<ng-template #loadedBlock>
-    <c-row>
-        <c-col sm="6" md="4" class="max-h-100vh">
-            <c-card>
-                <c-card-body>
-                    <c-row class="mb-3">
-                        <c-col class="">
-                            <span class="float-end">
-                                <a routerLink="create" cButton color="primary">Create New Menu</a>
+</c-row> -->
+<c-row>
+    <c-col>
+        <c-card class="mb-3">
+            <c-card-body>
+                <span class="d-flex d-grid gap-2 float-end">
+                    <a routerLink="create" cButton color="primary">Create New Menu</a>
+                </span>
+            </c-card-body>
+        </c-card>
+        <c-card *ngIf="isLoading else loadedBlock">
+            <c-card-body>
+                <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+            </c-card-body>
+        </c-card>
+        <ng-template #loadedBlock>
+            <c-row *ngIf="(menus && menus.length > 0) else emptyMenuBlock" [gutter]="3" dragula="menus" [(dragulaModel)]="menus">
+                <c-col [lg]="4" [md]="6" [xs]="12" *ngFor="let m of menus" class="d-flex justify-content-stretch">
+                    <c-card class="d-flex flex-grow-1">
+                        <img [cCardImg] [src]="m.primaryImg">
+                        <c-card-body class="d-flex flex-column justify-content-end">
+                            <span class="d-flex justify-content-between">
+                                <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
                             </span>
-                        </c-col>
-                    </c-row>
-                    <perfect-scrollbar>
-                        <ul *ngIf="menus.length > 0 else emptyMenuBlock" flush cListGroup dragula="menus" [(dragulaModel)]="menus">
-                            <a *ngFor="let m of menus" cListGroupItem
-                                (click)="selectMenu(m.id)" 
-                                [routerLink]="[m.id]" routerLinkActive="active"
-                                class="d-flex justify-content-between align-items-center border-0 my-1 rounded">
-                                <span>
-                                    <h6 class="my-1">{{m.title}}</h6>
+                            <p cCardText class="text-truncate">{{m.description}}</p>
+                            <span>
+                                <app-upload-button
+                                    (imageChange)="updateImage($event)" size="sm"
+                                    label='Update Image' [id]="m.id"></app-upload-button>
+                                <span class="d-flex d-grid gap-2 float-end">
+                                    <a cButton [routerLink]="[m.id, 'edit']" size="sm" color="light">Edit</a>
+                                    <a cButton [routerLink]="[m.id]" size="sm">Items</a>
                                 </span>
-                                <c-badge *ngIf="m.totalItems" color="primary" shape="rounded-pill" class="float-end">{{m.totalItems}}</c-badge>
-                            </a>
-                        </ul>
-                        <ng-template #emptyMenuBlock>
-                            Empty Menu
-                        </ng-template>
-                    </perfect-scrollbar>
-                </c-card-body>
-            </c-card>
-        </c-col>
-        <c-col sm="6" md="8">
-            <ng-template [ngIf]="selectedMenu" [ngIfElse]="emptyblock">
+                            </span>
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
+            <ng-template #emptyMenuBlock>
                 <c-card>
                     <c-card-body>
-                        <img *ngIf="selectedMenu.primaryImg" [cCardImg] class="mb-3" [src]="selectedMenu.primaryImg">
-                        <span class="d-flex justify-content-between">
-                            <h3 cCardTitle>{{selectedMenu.title}}</h3>
-                            <span class="d-block-inline">
-                                <a [routerLink]="[selectedMenu.id, 'edit']" cButton color="light" size="sm">Edit</a>
-                            </span>
-                        </span>
-                        <p cCardText>{{selectedMenu.description}}</p>
-                    </c-card-body>
-                </c-card>
-                <c-card class="mb-3">
-                    <c-card-body class="d-flex d-grid gap-2 justify-content-between">
-                        <span>
-                            <app-upload-button (imageChange)="updateImages($event)" label='Update Image'></app-upload-button>
-                        </span>
-                        <a [routerLink]="[selectedMenu.id, 'create']" routerLinkActive="disabled" cButton>Add New Item</a>
+                        Empty
                     </c-card-body>
                 </c-card>
             </ng-template>
-            <ng-template #emptyblock>
-                <c-card class="mb-3">
-                    <c-card-body>
-                        No Menu Selected
-                    </c-card-body>
-                </c-card>
-            </ng-template>
-            <router-outlet></router-outlet>
-        </c-col>
-    </c-row>
-</ng-template>
+        </ng-template>
+    </c-col>
+</c-row>

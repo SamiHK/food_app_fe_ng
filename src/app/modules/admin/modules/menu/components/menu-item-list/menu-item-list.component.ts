@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { MenuItem } from 'src/app/models/menu';
+import { Menu, MenuItem } from 'src/app/models/menu';
 import { AdminFileService } from 'src/app/services/admin-file.service';
 import { MenuService } from '../../services/menu.service';
 
@@ -14,6 +14,7 @@ import { MenuService } from '../../services/menu.service';
 export class MenuItemListComponent implements OnInit {
 
   menuItems: MenuItem[] | null = null;
+  selectedMenu?: Menu;
   sbjs = new Subscription();
   constructor(private route: ActivatedRoute,
     private amService: MenuService,
@@ -25,18 +26,16 @@ export class MenuItemListComponent implements OnInit {
     this.route.params.forEach(params => {
       if (params['id']) {
         // this.sbjs.unsubscribe();
-        this.loadMenu(params['id'])
+        this.loadMenuItems(params['id'])
       }
     })
   }
 
-  ngOnDestroy(): void {
-    this.sbjs.unsubscribe()
-  }
 
-  isLoading = false;
-  async loadMenu(id: number) {
-    this.isLoading = true;
+  isLoadingMenuItems = false;
+  async loadMenuItems(id: number) {
+    // this.selectMenu(id)
+    this.isLoadingMenuItems = true;
     // console.log(id);
     await this.amService.items(id).forEach(v => this.menuItems = v)
     if (this.menuItems) {
@@ -55,18 +54,20 @@ export class MenuItemListComponent implements OnInit {
         })
       )
     }
-    this.isLoading = false;
+    this.isLoadingMenuItems = false;
   }
 
-  updateImages(data: {
-    id?: any, files: FileList
+
+  // updatingImage = false;
+  async updateMenuItemImage(data: {
+    id: any, files: FileList
   }) {
-    console.log(data);
+    // console.log(data);
     if (data.id && data.files) {
       this.afService.menuItem(data.id, data.files[0]).subscribe(v => {
-        console.log(v);
+        // console.log(v);
         let menuItem = this.menuItems?.find(v => v.id == data.id);
-        if(menuItem){
+        if (menuItem) {
           menuItem.primaryImg = v.path
         }
       })

@@ -6,7 +6,7 @@ import { SalespersonViewComponent } from './components/salesperson-view/salesper
 import { SalespersonComponent } from './components/salesperson/salesperson.component';
 
 const routes: Routes = [
-  { path: '', component: SalespersonComponent, children: [
+  { path: '', component: SalespersonComponent, data: {title: 'Salesperson'}, children: [
     { path: '', component: SalespersonListComponent, data: {title: 'List'} },
     { path: 'register', component: SalespersonRegisterComponent , data: {title: 'Register'}},
     { path: ':id', component: SalespersonViewComponent, data: {title: 'View'} },

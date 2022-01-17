@@ -10,9 +10,8 @@ const routes: Routes = [
     path: 'salesperson', loadChildren: () => import('./modules/salesperson/salesperson.module').then(m => m.SalespersonModule)
   },
   {
-    path: '', component: ManagerComponent, data: { title: 'Manager' },
-    children: [
-    ]
+    path: '', component: ManagerComponent,
+    children: []
   },
 ];
 

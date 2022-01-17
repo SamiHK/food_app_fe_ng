@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,16 +18,21 @@ export class MenuFormComponent implements OnInit {
     'description': new FormControl(null)
   })
 
+  isLoading = false;
   constructor(private route: ActivatedRoute,
+    public location: Location,
     private router: Router,
     private amService: MenuService) { }
 
   ngOnInit(): void {
     this.route.params.forEach(params => {
       if(params['id']){
+        this.isLoading = true;
         this.amService.get(params['id']).forEach(v => {
           this.menu = v;
           this.setEditFormValues();
+        }).finally(() => {
+          this.isLoading = false;
         })
       }
     })
@@ -45,13 +51,6 @@ export class MenuFormComponent implements OnInit {
     } else {
       this.form.reset()
     }
-  }
-
-  close(){
-    if(this.menu && this.menu.id)
-      this.router.navigate(['admin', 'menu', this.menu.id]);
-    else 
-      this.router.navigate(['admin', 'menu']);
   }
 
   isSaving = false;

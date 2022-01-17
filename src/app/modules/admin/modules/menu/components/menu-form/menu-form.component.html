@@ -3,19 +3,19 @@
         <c-card>
             <c-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <fieldset [disabled]="isSaving">
-                        <div class="mb-3">
-                            <label cLabel for="title">Title</label>
+                    <fieldset [disabled]="isSaving || isLoading">
+                        <div class="mb-3" cFormFloating>
                             <input cFormControl formControlName="title" id="title" type="text" autofocus>
+                            <label cLabel id="title">Title</label>
                             <app-input-error [control]="form.controls['title']"></app-input-error>
                         </div>
-                        <div class="mb-3">
-                            <label cLabel for="description">Description</label>
+                        <div class="mb-3" cFormFloating>
                             <textarea cFormControl formControlName="description" id="description" type="text"></textarea>
+                            <label cLabel id="description">Description</label>
                         </div>
                         <div class="">
                             <span class="d-grid gap-2 d-flex float-end">
-                                <button (click)="close()" cButton type="button" color="light">Close</button>
+                                <button (click)="location.back()" cButton type="button" color="light">Close</button>
                                 <button (click)="reset()" cButton type="button" color="secondary">Reset</button>
                                 <button xcButton [loading]="isSaving" loadingLabel="Saving..." type="submit">Save</button>
                             </span>

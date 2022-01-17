@@ -1,4 +1,4 @@
-<c-card *ngIf="isLoading else loadedBlock">
+<c-card *ngIf="isLoadingMenuItems else loadedBlock">
     <c-card-body>
         <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
     </c-card-body>
@@ -6,16 +6,21 @@
 <ng-template #loadedBlock>
     <ng-template [ngIf]="menuItems && menuItems.length > 0" [ngIfElse]="emptyblock">
         <c-row [md]="2" [sm]="1" [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems">
-            <c-col *ngFor="let i of menuItems">
-                <c-card>
-                    <c-card-body>
-                        <img *ngIf="i.primaryImg" [cCardImg] class="mb-3" [src]="i.primaryImg">
+            <c-col *ngFor="let i of menuItems" class="d-flex justify-content-stretch">
+                <c-card class="d-flex flex-grow-1">
+                    <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg">
+                    <c-card-body class="d-flex flex-column justify-content-end">
                         <span class="d-flex justify-content-between">
                             <h6>{{i.title}}</h6>
-                            <a [routerLink]="[i.id, 'edit']" cButton color="light" size="sm">Edit</a>
+                            <a [routerLink]="['item', i.id, 'edit']" routerLinkActive="disabled" cButton color="light"
+                                size="sm">Edit</a>
                         </span>
                         <p>{{i.description}}</p>
                         <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
+                            <span>
+                                <app-upload-button (imageChange)="updateMenuItemImage($event)" size="sm"
+                                    label='Update Image' [id]="i.id"></app-upload-button>
+                            </span>
                             <span class="d-flex d-grid gap-2">
                                 <span *ngIf="i.oldPrice">
                                     <!-- <small>Old Price</small> -->
@@ -26,11 +31,10 @@
                                     </c-badge>
                                 </span>
                                 <span>
-                                    <c-badge color="primary" shape="rounded-pill">{{i.price | currency:'Pkr '}}</c-badge>
+                                    <c-badge color="primary" shape="rounded-pill">{{i.price |
+                                        currency:'Pkr
+                                        '}}</c-badge>
                                 </span>
-                            </span>
-                            <span>
-                                <app-upload-button (imageChange)="updateImages($event)" size="sm" label='Update Image' [id]="i.id"></app-upload-button>
                             </span>
                         </div>
                     </c-card-body>
@@ -38,10 +42,10 @@
             </c-col>
         </c-row>
     </ng-template>
-    <ng-template #emptyblock>        
+    <ng-template #emptyblock>
         <c-card>
             <c-card-body>
-                Empty Menu Items
+                empty
             </c-card-body>
         </c-card>
     </ng-template>

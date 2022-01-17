@@ -31,10 +31,10 @@
                                     </div>
                                 </c-col>
                                 <c-col sm="4">
-                                    <span class="float-end">
+                                    <span class="d-flex d-grid gap-2 float-end">
                                         <button cButton type="button" (click)="cancelEditProfile()"
                                             color="light">Cancel</button>
-                                        <button xcButton [loading]="savingProfile" loadingLabel="Saving..." type="submit" class="ml-2">
+                                        <button xcButton [loading]="savingProfile" loadingLabel="Saving..." type="submit">
                                             Save
                                         </button>
                                     </span>
@@ -70,10 +70,10 @@
                                     </div>
                                 </c-col>
                                 <c-col sm="4">
-                                    <span class="float-end">
+                                    <span class="d-flex d-grid gap-2 float-end">
                                         <button cButton type="button" (click)="cancelEditUser()" 
                                             color="light">Cancel</button>
-                                        <button xcButton [loading]="savingUser" loadingLabel="Saving..." type="submit"  class="ml-2">
+                                        <button xcButton [loading]="savingUser" loadingLabel="Saving..." type="submit">
                                             Save
                                         </button>
                                     </span>
@@ -123,10 +123,10 @@
                             <app-input-error [control]="passwordForm"></app-input-error>
                         </c-col>
                         <c-col sm="4">
-                            <span class="float-end">
+                            <span class="d-flex d-grid gap-2 float-end">
                                 <button cButton type="button" (click)="cancelUpdatePassword()" 
                                     color="light">Cancel</button>
-                                <button xcButton [loading]="updatingPassword" loadingLabel="Saving..." type="submit" class="ml-2">
+                                <button xcButton [loading]="updatingPassword" loadingLabel="Saving..." type="submit">
                                     Save
                                 </button>
                             </span>

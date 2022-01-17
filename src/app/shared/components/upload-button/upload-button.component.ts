@@ -7,13 +7,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class UploadButtonComponent implements OnInit {
 
-  @Input('id') public id? : any;
+  @Input('id') public id : any;
   @Input('size') public size? : 'lg' | 'sm';
   @Input('label') public label : string = 'Choose Image';
+  @Input('loading') public loading = false;
+  @Input('loadingLabel') public loadingLabel = '';
 
   @Output('imageChange')
   public imageChange = new EventEmitter<{
-    id?: string,
+    id: any,
     files: FileList
   }>();
 

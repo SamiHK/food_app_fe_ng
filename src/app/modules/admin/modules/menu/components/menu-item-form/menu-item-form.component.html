@@ -1,4 +1,4 @@
-<c-row class="justify-content-center">
+<c-row class="justify-content-center mb-3" id="item-form">
     <c-col>
         <c-card>
             <c-card-body>
@@ -6,32 +6,32 @@
                     <fieldset [disabled]="isSaving">
                         <c-row>
                             <c-col>
-                                <div class="mb-3">
-                                    <label cLabel for="title">Title</label>
+                                <div class="mb-3" cFormFloating>
                                     <input cFormControl formControlName="title" id="title" type="text" autofocus>
+                                    <label cLabel for="title">Title</label>
                                     <app-input-error [control]="form.controls['title']"></app-input-error>
                                 </div>                                
                             </c-col>
                         </c-row>
                         <c-row>
                             <c-col md="6">
-                                <div class="mb-3">
-                                    <label cLabel for="price">Price</label>
+                                <div class="mb-3" cFormFloating>
                                     <input cFormControl formControlName="price" id="price" type="number">
+                                    <label cLabel for="price">Price</label>
                                 </div>
                             </c-col>
                             <c-col md="6">
-                                <div class="mb-3">
-                                    <label cLabel for="oldPrice">Old Price</label>
+                                <div class="mb-3" cFormFloating>
                                     <input cFormControl formControlName="oldPrice" id="oldPrice" type="number">
+                                    <label cLabel for="oldPrice">Old Price</label>
                                 </div>
                             </c-col>
                         </c-row>
                         <c-row>
                             <c-col>
-                                <div class="mb-3">
-                                    <label cLabel for="description">Description</label>
+                                <div class="mb-3" cFormFloating>
                                     <textarea cFormControl formControlName="description" id="description" type="text"></textarea>
+                                    <label cLabel for="description">Description</label>
                                 </div>
                             </c-col>
                         </c-row>

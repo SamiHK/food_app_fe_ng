@@ -1,0 +1,35 @@
+<c-card>
+    <c-card-body>
+        <c-row class="mb-3">
+            <c-col class="">
+                <span class="float-end">
+                    <a routerLink="../create" cButton color="primary">Create New Menu</a>
+                </span>
+            </c-col>
+        </c-row>
+        <c-row *ngIf="isLoading else loadedBlock">
+            <c-col>
+                <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+            </c-col>
+        </c-row>
+        <ng-template #loadedBlock>
+            <perfect-scrollbar>
+                <ul *ngIf="menus.length > 0 else emptyMenuBlock" flush cListGroup dragula="menus"
+                    [(dragulaModel)]="menus">
+                    <a *ngFor="let m of menus" cListGroupItem
+                        [routerLink]="['../', m.id]" routerLinkActive="active"
+                        class="d-flex justify-content-between align-items-center border-0 my-1 rounded">
+                        <span>
+                            <h6 class="my-1">{{m.title}}</h6>
+                        </span>
+                        <c-badge *ngIf="m.totalItems" color="primary" shape="rounded-pill" class="float-end">
+                            {{m.totalItems}}</c-badge>
+                    </a>
+                </ul>
+                <ng-template #emptyMenuBlock>
+                    Empty Menu
+                </ng-template>
+            </perfect-scrollbar>
+        </ng-template>
+    </c-card-body>
+</c-card>

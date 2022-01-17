@@ -28,7 +28,7 @@ export class MenuItemFormComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.menuId = this.route.snapshot.params['id'];
+    this.menuId = this.route.parent?.snapshot.params['id'];
     // console.log(`menuId: ${this.menuId}`)
     this.menuItemId = this.route.snapshot.params['menuItemId'];
     if(this.menuItemId){
@@ -37,6 +37,9 @@ export class MenuItemFormComponent implements OnInit {
       this.loadForm();
       this.isLoading = false;
     }
+    document.querySelector('#item-form')?.scrollIntoView({
+      behavior: 'smooth', block: 'center',
+    })
   }
 
   loadForm(){

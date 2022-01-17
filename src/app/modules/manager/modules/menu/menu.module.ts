@@ -8,6 +8,10 @@ import { MenuItemListComponent } from './components/menu-item-list/menu-item-lis
 import { AlertModule, BadgeModule, ButtonGroupModule, ButtonModule, CardModule, FormModule, GridModule, ImgModule, ListGroupModule, SidebarModule, SpinnerModule, TableModule } from '@coreui/angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconModule, IconSetModule } from '@coreui/icons-angular';
+import { MenuCardComponent } from './components/menu-card/menu-card.component';
+import { MenuNavigationListComponent } from './components/menu-navigation-list/menu-navigation-list.component';
+import { MenuBoardComponent } from './components/menu-board/menu-board.component';
+import { DragulaModule } from 'ng2-dragula';
 
 const CORE_UI_MODULES = [CardModule, ButtonModule, ButtonGroupModule,
   FormModule, AlertModule, TableModule, SpinnerModule,
@@ -20,12 +24,16 @@ const CORE_UI_MODULES = [CardModule, ButtonModule, ButtonGroupModule,
   declarations: [
     MenuComponent,
     MenuListComponent,
-    MenuItemListComponent
+    MenuItemListComponent,
+    MenuCardComponent,
+    MenuNavigationListComponent,
+    MenuBoardComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
-    ...CORE_UI_MODULES
+    ...CORE_UI_MODULES,
+    DragulaModule.forRoot()
   ]
 })
 export class MenuModule { }

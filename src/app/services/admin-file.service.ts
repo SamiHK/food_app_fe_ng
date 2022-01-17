@@ -20,7 +20,7 @@ export class AdminFileService {
     );
   }
 
-  menu(menuId: number, body: File) {
+  menu(menuId: any, body: File) {
     const formData = new FormData();
     formData.append('menu', body);
     return this.http.post(`${this.BASE_URL}/menu/${menuId}`, formData)

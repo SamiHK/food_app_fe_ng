@@ -1,0 +1,9 @@
+<c-row>
+    <c-col md="4">
+        <app-menu-navigation-list [menus]="menus" [isLoading]="isLoadingMenu"></app-menu-navigation-list>
+    </c-col>
+    <c-col md="8">
+        <app-menu-card [menu]="selectedMenu" [isLoading]="isLoadingMenu"></app-menu-card>
+        <router-outlet></router-outlet>
+    </c-col>
+</c-row>

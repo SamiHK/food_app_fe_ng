@@ -1,0 +1,34 @@
+<c-card *ngIf="isLoading else loadedBlock">
+    <c-card-body>
+        <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+    </c-card-body>
+</c-card>
+<ng-template #loadedBlock>
+    <ng-template [ngIf]="menu" [ngIfElse]="emptyMenuBlock">
+        <c-card class="mb-3">
+            <c-card-body class="">
+                <c-row>
+                    <c-col sm="1" md="4">
+                        <img *ngIf="menu.primaryImg" cImg rounded fluid [src]="menu.primaryImg">
+                    </c-col>
+                    <c-col sm="11" md="8">
+                        <span class="d-flex justify-content-between">
+                            <h3 cCardTitle>{{menu.title}}</h3>
+                            <span class="d-block-inline">
+                                <!-- <a routerLink="edit" cButton color="light" size="sm">Edit</a> -->
+                            </span>
+                        </span>
+                        <p cCardText>{{menu.description}}</p>
+                    </c-col>
+                </c-row>
+            </c-card-body>
+        </c-card>
+    </ng-template>
+    <ng-template #emptyMenuBlock>
+        <c-card>
+            <c-card-body>
+                Menu Not Selected
+            </c-card-body>
+        </c-card>
+    </ng-template>
+</ng-template>

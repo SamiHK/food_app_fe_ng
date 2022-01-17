@@ -11,10 +11,13 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, ListGroupModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, ImgModule, ListGroupModule, SpinnerModule, TableModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { DragulaModule } from 'ng2-dragula';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { MenuBoardComponent } from './components/menu-board/menu-board.component';
+import { MenuNavigationListComponent } from './components/menu-navigation-list/menu-navigation-list.component';
+import { MenuCardComponent } from './components/menu-card/menu-card.component';
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -27,7 +30,7 @@ const CORE_UI_MODULES = [
   IconModule,
   BadgeModule,
   PerfectScrollbarModule,
-  ListGroupModule
+  ListGroupModule, ImgModule
 ]
 
 const REQUIRED_MODULES = [
@@ -45,7 +48,10 @@ const REQUIRED_MODULES = [
     MenuListComponent,
     MenuFormComponent,
     MenuItemListComponent,
-    MenuItemFormComponent
+    MenuItemFormComponent,
+    MenuBoardComponent,
+    MenuNavigationListComponent,
+    MenuCardComponent
   ],
   imports: [
     CommonModule,
