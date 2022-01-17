@@ -7,11 +7,11 @@ export const adminNavItems: INavData[] = [
   },
   {
     name: 'Manager',
-    url: '/manager'
+    url: '/admin/manager'
   },
   {
     name: 'Branch',
-    url: '/branch'
+    url: '/admin/branch'
   },
   {
     name: 'Menu',

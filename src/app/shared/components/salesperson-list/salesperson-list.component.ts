@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from 'src/app/models/page';
 import { SalesPerson } from 'src/app/models/sales-person';
-import { AdminBranchService } from 'src/app/services/admin-branch.service';
+import { BranchService } from 'src/app/modules/admin/services/branch.service';
 
 @Component({
   selector: 'app-salesperson-list',
@@ -20,7 +20,7 @@ export class SalespersonListComponent implements OnInit {
   page = new Page<SalesPerson>();
   branchId: string | null = null
 
-  constructor(private route: ActivatedRoute, private abService: AdminBranchService) { }
+  constructor(private route: ActivatedRoute, private abService: BranchService) { }
 
   ngOnInit(): void {
     this.branchId = this.route.snapshot.params['branchId']

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Manager } from 'src/app/models/manager';
 import { Page } from 'src/app/models/page';
-import { SalesPerson } from 'src/app/models/sales-person';
-import { ManagerSalespersonService } from 'src/app/services/manager-salesperson.service';
+import { ManagerService } from 'src/app/modules/admin/services/manager.service';
 
 @Component({
-  selector: 'app-salesperson-list',
-  templateUrl: './salesperson-list.component.html',
-  styleUrls: ['./salesperson-list.component.scss']
+  selector: 'app-manager-list',
+  templateUrl: './manager-list.component.html',
+  styleUrls: ['./manager-list.component.scss']
 })
-export class SalespersonListComponent implements OnInit {
+export class ManagerListComponent implements OnInit {
 
-  page = new Page<SalesPerson>();
+  page = new Page<Manager>();
 
   form = new FormGroup({
     'search': new FormControl(null, Validators.required)
   })
 
-  constructor(private mspService: ManagerSalespersonService) { }
+  constructor(private amService: ManagerService) { }
 
   ngOnInit(): void {
     this.loadManagers();
@@ -26,7 +26,7 @@ export class SalespersonListComponent implements OnInit {
   isLoading = false;
   async loadManagers(params?:any){
     this.isLoading = true;
-    await this.mspService.filter(params)
+    await this.amService.filter(params)
       .forEach(v => this.page = v)
       .finally(() => this.isLoading = false);
   }
@@ -48,5 +48,4 @@ export class SalespersonListComponent implements OnInit {
       this.loadManagers({number: page.page})
     }
   }
-
 }
