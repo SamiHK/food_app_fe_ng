@@ -1,0 +1,78 @@
+<c-row class="justify-content-center" *ngIf="isLoading else elseBlock">
+    <c-col md="8" class="">
+        <c-spinner size="sm"></c-spinner>
+        <span class="d-flex-inline my-auto">
+            Loading...
+        </span>
+    </c-col>
+</c-row>
+<ng-template #elseBlock>
+    <c-row class="justify-content-center">
+        <c-col md="8">
+            <c-row>
+                <c-col>
+                    <h4>@{{manager.username}}</h4>
+                </c-col>
+                <c-col xs="1">
+                    <app-user-active-switch [user]="manager"></app-user-active-switch>
+                </c-col>
+            </c-row>
+            <app-user-profile [user]="manager"></app-user-profile>
+            <h4>Branch</h4>
+            <c-card>
+                <c-card-body>
+                    <c-row *ngIf="!isEditBranch else branchForm">
+                        <c-col>
+                            <span *ngIf="(manager.branchId && manager.branch && manager.branch) else na">
+                                <h4>
+                                    {{manager.branch.name}}
+                                </h4>
+                                <a cButton [routerLink]="['../../branch', manager.branchId]" color="light" size="sm">
+                                    {{manager.branch.code}}
+                                </a>
+                                <hr>
+                                <a cButton [routerLink]="[manager.branchId, 'salespersons']" color="light" *ngIf="manager.salespersons">
+                                    Salesperson <c-badge shape="rounded-pill" color="success">{{manager.salespersons.length}}</c-badge>
+                                </a>
+                            </span>
+                            <ng-template #na>N/A</ng-template>
+                        </c-col>
+                        <c-col xs="2">
+                            <span class="float-end">
+                                <button cButton (click)="editBranch()" color="light" size="sm">Edit</button>
+                            </span>
+                        </c-col>
+                    </c-row>
+                    <ng-template #branchForm>
+                        <form (ngSubmit)="saveBranch()">
+                            <fieldset [disabled]="savingBranch">
+                                <c-row>
+                                    <c-col>
+                                        <span *ngIf="!branchLoading else loader">
+                                            <select cSelect [(ngModel)]="selectedBranchId" name="branch">
+                                                <option value="null">None</option>
+                                                <option *ngFor="let i of branchPage.items" [value]="i.id">{{i.code}}</option>
+                                            </select>
+                                        </span>
+                                        <ng-template #loader>
+                                            <c-spinner size="sm"></c-spinner>
+                                        </ng-template>
+                                    </c-col>
+                                    <c-col xs="4">
+                                        <span class="d-grid gap-2 d-flex float-end">
+                                            <button cButton (click)="cancelEditBranch()" color="light"
+                                                size="sm">Cancel</button>
+                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..." type="submit">
+                                                Save
+                                            </button>
+                                        </span>
+                                    </c-col>
+                                </c-row>
+                            </fieldset>
+                        </form>
+                    </ng-template>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</ng-template>

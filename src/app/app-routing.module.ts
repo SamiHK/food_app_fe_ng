@@ -24,64 +24,24 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'manager', data: {title: 'Manager'},  
-        loadChildren: () =>
-          import('./modules/manager/manager.module').then((m) => m.ManagerModule)
-      },
-      {
-        path: 'branch', data: {title: 'Branch'},
-        loadChildren: () =>
-          import('./modules/branch/branch.module').then((m) => m.BranchModule)
-      },
-      {
-        path: 'salesperson', data: {title: 'Salesperson'},
-        loadChildren: () =>
-          import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
-      },
-      {
-        path: 'admin', data: {title: 'Menu'},
-        loadChildren: () =>
-          import('./modules/menu/menu.module').then((m) => m.MenuModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
       {
-        path: 'theme',
+        path: 'admin',  
         loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule)
+          import('./modules/admin/admin.module').then((m) => m.AdminModule)
       },
       {
-        path: 'base',
+        path: 'manager', data: {title: 'Manager'},  
         loadChildren: () =>
-          import('./views/base/base.module').then((m) => m.BaseModule)
+          import('./modules/manager/manager.module').then((m) => m.ManagerModule)
       },
-      {
-        path: 'buttons',
+        {
+        path: 'salesperson', data: {title: 'Salesperson'},
         loadChildren: () =>
-          import('./views/buttons/buttons.module').then((m) => m.ButtonsModule)
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./views/charts/charts.module').then((m) => m.ChartsModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () =>
-          import('./views/icons/icons.module').then((m) => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () =>
-          import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
+          import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
       },
       {
         path: 'widgets',

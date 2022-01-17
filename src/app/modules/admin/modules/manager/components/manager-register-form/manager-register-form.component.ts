@@ -3,16 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/models/alert';
+import { ManagerService } from 'src/app/modules/admin/services/manager.service';
 import { checkPassword } from 'src/app/shared/form-input-validatorsFn';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { SalespersonService } from '../../services/salesperson.service';
 
 @Component({
-  selector: 'app-salesperson-register',
-  templateUrl: './salesperson-register.component.html',
-  styleUrls: ['./salesperson-register.component.scss']
+  selector: 'app-manager-register-form',
+  templateUrl: './manager-register-form.component.html',
+  styleUrls: ['./manager-register-form.component.scss']
 })
-export class SalespersonRegisterComponent implements OnInit {
+export class ManagerRegisterFormComponent implements OnInit {
 
   form = new FormGroup({
     'username': new FormControl(null, [Validators.required]),
@@ -20,7 +20,7 @@ export class SalespersonRegisterComponent implements OnInit {
     'confirmPassword': new FormControl(null),
   })
 
-  constructor(private mspService: SalespersonService,
+  constructor(private amService: ManagerService,
     private router: Router,
     private alertService: AlertService,
     public location: Location) {
@@ -37,12 +37,12 @@ export class SalespersonRegisterComponent implements OnInit {
     if(this.form.valid){
       this.alertService.hideAlert(this.alert);
       this.isLoading = true;
-      this.mspService.register(this.form.value)
+      this.amService.register(this.form.value)
         .forEach(v => {
           console.log(v)
           if(v) {  
-            this.alertService.showAlert(this.alert, 'Salesperson Registered', `New Salesperson has been registered` , 'success');
-            this.router.navigate(['manager', 'salesperson', v.id])
+            this.alertService.showAlert(this.alert, 'Manager Registered', `New Manager has been registered` , 'success');
+            this.router.navigate(['admin', 'manager', v.id])
           }
         })
         .catch(e => {
