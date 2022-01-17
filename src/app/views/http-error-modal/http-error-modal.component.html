@@ -1,0 +1,21 @@
+<c-card class="text-danger">
+    <c-card-body class="">
+        <h4 cCardTitle>{{er?.name}}-{{er?.status}}</h4>
+        <h2>{{er?.statusText}}</h2>
+        <small>url: {{er?.url}}</small>
+        <span *ngIf="er?.error && (er?.error.name || er?.error.code)">
+            <hr>
+            <!-- <p>Message: {{er?.message}}</p> -->
+            <p>{{er?.error.name}}</p>
+            <p>{{er?.error.message}}</p>
+        </span>
+        <c-row>
+            <c-col>
+                <span class="d-grid d-flex gap-2 float-end">
+                    <button cButton (click)="bsModalRef.hide()" color="light">Close</button>
+                    <button *ngIf="isLogin" cButton (click)="login()" color="primary" shape="outline">Login</button>
+                </span>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>

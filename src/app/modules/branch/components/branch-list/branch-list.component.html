@@ -1,12 +1,18 @@
 <c-card class="mb-4">
     <c-card-body>
         <c-row>
-            <c-col class="text-right">
-                <button cButton color="primary" routerLink="register">Register New Branch</button>
+            <c-col class="">
+                <span class="float-end">
+                    <button cButton color="primary" routerLink="register">Register New Branch</button>
+                </span>
             </c-col>
         </c-row>
     </c-card-body>
 </c-card>
+<!-- <c-card class="mb-4">
+    <c-card-body>
+    </c-card-body>
+</c-card> -->
 <c-card class="mb-4">
     <c-card-body>
         <c-row>
@@ -19,10 +25,7 @@
                 </form>
             </c-col>
         </c-row>
-    </c-card-body>
-</c-card>
-<c-card class="mb-4">
-    <c-card-body>
+        <hr>
         <c-row>
             <c-col>
                 <table cTable hover>
@@ -48,7 +51,7 @@
                                 </td>
                                 <td [routerLink]="[i.id]">{{i.code}}</td>
                                 <td [routerLink]="[i.id]">{{i.name}}</td>
-                                <td [routerLink]="[i.id]">{{i.address}}</td>
+                                <td [routerLink]="[i.id]" class="w-50">{{i.branchAddress}}</td>
                                 <td>{{i.managerFullName}}</td>
                             </tr>
                             <tr *ngIf="page.items.length == 0">
@@ -59,7 +62,7 @@
                         </ng-template>
                     </tbody>
                 </table>
-                <pagination [totalItems]="page.total" [(ngModel)]="page.number" 
+                <pagination [totalItems]="page.total" [(ngModel)]="page.number"  [itemsPerPage]="page.size"
                  (pageChanged)="onPageChange($event)"></pagination>
             </c-col>
         </c-row>

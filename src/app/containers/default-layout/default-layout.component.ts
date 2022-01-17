@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthUser } from 'src/app/models/auth-user';
-import { adminNavItems, managerNavItems, navItems } from './_nav';
+import { adminNavItems, managerNavItems, navItems, salespersonNavItems } from './_nav';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +29,7 @@ export class DefaultLayoutComponent implements OnInit {
         switch(this.user.role) {
           case 'ADMIN': this.navItems = adminNavItems; break;
           case 'MANAGER': this.navItems = managerNavItems; break;
+          case 'SALES_PERSON': this.navItems = salespersonNavItems; break;
           // default: 
         }
       }

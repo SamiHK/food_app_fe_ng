@@ -1,0 +1,4 @@
+<input cFormControl #menuImageUpdate (change)="onImageChange($event)" type="file" multiple class="d-none" >
+<button cButton (click)="menuImageUpdate.click()" color="light" [size]="size">
+    {{label}}
+</button>

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Manager } from 'src/app/models/manager';
 import { Page } from 'src/app/models/page';
-import { ManagerService } from 'src/app/services/manager.service';
-import { AdminManagerService } from 'src/app/shared/services/admin-manager.service';
+import { AdminManagerService } from 'src/app/services/admin-manager.service';
 
 @Component({
   selector: 'app-manager-list',

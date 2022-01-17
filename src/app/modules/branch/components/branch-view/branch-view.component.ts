@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,9 +6,9 @@ import { Alert } from 'src/app/models/alert';
 import { Branch } from 'src/app/models/branch';
 import { Manager } from 'src/app/models/manager';
 import { Page } from 'src/app/models/page';
-import { CommonService } from 'src/app/services/common.service';
-import { AdminBranchService } from 'src/app/shared/services/admin-branch.service';
-import { AdminManagerService } from 'src/app/shared/services/admin-manager.service';
+import { AdminBranchService } from 'src/app/services/admin-branch.service';
+import { AdminManagerService } from 'src/app/services/admin-manager.service';
+import { CommonModalService } from 'src/app/shared/services/common-modal.service';
 
 @Component({
   selector: 'app-branch-view',
@@ -18,10 +19,12 @@ export class BranchViewComponent implements OnInit {
 
   branch: Branch = new Branch();
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute,
     private amService: AdminManagerService,
     private abService: AdminBranchService,
-    private commonService: CommonService) {
+    private location: Location,
+    private router: Router,
+    private cModalService: CommonModalService) {
     let id = this.route.snapshot.params['id'];
     if (id) {
       this.branch.id = id;
@@ -45,6 +48,25 @@ export class BranchViewComponent implements OnInit {
     'name': new FormControl(null, [Validators.required], )
   })
 
+
+  editLocation(){
+    let modalRef = this.cModalService.showMapModal(this.branch.location);
+    modalRef.onHide?.subscribe(
+      async (e) => {
+        // console.log(e);
+        if(e){
+          // console.log(e)
+          // console.log(modalRef.content?.location)
+          if(modalRef && modalRef.content && modalRef.content.location && modalRef.content.location.formattedAddress){
+            await this.abService.updateLocation(this.branch.id, modalRef.content.location)
+            .forEach(v => this.branch.location = v)
+            // this.branch.location = modalRef.content?.location
+          }
+        }
+      }
+    )
+  }
+
   isEditBranch = false;
   editBranch(){
     if(this.branch && this.branch.id){
@@ -55,7 +77,11 @@ export class BranchViewComponent implements OnInit {
   }
   cancelEditBranch(){
     this.branchForm.reset();
-    this.isEditBranch = false;
+    if(this.branch && this.branch.id){
+      this.isEditBranch = false;
+    } else {
+      this.location.back()
+    }
   }
   savingBranch = false;
   saveBranch(){
@@ -68,11 +94,13 @@ export class BranchViewComponent implements OnInit {
       } 
 
       this.abService.save(b).forEach(v => {
-        if(v && v.error){
-
-        } else if(v){
-          Object.assign(this.branch, v);
-          this.isEditBranch = false;
+        if(v){
+          if(!this.branch.id){
+            this.router.navigate(['branch', v.id])
+          } else {
+            Object.assign(this.branch, v);
+            this.isEditBranch = false;
+          }
         }
       })
       .catch(e => {
@@ -121,7 +149,6 @@ export class BranchViewComponent implements OnInit {
         Object.assign(this.branch, v);
         this.isEditManager = false;
         this.loadManager();
-        // this.commonService.showSuccessAlert(this.alert, "Branch Updated")
       })
         .catch(e => console.log(e))
         .finally(() => {

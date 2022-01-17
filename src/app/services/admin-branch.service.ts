@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
-import { Branch } from 'src/app/models/branch';
-import { Page } from 'src/app/models/page';
-import { CommonService } from 'src/app/services/common.service';
+import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Branch } from '../models/branch';
+import { Location } from '../models/loaction';
+import { Page } from '../models/page';
+import { SalesPerson } from '../models/sales-person';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,15 @@ export class AdminBranchService {
   private BASE_URL = `${environment.BASE_URL}/admin/branch`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
+
+  salesperson(branchId: string, params?:any) {
+    return this.http.get<Page<SalesPerson>>(`${this.BASE_URL}/${branchId}/salespersons`, {
+      params: params
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
 
   filter(params?:any) {
     return this.http.get<Page<Branch>>(`${this.BASE_URL}`, {
@@ -40,8 +51,15 @@ export class AdminBranchService {
     );
   }
 
+  updateLocation(branchId: string, body: Location) {
+    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/location`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
   updateManager(branchId: string, body: {managerId: string}) {
-    return this.http.post<Page<Branch>>(`${this.BASE_URL}/${branchId}/manager`, body)
+    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/manager`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );
