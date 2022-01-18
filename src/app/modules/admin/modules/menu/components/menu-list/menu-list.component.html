@@ -25,15 +25,22 @@
                         <c-card-body class="d-flex flex-column justify-content-end">
                             <span class="d-flex justify-content-between">
                                 <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
+                                <span>
+                                    <a cButton [routerLink]="[m.id, 'edit']" size="sm" color="light">Edit</a>
+                                </span>
                             </span>
                             <p cCardText class="text-truncate">{{m.description}}</p>
                             <span>
                                 <app-upload-button
-                                    (imageChange)="updateImage($event)" size="sm"
-                                    label='Update Image' [id]="m.id"></app-upload-button>
+                                (imageChange)="updateImage($event)" size="sm"
+                                label='Update Image' [id]="m.id"></app-upload-button>
                                 <span class="d-flex d-grid gap-2 float-end">
-                                    <a cButton [routerLink]="[m.id, 'edit']" size="sm" color="light">Edit</a>
-                                    <a cButton [routerLink]="[m.id]" size="sm">Items</a>
+                                    <a cButton [routerLink]="[m.id]" size="sm">
+                                        <span>
+                                            <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
+                                        </span>
+                                        Items
+                                    </a>
                                 </span>
                             </span>
                         </c-card-body>

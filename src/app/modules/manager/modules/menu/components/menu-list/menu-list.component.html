@@ -1,8 +1,3 @@
-<!-- <c-row *ngIf="isLoading else loadedBlock">
-    <c-col>
-        <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
-    </c-col>
-</c-row> -->
 <c-row>
     <c-col>
         <c-card *ngIf="isLoading else loadedBlock">
@@ -22,9 +17,13 @@
                             <p cCardText class="text-truncate">{{m.description}}</p>
                             <span class="d-flex justify-content-between">
                                 <app-input-switch [isLoading]="m.updatingAvailability" 
-                                    label="Is Available" [id]="m.id" [status]="m.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
+                                label="Is Available" [id]="m.id" [status]="m.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
                                 <span class="d-flex d-grid gap-2 float-end">
-                                    <a cButton [routerLink]="[m.id]" size="sm">Items</a>
+                                    <a cButton [routerLink]="[m.id]" size="sm">
+                                        <span>
+                                            <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
+                                        </span>
+                                        Items</a>
                                 </span>
                             </span>
                         </c-card-body>

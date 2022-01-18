@@ -15,11 +15,12 @@
                         </span>
                         <p>{{i.description}}</p>
                         <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
-                            <span>
-                                <app-input-switch [isLoading]="i.updatingAvailability" 
-                                    label="Is Available" [id]="i.id" [status]="i.isAvailable" (onChange)="onChangeMenuItemAvailability($event)"></app-input-switch>
-                            </span>
                             <span class="d-flex d-grid gap-2">
+                                <span>
+                                    <c-badge color="primary" shape="rounded-pill">{{i.price |
+                                        currency:'Pkr
+                                        '}}</c-badge>
+                                </span>
                                 <span *ngIf="i.oldPrice">
                                     <!-- <small>Old Price</small> -->
                                     <c-badge color="dark" shape="rounded-pill">
@@ -28,12 +29,12 @@
                                         </span>
                                     </c-badge>
                                 </span>
-                                <span>
-                                    <c-badge color="primary" shape="rounded-pill">{{i.price |
-                                        currency:'Pkr
-                                        '}}</c-badge>
-                                </span>
                             </span>
+                            <span>
+                                <app-input-switch [isLoading]="i.updatingAvailability" 
+                                    label="Is Available" [id]="i.id" [status]="i.isAvailable" (onChange)="onChangeMenuItemAvailability($event)"></app-input-switch>
+                            </span>
+
                         </div>
                     </c-card-body>
                 </c-card>
