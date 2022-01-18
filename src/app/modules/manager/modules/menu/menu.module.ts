@@ -12,6 +12,7 @@ import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { MenuNavigationListComponent } from './components/menu-navigation-list/menu-navigation-list.component';
 import { MenuBoardComponent } from './components/menu-board/menu-board.component';
 import { DragulaModule } from 'ng2-dragula';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const CORE_UI_MODULES = [CardModule, ButtonModule, ButtonGroupModule,
   FormModule, AlertModule, TableModule, SpinnerModule,
@@ -33,7 +34,8 @@ const CORE_UI_MODULES = [CardModule, ButtonModule, ButtonGroupModule,
     CommonModule,
     MenuRoutingModule,
     ...CORE_UI_MODULES,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    SharedModule
   ]
 })
 export class MenuModule { }

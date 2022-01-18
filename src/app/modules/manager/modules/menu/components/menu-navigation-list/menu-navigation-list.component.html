@@ -9,7 +9,7 @@
             <perfect-scrollbar>
                 <ul *ngIf="menus.length > 0 else emptyMenuBlock" flush cListGroup dragula="menus"
                     [(dragulaModel)]="menus">
-                    <a *ngFor="let m of menus" cListGroupItem
+                    <a *ngFor="let m of menus" cListGroupItem [ngClass]="{'bg-dark': !m.isAvailable}"
                         [routerLink]="['../', m.id]" routerLinkActive="active"
                         class="d-flex justify-content-between align-items-center border-0 my-1 rounded">
                         <span>

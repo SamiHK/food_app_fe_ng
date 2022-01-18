@@ -20,7 +20,9 @@
                                 <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
                             </span>
                             <p cCardText class="text-truncate">{{m.description}}</p>
-                            <span>
+                            <span class="d-flex justify-content-between">
+                                <app-input-switch [isLoading]="m.updatingAvailability" 
+                                    label="Is Available" [id]="m.id" [status]="m.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
                                 <span class="d-flex d-grid gap-2 float-end">
                                     <a cButton [routerLink]="[m.id]" size="sm">Items</a>
                                 </span>

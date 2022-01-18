@@ -14,6 +14,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { SalespersonListComponent } from './components/salesperson-list/salesperson-list.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { UploadButtonComponent } from './components/upload-button/upload-button.component';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 
 const CORE_UI_MODULES = [FormModule,
   ButtonModule,
@@ -36,6 +37,7 @@ const CORE_UI_MODULES = [FormModule,
     MapModalComponent,
     SalespersonListComponent,
     UploadButtonComponent,
+    InputSwitchComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ const CORE_UI_MODULES = [FormModule,
   ],
   exports: [
     InputErrorComponent, UserProfileFormComponent, UploadButtonComponent,
+    InputSwitchComponent,
     UserActiveSwitchComponent, XcButtonDirective, SalespersonListComponent
   ]
 })

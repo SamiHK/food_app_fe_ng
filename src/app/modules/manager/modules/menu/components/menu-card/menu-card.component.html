@@ -15,6 +15,8 @@
                         <span class="d-flex justify-content-between">
                             <h3 cCardTitle>{{menu.title}}</h3>
                             <span class="d-block-inline">
+                                <app-input-switch [isLoading]="updatingAvailableStatus" 
+                                    label="Is Available" [status]="menu.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
                                 <!-- <a routerLink="edit" cButton color="light" size="sm">Edit</a> -->
                             </span>
                         </span>

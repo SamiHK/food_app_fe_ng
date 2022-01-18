@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
-import { Menu } from 'src/app/models/menu';
+import { Menu, MenuItem } from 'src/app/models/menu';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 
@@ -25,6 +25,20 @@ export class MenuService {
 
   menuItems(menuId: number) {
     return this.http.get<Menu[]>(`${this.BASE_URL}/${menuId}/item`)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
+  menuAvailability(body: Menu) {
+    return this.http.post(`${this.BASE_URL}/availability`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
+  menuItemAvailability(body: MenuItem) {
+    return this.http.post(`${this.BASE_URL}/item/availability`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );

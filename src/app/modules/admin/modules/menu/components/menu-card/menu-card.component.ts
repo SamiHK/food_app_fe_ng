@@ -35,5 +35,4 @@ export class MenuCardComponent implements OnInit {
     }
   }
 
-
 }

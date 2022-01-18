@@ -5,7 +5,9 @@ export class Menu {
     description: string | null = null;
     primaryImg: string|null = null;
     totalItems: number = 0;
-    items: MenuItem[] = []
+    items: MenuItem[] = [];
+    isAvailable: boolean = true;
+    updatingAvailability: boolean = false;
 }
 
 
@@ -18,4 +20,7 @@ export class MenuItem {
     price: number = 0;
     oldPrice: number | null = null;
     sortOrder: number = 0;
+    isMenuAvailable: boolean = true;
+    isAvailable: boolean = true;
+    updatingAvailability: boolean = false;
 }

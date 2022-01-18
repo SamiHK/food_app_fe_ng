@@ -36,4 +36,17 @@ export class MenuItemListComponent implements OnInit {
     await this.amService.menuItems(id).forEach(v => this.menuItems = v)
     this.isLoadingMenuItems = false;
   }
+
+  async onChangeMenuItemAvailability(event: any){
+    console.log(event)
+    if(event){
+      let menuItem = this.menuItems?.find(m => m.id == event.id);
+      if(menuItem){
+        menuItem.updatingAvailability = true;
+        menuItem.isAvailable = event.status;
+        this.amService.menuItemAvailability(menuItem).forEach(v => console.log(v));
+        menuItem.updatingAvailability = false;
+      }
+    }
+  }
 }

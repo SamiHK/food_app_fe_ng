@@ -39,4 +39,16 @@ export class MenuListComponent implements OnInit, OnDestroy {
     this.isLoading = false;
   }
 
+  async onChangeAvailability(event: any){
+    if(event.id){
+      let menu = this.menus.find(m => m.id == event.id);
+      if(menu){
+        menu.updatingAvailability = true;
+        menu.isAvailable = event.status;
+        await this.amService.menuAvailability(menu).forEach(v => console.log(v));
+        menu.updatingAvailability = false;
+      }
+    }
+  }
+
 }

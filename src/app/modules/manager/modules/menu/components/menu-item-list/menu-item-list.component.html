@@ -16,6 +16,8 @@
                         <p>{{i.description}}</p>
                         <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
                             <span>
+                                <app-input-switch [isLoading]="i.updatingAvailability" 
+                                    label="Is Available" [id]="i.id" [status]="i.isAvailable" (onChange)="onChangeMenuItemAvailability($event)"></app-input-switch>
                             </span>
                             <span class="d-flex d-grid gap-2">
                                 <span *ngIf="i.oldPrice">
