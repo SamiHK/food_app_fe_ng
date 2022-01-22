@@ -1,0 +1,60 @@
+<c-row class="justify-content-center">
+    <c-col md="8">
+        <c-card *ngIf="!isEditForm else editForm" class="mb-4">
+            <c-card-body  class="d-flex justify-content-end">
+                <button (click)="createUnit()" cButton>Create</button>        
+            </c-card-body>
+        </c-card>
+        <ng-template #editForm>
+            <c-card class="">
+                <c-card-body>
+                    <button (click)="location.back()" color="dark" type="button" cButton variant="outline" size="sm">
+                        <svg cIcon name="cilCaretLeft" size="sm"></svg> Go Back
+                    </button>
+                </c-card-body>
+            </c-card>
+            <c-card class="mb-4">
+                <c-card-body  class="">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <fieldset [disabled]="isSaving" class="d-flex gap-2">
+                            <span class="flex-grow-1">
+                                <input cFormControl formControlName="title"  [valid]="form.controls['title'].value" id="title" placeholder="Title" size="sm">
+                                <app-input-error [control]="form.controls['title']"></app-input-error>
+                            </span>
+                            <span class="">
+                                <span class="d-flex gap-2">
+                                    <button (click)="isEditForm = !isEditForm" type="button" color="light" cButton>Cancel</button>
+                                    <button type="submit" xcButton [loading]="isSaving" loadingLabel="Saving...">Save</button>
+                                </span>
+                            </span>
+                        </fieldset>
+                    </form>
+                </c-card-body>
+            </c-card>
+        </ng-template>
+        <c-card class="" *ngIf="isLoading else loadedBlock">
+            <c-card-body class="d-flex gap-2 align-items-center">
+                <c-spinner size="sm"></c-spinner>
+                <span>
+                    Loading...
+                </span> 
+            </c-card-body>
+        </c-card>
+        <ng-template #loadedBlock>
+            <c-card class="mb-1" *ngFor="let miu of menuItemUnits">
+                <c-card-body class="d-flex justify-content-between">
+                    <h6 cCardTitle class="my-1">{{miu.title}}</h6>
+                    <span class="d-flex gap-2">
+                        <button (click)="deleteUnit(miu)" cButton size="sm" color="danger">delete</button>
+                        <button (click)="editUnit(miu)" cButton size="sm" color="light">Edit</button>
+                    </span>
+                </c-card-body>
+            </c-card>
+            <c-card class="" *ngIf="menuItemUnits && menuItemUnits.length == 0">
+                <c-card-body>
+                    Empty
+                </c-card-body>
+            </c-card>
+        </ng-template>
+    </c-col>
+</c-row>

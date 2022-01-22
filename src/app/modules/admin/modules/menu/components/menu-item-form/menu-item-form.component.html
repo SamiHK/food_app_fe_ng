@@ -7,30 +7,41 @@
                         <c-row>
                             <c-col>
                                 <div class="mb-3" cFormFloating>
-                                    <input cFormControl formControlName="title" id="title" type="text" autofocus>
+                                    <input cFormControl formControlName="title" [valid]="form.controls['title'].valid" id="title" placeholder="Title" type="text" autofocus>
                                     <label cLabel for="title">Title</label>
                                     <app-input-error [control]="form.controls['title']"></app-input-error>
                                 </div>                                
                             </c-col>
                         </c-row>
                         <c-row>
-                            <c-col md="6">
+                            <c-col sm="4">
                                 <div class="mb-3" cFormFloating>
-                                    <input cFormControl formControlName="price" id="price" type="number">
+                                    <input cFormControl formControlName="price" [valid]="form.controls['price'].valid" id="price" placeholder="Price" type="number">
                                     <label cLabel for="price">Price</label>
+                                    <app-input-error [control]="form.controls['price']"></app-input-error>
                                 </div>
                             </c-col>
-                            <c-col md="6">
+                            <c-col sm="4">
                                 <div class="mb-3" cFormFloating>
-                                    <input cFormControl formControlName="oldPrice" id="oldPrice" type="number">
+                                    <input cFormControl formControlName="oldPrice" id="oldPrice" placeholder="Old Price" type="number">
                                     <label cLabel for="oldPrice">Old Price</label>
+                                </div>
+                            </c-col>
+                            <c-col sm="4">
+                                <div class="mb-3" cFormFloating>
+                                    <select cSelect formControlName="unitId" [valid]="form.controls['unitId'].valid" id="unit" placeholder="Unit" (change)="onSelectUnit($event)">
+                                        <option *ngFor="let miu of menuItemUnits" [value]="miu.id">{{miu.title}}</option>
+                                        <option value="create">Create</option>
+                                    </select>
+                                    <label cLabel for="unit">Unit</label>
+                                    <app-input-error [control]="form.controls['unitId']"></app-input-error>
                                 </div>
                             </c-col>
                         </c-row>
                         <c-row>
                             <c-col>
                                 <div class="mb-3" cFormFloating>
-                                    <textarea cFormControl formControlName="description" id="description" type="text"></textarea>
+                                    <textarea cFormControl formControlName="description" id="description" placeholder="Description" type="text"></textarea>
                                     <label cLabel for="description">Description</label>
                                 </div>
                             </c-col>

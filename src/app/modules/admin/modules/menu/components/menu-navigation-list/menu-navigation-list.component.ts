@@ -28,7 +28,7 @@ export class MenuNavigationListComponent implements OnInit {
           sortOrder: m.sortOrder
         }
       });
-      this.amService.updateSorting(sortMap).subscribe(v => v)
+      this.amService.updateMenuSorting(sortMap).subscribe(v => v)
     })
   }
 

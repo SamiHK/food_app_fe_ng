@@ -5,38 +5,41 @@
 </c-card>
 <ng-template #loadedBlock>
     <ng-template [ngIf]="menuItems && menuItems.length > 0" [ngIfElse]="emptyblock">
-        <c-row [md]="2" [sm]="1" [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems">
+        <c-row [lg]="2" [sm]="1" [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems" class="">
             <c-col *ngFor="let i of menuItems" class="d-flex justify-content-stretch">
                 <c-card class="d-flex flex-grow-1">
                     <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg">
-                    <c-card-body class="d-flex flex-column justify-content-end">
+                    <c-card-body class="d-flex flex-column gap-1">
+                        <span class="d-flex flex-grow-1"></span>
                         <span class="d-flex justify-content-between">
-                            <h6>{{i.title}}</h6>
+                            <h6 cCardTitle>{{i.title}}</h6>
                             <a [routerLink]="['item', i.id, 'edit']" routerLinkActive="disabled" cButton color="light"
-                                size="sm">Edit</a>
+                            size="sm">Edit</a>
                         </span>
-                        <p>{{i.description}}</p>
-                        <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
+                        <p *ngIf="i.description && i.description != ''" class="text-truncate mb-1">{{i.description}}</p>
+                        <small class="fw-semibold">{{i.unit}}</small>
+                        <div class="d-flex d-grid gap-2 justify-content-between align-items-center align-self-bottom">
                             <span class="d-flex d-grid gap-2">
                                 <span>
                                     <c-badge color="primary" shape="rounded-pill">{{i.price |
                                         currency:'Pkr
                                         '}}</c-badge>
+                                    </span>
+                                    <span *ngIf="i.oldPrice">
+                                        <!-- <small>Old Price</small> -->
+                                        <c-badge color="danger" shape="rounded-pill">
+                                            <span class="text-decoration-line-through">
+                                                {{ i.oldPrice | currency:'Pkr '}}
+                                            </span>
+                                        </c-badge>
+                                    </span>
                                 </span>
-                                <span *ngIf="i.oldPrice">
-                                    <!-- <small>Old Price</small> -->
-                                    <c-badge color="dark" shape="rounded-pill">
-                                        <span class="text-decoration-line-through">
-                                            {{ i.oldPrice | currency:'Pkr '}}
-                                        </span>
-                                    </c-badge>
-                                </span>
-                            </span>
+                            <span>
                             <span>
                                 <app-upload-button (imageChange)="updateMenuItemImage($event)" size="sm"
-                                    label='Update Image' [id]="i.id"></app-upload-button>
+                                        label='Update Image' [id]="i.id"></app-upload-button>
+                                </span>
                             </span>
-
                         </div>
                     </c-card-body>
                 </c-card>

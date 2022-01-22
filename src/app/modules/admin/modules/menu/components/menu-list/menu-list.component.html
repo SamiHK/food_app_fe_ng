@@ -5,7 +5,7 @@
 </c-row> -->
 <c-row>
     <c-col>
-        <c-card class="mb-3">
+        <c-card class="mb-4">
             <c-card-body>
                 <span class="d-flex d-grid gap-2 float-end">
                     <a routerLink="create" cButton color="primary">Create New Menu</a>
@@ -22,25 +22,28 @@
                 <c-col [lg]="4" [md]="6" [xs]="12" *ngFor="let m of menus" class="d-flex justify-content-stretch">
                     <c-card class="d-flex flex-grow-1">
                         <img [cCardImg] [src]="m.primaryImg">
-                        <c-card-body class="d-flex flex-column justify-content-end">
+                        <c-card-body class="d-flex flex-column justify-content-end gap-2">
                             <span class="d-flex justify-content-between">
-                                <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
+                                <span class="d-flex gap-2 align-items-center">
+                                    <h6 cCardTitle class="">{{m.title}}</h6>
+                                </span>
                                 <span>
-                                    <a cButton [routerLink]="[m.id, 'edit']" size="sm" color="light">Edit</a>
+                                    <app-input-switch label="Is Active" [status]="m.isActive" [id]="m.id" (onChange)="updateIsActive($event)"></app-input-switch>
                                 </span>
                             </span>
-                            <p cCardText class="text-truncate">{{m.description}}</p>
-                            <span>
-                                <app-upload-button
-                                (imageChange)="updateImage($event)" size="sm"
-                                label='Update Image' [id]="m.id"></app-upload-button>
+                            <p *ngIf="m.description" cCardText class="mb-1 text-truncate">{{m.description}}</p>
+                            <span class="d-flex justify-content-between align-items-center">
+                                <a cButton [routerLink]="[m.id]" size="sm" color="light">
+                                    <span>
+                                        <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
+                                    </span>
+                                    Items
+                                </a>
                                 <span class="d-flex d-grid gap-2 float-end">
-                                    <a cButton [routerLink]="[m.id]" size="sm">
-                                        <span>
-                                            <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
-                                        </span>
-                                        Items
-                                    </a>
+                                    <app-upload-button
+                                    (imageChange)="updateImage($event)" size="sm"
+                                    label='Update Image' [id]="m.id"></app-upload-button>
+                                    <a cButton [routerLink]="[m.id, 'edit']" size="sm" color="light">Edit</a>
                                 </span>
                             </span>
                         </c-card-body>

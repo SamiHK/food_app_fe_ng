@@ -28,7 +28,7 @@ export class MenuFormComponent implements OnInit {
     this.route.params.forEach(params => {
       if(params['id']){
         this.isLoading = true;
-        this.amService.get(params['id']).forEach(v => {
+        this.amService.getMenu(params['id']).forEach(v => {
           this.menu = v;
           this.setEditFormValues();
         }).finally(() => {
@@ -59,12 +59,12 @@ export class MenuFormComponent implements OnInit {
       this.isSaving = true;
       let body = this.form.value;
       if(this.menu && this.menu.id){
-         await this.amService.update(body, this.menu.id)
+         await this.amService.updateMenu(body, this.menu.id)
           .forEach(v => {
             this.router.navigate(['admin', 'menu', v.id])
           })
       } else {
-        await this.amService.create(body)
+        await this.amService.createMenu(body)
           .forEach(v => {
             this.router.navigate(['admin', 'menu', v.id])
           })

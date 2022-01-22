@@ -18,6 +18,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MenuBoardComponent } from './components/menu-board/menu-board.component';
 import { MenuNavigationListComponent } from './components/menu-navigation-list/menu-navigation-list.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
+import { MenuItemUnitListComponent } from './components/menu-item-unit-list/menu-item-unit-list.component';
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -51,7 +52,8 @@ const REQUIRED_MODULES = [
     MenuItemFormComponent,
     MenuBoardComponent,
     MenuNavigationListComponent,
-    MenuCardComponent
+    MenuCardComponent,
+    MenuItemUnitListComponent
   ],
   imports: [
     CommonModule,

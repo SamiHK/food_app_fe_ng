@@ -1,1 +1,10 @@
-<h1>alert-modal</h1>
+<c-card>
+    <c-card-body class="">
+        <h4 cCardTitle>Delete</h4>
+        <p cCardText>Are you sure? do you want to delete?</p>
+        <span class="d-flex gap-2 justify-content-end">
+            <button (click)="bsModalRef.hide()" cButton color="light">No</button>
+            <button (click)="confirm()" cButton color="danger">Yes</button>
+        </span>
+    </c-card-body>
+</c-card>

@@ -37,7 +37,7 @@ export class MenuItemListComponent implements OnInit {
     // this.selectMenu(id)
     this.isLoadingMenuItems = true;
     // console.log(id);
-    await this.amService.items(id).forEach(v => this.menuItems = v)
+    await this.amService.getMenuItems(id).forEach(v => this.menuItems = v)
     if (this.menuItems) {
       this.sbjs.add(
         this.dragulaService.dragend('menuItems').subscribe(v => {
@@ -50,7 +50,7 @@ export class MenuItemListComponent implements OnInit {
               sortOrder: m.sortOrder
             }
           })
-          this.amService.updateItemSorting(sortMap).subscribe(v => v)
+          this.amService.updateMenuItemsSorting(sortMap).subscribe(v => v)
         })
       )
     }
@@ -63,12 +63,12 @@ export class MenuItemListComponent implements OnInit {
     id: any, files: FileList
   }) {
     // console.log(data);
-    if (data.id && data.files) {
+    if (data.id && data.files && data.files.length > 0) {
       this.afService.menuItem(data.id, data.files[0]).subscribe(v => {
         // console.log(v);
         let menuItem = this.menuItems?.find(v => v.id == data.id);
         if (menuItem) {
-          menuItem.primaryImg = v.path
+          menuItem.primaryImg = v.primaryImg
         }
       })
     }

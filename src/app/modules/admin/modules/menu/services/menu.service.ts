@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
-import { Menu, MenuItem } from 'src/app/models/menu';
+import { Menu, MenuItem, MenuItemUnit } from 'src/app/models/menu';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +14,7 @@ export class MenuService {
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
-  filter(params?:any) {
+  getMenus(params?:any) {
     return this.http.get<Menu[]>(`${this.BASE_URL}`, {
       params: params
     })
@@ -23,21 +23,21 @@ export class MenuService {
     );
   }
 
-  create(body: Menu) {
+  createMenu(body: Menu) {
     return this.http.post<Menu>(`${this.BASE_URL}`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  update(body: Menu, id: number) {
+  updateMenu(body: Menu, id: number) {
     return this.http.post<Menu>(`${this.BASE_URL}/${id}`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  updateSorting(body: {
+  updateMenuSorting(body: {
     id: number | null, sortOrder: number
   }[]) {
     return this.http.post<Menu[]>(`${this.BASE_URL}/sorting`, body)
@@ -46,28 +46,28 @@ export class MenuService {
     );
   }
 
-  get(id: number) {
+  getMenu(id: number) {
     return this.http.get<Menu>(`${this.BASE_URL}/${id}`)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  item(menuItemId: number) {
+  getMenuItem(menuItemId: number) {
     return this.http.get<MenuItem>(`${this.BASE_URL}/item/${menuItemId}`)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  updateItem(menuItemId: number, body: MenuItem) {
+  updateMenuItem(menuItemId: number, body: MenuItem) {
     return this.http.post<MenuItem>(`${this.BASE_URL}/item/${menuItemId}`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  updateItemSorting(body: any) {
+  updateMenuItemsSorting(body: any) {
     return this.http.post<MenuItem>(`${this.BASE_URL}/item/sorting`, body)
     .pipe(
       catchError(this.commonService.catchError)
@@ -75,17 +75,25 @@ export class MenuService {
   }
 
 
-  items(menuId: number) {
+  getMenuItems(menuId: number) {
     return this.http.get<MenuItem[]>(`${this.BASE_URL}/${menuId}/item`)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
 
-  createItem(menuId: number, body: MenuItem) {
+  createMenuItem(menuId: number, body: MenuItem) {
     return this.http.post<MenuItem>(`${this.BASE_URL}/${menuId}/item`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );
   }
+
+  changeMenuIsActive(menuId: number, body: { isActive : boolean}) {
+    return this.http.post(`${this.BASE_URL}/${menuId}/isActive`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
 }

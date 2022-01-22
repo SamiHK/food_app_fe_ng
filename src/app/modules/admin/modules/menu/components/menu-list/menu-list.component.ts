@@ -27,7 +27,7 @@ export class MenuListComponent implements OnInit {
           sortOrder: m.sortOrder
         }
       });
-      this.amService.updateSorting(sortMap).subscribe(v => v)
+      this.amService.updateMenuSorting(sortMap).subscribe(v => v)
     })
   }
 
@@ -41,7 +41,7 @@ export class MenuListComponent implements OnInit {
     page?: number, size?: number, search?: string
   }) {
     this.isLoading = true;
-    await this.amService.filter(params).forEach(v => this.menus = v)
+    await this.amService.getMenus(params).forEach(v => this.menus = v)
     this.isLoading = false;
   }
 
@@ -51,7 +51,7 @@ export class MenuListComponent implements OnInit {
     files: FileList
   }) {
     // console.log(data)
-    if (data && data.id && data.files) {
+    if (data && data.id && data.files && data.files.length > 0) {
       // console.log(event.target.files);
       this.isUpdatingImage = true;
       await this.afService.menu(data.id, data.files[0]).forEach(v => {
@@ -59,13 +59,20 @@ export class MenuListComponent implements OnInit {
         if (data.id) {
           let menu = this.menus.find(m => m.id == data.id);
           if(menu){
-            menu.primaryImg = v.path;
+            menu.primaryImg = v.primaryImg;
           }
         }
       });
       this.isUpdatingImage = false;
     }
     // console.log(this.selectedMenuImages);
+  }
+
+  updateIsActive(d: {id: any, status: boolean}){
+    // console.log(d);
+    if(d && d.id && d.status != undefined){
+      this.amService.changeMenuIsActive(d.id, {isActive: d.status}).subscribe(v => v)
+    }
   }
 
 }

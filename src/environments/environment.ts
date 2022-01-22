@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://192.168.0.104:3000/api',
+  BASE_URL: 'http://192.168.0.101:3000/api',
   appName: 'Food App',
   GOOGLE_MAP_API_KEY: 'AIzaSyCaI46NZk1bXj1-vdZ69yoc1yycHhd_-9o'
 };

@@ -6,6 +6,7 @@ export class Menu {
     primaryImg: string|null = null;
     totalItems: number = 0;
     items: MenuItem[] = [];
+    isActive: boolean = true;
     isAvailable: boolean = true;
     updatingAvailability: boolean = false;
 }
@@ -23,4 +24,16 @@ export class MenuItem {
     isMenuAvailable: boolean = true;
     isAvailable: boolean = true;
     updatingAvailability: boolean = false;
+    unit?: string;
+    unitId?: number;
+}
+
+export class MenuItemUnit {
+    id: number;
+    title: string;
+
+    constructor(id: number, title: string){
+        this.id = id;
+        this.title = title;
+    }
 }

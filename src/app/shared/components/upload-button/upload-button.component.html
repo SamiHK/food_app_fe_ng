@@ -1,5 +1,5 @@
 <input cFormControl #menuImageUpdate (change)="onImageChange($event)" type="file" multiple class="d-none" >
-<button cButton [disabled]="loading" (click)="menuImageUpdate.click()" color="light" [size]="size">
+<button cButton [disabled]="loading" (click)="menuImageUpdate.click()" color="dark" variant="outline" [size]="size">
     <span *ngIf="loading else elseBlock">
         {{loadingLabel}} 
     </span>

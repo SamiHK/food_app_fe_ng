@@ -5,12 +5,12 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <fieldset [disabled]="isSaving || isLoading">
                         <div class="mb-3" cFormFloating>
-                            <input cFormControl formControlName="title" id="title" type="text" autofocus>
+                            <input cFormControl formControlName="title" id="title" type="text" placeholder="Title" autofocus>
                             <label cLabel id="title">Title</label>
                             <app-input-error [control]="form.controls['title']"></app-input-error>
                         </div>
                         <div class="mb-3" cFormFloating>
-                            <textarea cFormControl formControlName="description" id="description" type="text"></textarea>
+                            <textarea cFormControl formControlName="description" id="description" placeholder="Description" type="text"></textarea>
                             <label cLabel id="description">Description</label>
                         </div>
                         <div class="">

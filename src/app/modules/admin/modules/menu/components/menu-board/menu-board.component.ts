@@ -27,7 +27,7 @@ export class MenuBoardComponent implements OnInit {
   isLoadingMenu = false;
   async loadMenu(){
     this.isLoadingMenu = true;
-    await this.amService.filter().forEach(v => this.menus = v);
+    await this.amService.getMenus().forEach(v => this.menus = v);
     this.isLoadingMenu = false;
   }
 

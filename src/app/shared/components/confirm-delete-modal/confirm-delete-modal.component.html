@@ -1,0 +1,10 @@
+<c-card>
+    <c-card-body>
+        <h4 cCardTitle>{{title}}</h4>
+        <p cCardText>{{message}}</p>
+        <span class="d-flex gap-2 justify-content-end">
+            <button cButton (click)="bsModalRef.hide()" color="light" variant="outline">No</button>
+            <button cButton (click)="yes()" color="danger" variant="outline">Yes</button>
+        </span>
+    </c-card-body>
+</c-card>

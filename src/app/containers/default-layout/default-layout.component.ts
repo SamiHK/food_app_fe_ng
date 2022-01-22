@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthUser } from 'src/app/models/auth-user';
+import { environment } from 'src/environments/environment';
 import { adminNavItems, managerNavItems, navItems, salespersonNavItems } from './_nav';
 
 @Component({

@@ -13,17 +13,19 @@
                         <c-card-body class="d-flex flex-column justify-content-end">
                             <span class="d-flex justify-content-between">
                                 <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
+                                <span>
+                                    <app-input-switch [isLoading]="m.updatingAvailability" 
+                                    label="Is Available" [id]="m.id" [status]="m.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
+                                </span>
                             </span>
                             <p cCardText class="text-truncate">{{m.description}}</p>
                             <span class="d-flex justify-content-between">
-                                <app-input-switch [isLoading]="m.updatingAvailability" 
-                                label="Is Available" [id]="m.id" [status]="m.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
+                                <a cButton [routerLink]="[m.id]" color="light" size="sm">
+                                    <span>
+                                        <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
+                                    </span>
+                                    Items</a>
                                 <span class="d-flex d-grid gap-2 float-end">
-                                    <a cButton [routerLink]="[m.id]" size="sm">
-                                        <span>
-                                            <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
-                                        </span>
-                                        Items</a>
                                 </span>
                             </span>
                         </c-card-body>

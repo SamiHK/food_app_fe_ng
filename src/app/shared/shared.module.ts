@@ -15,6 +15,7 @@ import { SalespersonListComponent } from './components/salesperson-list/salesper
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
+import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
 
 const CORE_UI_MODULES = [FormModule,
   ButtonModule,
@@ -38,6 +39,7 @@ const CORE_UI_MODULES = [FormModule,
     SalespersonListComponent,
     UploadButtonComponent,
     InputSwitchComponent,
+    ConfirmDeleteModalComponent,
   ],
   imports: [
     CommonModule,
