@@ -22,6 +22,7 @@ export class MenuBoardComponent implements OnInit {
         this.selectMenu(this.menus.find(m => m.id == menuId));
       }
     })
+    
   }
 
   selectMenu(m?: Menu) {

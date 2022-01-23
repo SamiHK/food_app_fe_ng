@@ -18,12 +18,24 @@ export class MenuListComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private amService: MenuService,
+    private dragulaService: DragulaService,
     private afService: AdminFileService) {
     
   }
 
   ngOnInit(): void {
-    this.loadMenu()
+    this.loadMenu();
+    this.dragulaService.drop('menus').subscribe(v => {
+      // console.log(v);
+      this.menus.forEach((m, i) => m.sortOrder = (i + 1))
+      let sortMap = this.menus.map((m, i) => {
+        return {
+          id: m.id,
+          sortOrder: m.sortOrder
+        }
+      });
+      this.amService.menuSorting(sortMap).subscribe(v => v)
+    })
   }
 
   ngOnDestroy(): void {

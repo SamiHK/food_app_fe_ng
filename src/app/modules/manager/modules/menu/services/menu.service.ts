@@ -37,6 +37,20 @@ export class MenuService {
     );
   }
 
+  menuSorting(body: {id: number | null, sortOrder: number}[]) {
+    return this.http.post(`${this.BASE_URL}/sorting`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
+  menuItemsSorting(body: {id: number | null, sortOrder: number}[]) {
+    return this.http.post(`${this.BASE_URL}/item/sorting`, body)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+  }
+
   menuItemAvailability(body: MenuItem) {
     return this.http.post(`${this.BASE_URL}/item/availability`, body)
     .pipe(

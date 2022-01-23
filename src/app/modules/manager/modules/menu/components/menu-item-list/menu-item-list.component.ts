@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Menu, MenuItem } from 'src/app/models/menu';
 import { MenuService } from '../../services/menu.service';
@@ -15,7 +16,8 @@ export class MenuItemListComponent implements OnInit {
   selectedMenu?: Menu;
   sbjs = new Subscription();
   constructor(private route: ActivatedRoute,
-    private amService: MenuService) {
+    private amService: MenuService,
+    private dragulaService: DragulaService) {
   }
 
   async ngOnInit() {
@@ -23,6 +25,20 @@ export class MenuItemListComponent implements OnInit {
       if (params['id']) {
         // this.sbjs.unsubscribe();
         this.loadMenuItems(params['id'])
+      }
+    });
+
+    this.dragulaService.drop('menuItems').subscribe(v => {
+      // console.log(v);
+      if(this.menuItems){
+        this.menuItems.forEach((m, i) => m.sortOrder = (i + 1))
+        let sortMap = this.menuItems.map((m, i) => {
+          return {
+            id: m.id,
+            sortOrder: m.sortOrder
+          }
+        });
+        this.amService.menuItemsSorting(sortMap).subscribe(v => v)
       }
     })
   }
