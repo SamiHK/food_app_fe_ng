@@ -24,7 +24,7 @@ export class MenuService {
   }
 
   menuItems(menuId: number) {
-    return this.http.get<Menu[]>(`${this.BASE_URL}/${menuId}/item`)
+    return this.http.get<MenuItem[]>(`${this.BASE_URL}/${menuId}/item`)
     .pipe(
       catchError(this.commonService.catchError)
     );

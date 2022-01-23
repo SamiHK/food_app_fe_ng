@@ -45,12 +45,26 @@
         </a>
       </c-nav-item>
     </c-header-nav> -->
-    <c-header-nav class="ms-3" *ngIf="user">
+    <c-header-nav class="" *ngIf="user else nonAuthBlock">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
+    <ng-template #nonAuthBlock>
+      <c-header-nav class="ms-3">
+        <c-nav-item>
+          <a routerLink="login" cNavLink>
+            Login
+          </a>
+        </c-nav-item>
+        <c-nav-item>
+          <a routerLink="register" cNavLink>
+            Register
+          </a>
+        </c-nav-item>
+      </c-header-nav>
+    </ng-template>
 
   </c-container>
-    <c-header-divider></c-header-divider>
+  <c-header-divider></c-header-divider>
   <c-container [fluid]="true">
     <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
   </c-container>
@@ -66,7 +80,7 @@
       cDropdownToggle
       class="py-0"
     >
-      <span class="px-4" *ngIf="user">
+      <span class="px-2" *ngIf="user">
         {{user.fullName}}
       </span>
       <c-avatar

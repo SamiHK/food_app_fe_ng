@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
     this.store.select('auth').forEach(v => {
       // console.log(v);
       if(v != undefined && v != null){  
-        this.router.navigateByUrl('/')
+        // this.router.navigateByUrl('/')
       }
     });
   }

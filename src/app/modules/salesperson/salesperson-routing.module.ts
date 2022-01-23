@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SalespersonComponent } from './components/salesperson/salesperson.component';
 
 const routes: Routes = [{
-  path: '', component: SalespersonComponent, data: {title: 'Salesperson'},  children: [
+  path: '', component: SalespersonComponent, children: [
+    { path: 'dashboard', data: { title: 'Dashboard'},  loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)},
+    { path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule) },
+    { path: 'order', loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) }
   ]
 }];
 

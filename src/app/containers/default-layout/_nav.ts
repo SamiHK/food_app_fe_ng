@@ -3,7 +3,7 @@ import { INavData } from '@coreui/angular';
 export const adminNavItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard'
+    url: '/admin/dashboard'
   },
   {
     name: 'Manager',
@@ -21,7 +21,7 @@ export const adminNavItems: INavData[] = [
 export const managerNavItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard'
+    url: '/manager/dashboard'
   },
   {
     name: 'Salesperson',
@@ -36,7 +36,15 @@ export const managerNavItems: INavData[] = [
 export const salespersonNavItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard'
+    url: '/salesperson/dashboard'
+  },
+  {
+    name: 'Menu',
+    url: '/salesperson/menu'
+  },
+  {
+    name: 'Order',
+    url: '/salesperson/order'
   }
 ]
 

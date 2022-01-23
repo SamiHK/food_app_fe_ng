@@ -1,0 +1,21 @@
+<!--sidebar-->
+<c-sidebar #sidebar="cSidebar" class="sidebar sidebar-fixed sidebar-end bg-white" id="sidebar" size="xl">
+    <!-- <c-sidebar-brand>Sidebar Brand</c-sidebar-brand> -->
+    <!-- <c-sidebar-nav [navItems]="navItems"></c-sidebar-nav> -->
+    <!-- <c-sidebar-toggler></c-sidebar-toggler> -->
+    <!-- <c-sidebar-toggler *ngIf="!sidebar.narrow" toggle="unfoldable" cSidebarToggle="sidebar"></c-sidebar-toggler> -->
+</c-sidebar>
+
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+    <!--app-header-->
+    <app-web-header [user]="user" class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-web-header>
+    <!--app-body-->
+    <div class="body flex-grow-1 px-3">
+        <c-container breakpoint="lg" class="h-auto">
+            <router-outlet></router-outlet>
+        </c-container>
+    </div>
+    <!--app footer-->
+    <app-default-footer></app-default-footer>
+</div>

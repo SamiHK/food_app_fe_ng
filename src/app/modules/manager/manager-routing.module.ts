@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './components/manager/manager.component';
 
 const routes: Routes = [
+  { path: 'dashboard', data: { title: 'Dashboard'},  loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)},
   {
     path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule)
   },

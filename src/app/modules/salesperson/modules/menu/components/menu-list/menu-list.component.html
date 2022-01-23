@@ -1,0 +1,42 @@
+<c-row>
+    <c-col>
+        <c-card *ngIf="isLoading else loadedBlock">
+            <c-card-body>
+                <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+            </c-card-body>
+        </c-card>
+        <ng-template #loadedBlock>
+            <c-row *ngIf="(menus && menus.length > 0) else emptyMenuBlock" [gutter]="3">
+                <c-col [lg]="4" [md]="6" [xs]="12" *ngFor="let m of menus" class="d-flex justify-content-stretch">
+                    <c-card class="d-flex flex-grow-1">
+                        <img [cCardImg] [src]="m.primaryImg">
+                        <c-card-body class="d-flex flex-column justify-content-end">
+                            <span class="d-flex justify-content-between">
+                                <h6 cCardTitle class="text-truncate">{{m.title}}</h6>
+                                <span>
+                                </span>
+                            </span>
+                            <p cCardText class="text-truncate">{{m.description}}</p>
+                            <span class="d-flex justify-content-between">
+                                <a cButton [routerLink]="[m.id]" color="light" size="sm">
+                                    <span>
+                                        <c-badge color="primary" shape="rounded-pill">{{m.totalItems}}</c-badge>
+                                    </span>
+                                    Items</a>
+                                <span class="d-flex d-grid gap-2 float-end">
+                                </span>
+                            </span>
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
+            <ng-template #emptyMenuBlock>
+                <c-card>
+                    <c-card-body>
+                        Empty
+                    </c-card-body>
+                </c-card>
+            </ng-template>
+        </ng-template>
+    </c-col>
+</c-row>

@@ -24,7 +24,9 @@ export class DefaultLayoutComponent implements OnInit {
     this.store.select('auth').forEach(v => {
       // console.log(v);
       if (v == null) {
-        this.router.navigate(['login']);
+        this.user = undefined;
+        this.navItems = navItems;
+        // this.router.navigate(['login']);
       } else {
         this.user = v;
         switch(this.user.role) {

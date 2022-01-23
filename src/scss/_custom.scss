@@ -3,7 +3,7 @@
     float: right;
 }
 
-.btn-danger {
+.btn-danger, .btn-dark, .btn-secondary {
     color: $gray-100;
 
     &:hover {
@@ -37,4 +37,27 @@
     opacity: 0.2;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
     filter: alpha(opacity=20);
+}
+
+.card[ng-reflect-router-link] {
+    &:hover {
+        cursor: pointer;
+        border: 1px solid $gray-700;
+    }
+}
+
+img.img-sm {
+    height: 64px;
+    width: 64px;
+    object-fit: cover;    
+}
+img.img-md {
+    height: 128px;
+    width: 128px;
+    object-fit: cover;    
+}
+img.img-lg {
+    height: 256px;
+    width: 256x;
+    object-fit: cover;    
 }

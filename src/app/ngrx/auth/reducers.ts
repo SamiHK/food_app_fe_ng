@@ -1,5 +1,4 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { AuthGuard } from "src/app/guards/auth.guard";
 import { loginAction, logoutAction } from "./actions";
 
 export const authReducerKey = 'authReducer';

@@ -1,0 +1,48 @@
+<c-card *ngIf="isLoadingMenuItems else loadedBlock">
+    <c-card-body>
+        <c-spinner aria-hidden="true" label="Loading..." size="sm"></c-spinner> Loading...
+    </c-card-body>
+</c-card>
+<ng-template #loadedBlock>
+    <ng-template [ngIf]="menuItems && menuItems.length > 0" [ngIfElse]="emptyblock">
+        <c-row [md]="2" [sm]="1" [gutter]="2" >
+            <c-col *ngFor="let i of menuItems" class="d-flex justify-content-stretch">
+                <c-card class="d-flex flex-grow-1">
+                    <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg">
+                    <c-card-body class="d-flex flex-column justify-content-end">
+                        <span class="d-flex justify-content-between">
+                            <h6>{{i.title}}</h6>
+                        </span>
+                        <p>{{i.description}}</p>
+                        <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
+                            <span class="d-flex d-grid gap-2">
+                                <span>
+                                    <c-badge color="primary" shape="rounded-pill">{{i.price |
+                                        currency:'Pkr
+                                        '}}</c-badge>
+                                </span>
+                                <span *ngIf="i.oldPrice">
+                                    <!-- <small>Old Price</small> -->
+                                    <c-badge color="danger" shape="rounded-pill">
+                                        <span class="text-decoration-line-through">
+                                            {{ i.oldPrice | currency:'Pkr '}}
+                                        </span>
+                                    </c-badge>
+                                </span>
+                            </span>
+                            <span>
+                            </span>
+                        </div>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+    </ng-template>
+    <ng-template #emptyblock>
+        <c-card>
+            <c-card-body>
+                empty
+            </c-card-body>
+        </c-card>
+    </ng-template>
+</ng-template>  

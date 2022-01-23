@@ -2,19 +2,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DefaultLayoutComponent } from './containers';
+import { WebLayoutComponent } from './containers/web-layout/web-layout.component';
+import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'public/menu',
     pathMatch: 'full'
   },
   {
     path: '',
     loadChildren: () =>
       import('./auth/auth.module').then((m) => m.AuthModule)
+  },
+  {
+    path: 'public',
+    component: WebLayoutComponent,
+    children: [
+      { path: '', loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule) }
+    ]
   },
   {
     path: '',
@@ -24,22 +33,20 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
-      {
-        path: 'admin',  
+        path: 'admin', data: { title: 'Admin' },
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/admin/admin.module').then((m) => m.AdminModule)
       },
       {
-        path: 'manager', data: {title: 'Manager'},  
+        path: 'manager', data: { title: 'Manager' },
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/manager/manager.module').then((m) => m.ManagerModule)
       },
-        {
-        path: 'salesperson', data: {title: 'Salesperson'},
+      {
+        path: 'salesperson', data: { title: 'Salesperson' },
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
       },
@@ -69,7 +76,7 @@ const routes: Routes = [
       title: 'Page 500'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({

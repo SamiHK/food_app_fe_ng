@@ -53,6 +53,8 @@ import { ModalModule as BsModalModule } from 'ngx-bootstrap/modal';
 import { HttpErrorModalComponent } from './views/http-error-modal/http-error-modal.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { WebLayoutComponent } from './containers/web-layout/web-layout.component';
+import { WebHeaderComponent } from './containers/web-layout/web-header/web-header.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -62,10 +64,11 @@ const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
   DefaultLayoutComponent,
+  WebLayoutComponent, WebHeaderComponent
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent,],
+  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

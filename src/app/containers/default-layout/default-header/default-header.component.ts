@@ -30,6 +30,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
   public logout() {
     this.store.dispatch(logoutAction());
+    this.router.navigate([''])
   }
 
 }

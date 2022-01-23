@@ -1,0 +1,40 @@
+<c-card *ngIf="isLoading else loadedBlock">
+    <c-card-body>
+        <c-spinner size="sm"></c-spinner> Loading...
+    </c-card-body>
+</c-card>
+<ng-template #loadedBlock>
+    <c-row [gutter]="3" *ngFor="let m of menus" class="mb-5">
+        <c-col class="">
+            <h4>{{m.title}}</h4>
+            <c-card class="mb-2 d-flex justify-content-between" id="menu{{m.id}}">
+                <img [cCardImg] [src]="m.primaryImg" class="img-lg">
+                <c-card-body *ngIf="m.description" class="align-self-stretch">
+                    <!-- <h5 cCardTitle>{{m.title}}</h5> -->
+                    <p cCardText>{{m.description}}</p>
+                </c-card-body>
+            </c-card>
+            <c-row [md]="3" [sm]="1" [gutter]="2">
+                <c-col *ngFor="let mi of m.items">
+                    <c-card class="d-flex flex-row justify-content-between">
+                        <c-card-body class="align-self-stretch">
+                            <h6 cCardTitle>{{mi.title}}</h6>
+                            <p cCardText>{{mi.description}}</p>
+                            <span class="d-flex gap-2">
+                                <c-badge color="primary" shape="rounded-pill">
+                                    {{ mi.price | currency:'Pkr '}}
+                                </c-badge>
+                                <c-badge *ngIf="mi.oldPrice" color="danger" shape="rounded-pill">
+                                    <span class="text-decoration-line-through">
+                                        {{ mi.oldPrice | currency:'Pkr '}}
+                                    </span>
+                                </c-badge>
+                            </span>
+                        </c-card-body>
+                        <img [cCardImg] [src]="mi.primaryImg" class="img-md">
+                    </c-card>
+                </c-col>
+            </c-row>
+        </c-col>
+    </c-row>
+</ng-template>

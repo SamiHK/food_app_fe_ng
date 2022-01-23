@@ -1,0 +1,12 @@
+<c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="justify-content-center">
+    <c-col *ngFor="let m of menus" class="d-flex justify-content-stretch">
+        <c-card class="d-flex flex-row flex-grow-1" [routerLink]="[m.id]">
+            <c-card-body class="flex-shrink-1">
+                <h6 cCardTitle class="">{{m.title}}</h6>
+                <p cCardText *ngIf="m.description" class="text-wrap text-truncate">{{m.description}}</p>
+            </c-card-body>
+            <img [cCardImg] [src]="m.primaryImg" class="img-md">
+            <c-badge color="danger" shape="rounded-pill" class="position-absolute top-0 start-100 translate-middle">{{m.totalItems}}</c-badge>
+        </c-card>
+    </c-col>
+</c-row>

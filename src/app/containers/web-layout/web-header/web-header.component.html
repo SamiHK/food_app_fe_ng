@@ -1,0 +1,86 @@
+<!--<c-header class="mb-4 d-print-none" position="sticky">-->
+<ng-container >
+  <c-container fluid="true" class="gap-2">
+    <c-sidebar-brand [brandFull]="{
+      src: 'assets/img/brand/coreui-pro-angular-black.v1.svg',
+      width: 190,
+      height: 35,
+      alt: 'CoreUI Logo'
+    }" routerLink="" class="bg-white">
+    </c-sidebar-brand>
+    <c-header-nav class="d-flex mx-md-auto ms-sm-auto">
+      <c-nav-item>
+        <a routerLink="/public/menu" cNavLink routerLinkActive="active">Menu</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="/public/deals" cNavLink routerLinkActive="active">Deals</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="/public/promos" cNavLink routerLinkActive="active">Promos</a>
+      </c-nav-item>
+    </c-header-nav>
+    <c-header-nav class="gap-2">
+      <c-nav-item>
+        <button cButton color="light">
+          <svg cIcon name="cilLocationPin"></svg>
+          Selected Branch
+        </button>
+      </c-nav-item>
+      <c-nav-item>
+        <button toggle="visible" cButton [cSidebarToggle]="sidebarId" class="position-relative" color="light" >
+          <svg cIcon name="cilCart" ></svg>
+          <span class="position-absolute top-0 start-100 translate-middle">
+            <c-badge color="danger" shape="rounded-pill" size="sm">0</c-badge>
+          </span>
+        </button>
+      </c-nav-item>
+    </c-header-nav>
+    <c-header-nav class="ms-xs-auto" *ngIf="user else nonAuthBlock">
+      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+    </c-header-nav>
+    <ng-template #nonAuthBlock>
+      <c-header-nav class="">
+        <c-nav-item>
+          <a routerLink="/register" cNavLink>
+            Register
+          </a>
+        </c-nav-item>
+        <c-nav-item>
+          <a routerLink="/login" cNavLink>
+            Login
+          </a>
+        </c-nav-item>
+      </c-header-nav>
+    </ng-template>
+
+  </c-container>
+  <!-- <c-header-divider></c-header-divider> -->
+  <!-- <c-container>
+    <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
+  </c-container> -->
+</ng-container>
+<!--</c-header>-->
+
+<ng-template #userDropdown>
+  <c-dropdown alignment="end" variant="nav-item">
+    <button cButton color="" [caret]="false" cDropdownToggle class="py-0">
+      <span class="px-2" *ngIf="user">
+        {{user.fullName}}
+      </span>
+      <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success">
+      </c-avatar>
+    </button>
+    <ul cDropdownMenu class="py-0 w-auto">
+      <li *ngFor="let m of userMenus">
+        <a routerLink="{{m.url}}" href="#" cDropdownItem>
+          {{m.name}}
+        </a>
+      </li>
+      <li>
+        <a (click)="logout()" href="#" cDropdownItem>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </c-dropdown>
+</ng-template>
