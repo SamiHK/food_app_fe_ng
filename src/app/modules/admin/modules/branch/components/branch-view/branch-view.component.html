@@ -8,7 +8,7 @@
 </c-row>
 <ng-template #elseBlock>
     <c-row class="justify-content-center">
-        <c-col md="8">            
+        <c-col md="8">
             <c-card class="mb-4">
                 <ng-template [ngIf]="!isEditBranch" [ngIfElse]="branchFormBlock">
                     <c-card-body>
@@ -25,9 +25,10 @@
                         </c-row>
                         <hr>
                         <a cButton [routerLink]="['salespersons']" color="light">
-                            Salesperson <c-badge shape="rounded-pill" color="success">{{branch.totalActiveSalespersons}}</c-badge>
+                            Salesperson <c-badge shape="rounded-pill" color="success">{{branch.totalActiveSalespersons}}
+                            </c-badge>
                         </a>
-                    </c-card-body>                            
+                    </c-card-body>
                 </ng-template>
                 <ng-template #branchFormBlock>
                     <c-card-body>
@@ -35,20 +36,26 @@
                             <fieldset [disabled]="savingBranch">
                                 <c-row>
                                     <c-col sm="4">
-                                        <input formControlName="code" cFormControl [valid]="branchForm.controls['code'].valid" id="code" placeholder="Code" type="text" autofocus> 
+                                        <input formControlName="code" cFormControl
+                                            [valid]="branchForm.controls['code'].valid" id="code" placeholder="Code"
+                                            type="text" autofocus>
                                         <app-input-error [control]="branchForm.controls['code']"></app-input-error>
                                     </c-col>
                                     <c-col sm="4">
-                                        <input formControlName="name" cFormControl [valid]="branchForm.controls['name'].valid" id="name" placeholder="Name" type="text"> 
+                                        <input formControlName="name" cFormControl
+                                            [valid]="branchForm.controls['name'].valid" id="name" placeholder="Name"
+                                            type="text">
                                         <app-input-error [control]="branchForm.controls['name']"></app-input-error>
                                     </c-col>
                                     <c-col sm="4">
                                         <span class="d-grid gap-2 d-flex float-end">
-                                            <button cButton (click)="cancelEditBranch()" type="button" color="light">Cancel</button>
-                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..." type="submit" color="primary">
+                                            <button cButton (click)="cancelEditBranch()" type="button"
+                                                color="light">Cancel</button>
+                                            <button xcButton [loading]="savingBranch" loadingLabel="Saving..."
+                                                type="submit" color="primary">
                                                 Save
                                             </button>
-                                        </span>                                        
+                                        </span>
                                     </c-col>
                                 </c-row>
                             </fieldset>
@@ -56,24 +63,22 @@
                     </c-card-body>
                 </ng-template>
             </c-card>
-            
+
             <h4>Location</h4>
             <c-card class="mb-4">
-                <c-card-body>
-                    <c-row>
-                        <c-col>
-                            <span *ngIf="branch && branch.location else na">
-                                <svg cIcon name="cilLocationPin"></svg>
-                                {{branch.location.formattedAddress}}
-                            </span>
-                            <ng-template #na>
-                                N/A
-                            </ng-template>
-                        </c-col>
-                        <c-col xs="1">
-                            <button (click)="editLocation()" cButton color="light" size="sm">Edit</button>
-                        </c-col>
-                    </c-row>
+                <c-card-body class="d-flex justify-content-between">
+                    <div class="flex-grow-1">
+                        <span *ngIf="branch && branch.location else na">
+                            <svg cIcon name="cilLocationPin"></svg>
+                            {{branch.location.formattedAddress}}
+                        </span>
+                        <ng-template #na>
+                            N/A
+                        </ng-template>
+                    </div>
+                    <div>
+                        <button (click)="editLocation()" cButton color="light" size="sm">Edit</button>
+                    </div>
                 </c-card-body>
             </c-card>
 
@@ -85,7 +90,8 @@
                             <c-col>
                                 <span *ngIf="branch.managerId else na">
                                     <h4>{{branch.manager?.fullName}}</h4>
-                                    <a cButton [routerLink]="['../../manager', branch.managerId]" color="light" size="sm">
+                                    <a cButton [routerLink]="['../../manager', branch.managerId]" color="light"
+                                        size="sm">
                                         {{branch.manager?.username}}
                                     </a>
                                 </span>
@@ -106,7 +112,7 @@
                                                 <select cSelect [(ngModel)]="selectedManagerId" name="branch">
                                                     <option value="null">None</option>
                                                     <option *ngFor="let i of managerPage.items" [value]="i.id">
-                                                        {{i.fullName}} 
+                                                        {{i.fullName}}
                                                     </option>
                                                 </select>
                                             </span>
@@ -116,18 +122,20 @@
                                         </c-col>
                                         <c-col xs="4">
                                             <span class="d-grid gap-2 d-flex float-end">
-                                                <button cButton (click)="cancelEditManager()" color="light">Cancel</button>
-                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..." type="submit">Save</button>
+                                                <button cButton (click)="cancelEditManager()"
+                                                    color="light">Cancel</button>
+                                                <button xcButton [loading]="savingManager" loadingLabel="Saving..."
+                                                    type="submit">Save</button>
                                             </span>
                                         </c-col>
                                     </c-row>
                                 </fieldset>
                             </form>
-                        </ng-template> 
+                        </ng-template>
                         <!-- #managerForm -->
                     </c-card-body>
                 </c-card>
-            </ng-template> 
+            </ng-template>
             <!-- [ngIf]="branch.id" then show branch card -->
         </c-col>
     </c-row>

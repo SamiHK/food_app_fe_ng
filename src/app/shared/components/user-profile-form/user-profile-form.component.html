@@ -6,16 +6,18 @@
         </c-alert>
         <c-row class="mb-3">
             <ng-template [ngIf]="!isEditProfile" [ngIfElse]="editProfileForm">
-                <c-col>
-                    <small class="d-flex">Full name</small>
-                    <strong *ngIf="user.fullName else na">{{user.fullName}}</strong>
-                    <ng-template #na>
-                        <strong>N/A</strong>
-                    </ng-template>
-                </c-col>
-                <c-col xs="1" class="">
-                    <button (click)="editProfile()" cButton size="sm" color="light" class="float-end">Edit</button>
-                </c-col>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <small class="d-flex">Full name</small>
+                        <strong *ngIf="user.fullName else na">{{user.fullName}}</strong>
+                        <ng-template #na>
+                            <strong>N/A</strong>
+                        </ng-template>
+                    </span>
+                    <span>
+                        <button (click)="editProfile()" cButton size="sm" color="light" class="float-end">Edit</button>
+                    </span>
+                </div>
             </ng-template>
             <ng-template #editProfileForm>
                 <c-col>
@@ -48,13 +50,15 @@
         <hr>
         <c-row>
             <ng-template [ngIf]="!isEditUser" [ngIfElse]="editUserForm">
-                <c-col>
-                    <small class="d-flex">Email</small>
-                    <strong>{{user.email}}</strong>
-                </c-col>
-                <c-col xs="1" class="">
-                    <button cButton (click)="editUser()" size="sm" color="light" class="float-end">Edit</button>
-                </c-col>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <small class="d-flex">Email</small>
+                        <strong>{{user.email}}</strong>
+                    </span>
+                    <span>
+                        <button cButton (click)="editUser()" size="sm" color="light" class="float-end">Edit</button>
+                    </span>
+                </div>
             </ng-template>
             <ng-template #editUserForm>
                 <c-col>
@@ -86,28 +90,26 @@
         </c-row>
         <hr>
         <ng-template [ngIf]="!isUpdatePassword" [ngIfElse]="editUpdatePasswordForm">
-            <c-row>
-                <c-col>
+            <div class="d-flex justify-content-between">
+                <span class="d-flex flex-column">
                     <small class="d-flex">Password update</small>
                     <strong *ngIf="user.lastPasswordUpdate else notUpdated">{{user.lastPasswordUpdate}}</strong>
                     <ng-template #notUpdated>
                         <strong>Not updated</strong>
                     </ng-template>
-                </c-col>
-                <c-col xs="6" class="">
+                    <span>
+                        <small class="d-flex">Last login</small>
+                        <strong *ngIf="user.lastLogin else notLoggedIn">{{user.lastLogin}}</strong>
+                        <ng-template #notLoggedIn>
+                            <strong>Not logged in</strong>
+                        </ng-template>
+                    </span>
+                </span>
+                <span>
                     <button cButton (click)="editUpdatePassword()" size="sm" color="light" class="float-end">Change
                         Password</button>
-                </c-col>
-            </c-row>
-            <c-row>
-                <c-col>
-                    <small class="d-flex">Last login</small>
-                    <strong *ngIf="user.lastLogin else notLoggedIn">{{user.lastLogin}}</strong>
-                    <ng-template #notLoggedIn>
-                        <strong>Not logged in</strong>
-                    </ng-template>
-                </c-col>
-            </c-row>
+                </span>
+            </div>
         </ng-template>
         <ng-template #editUpdatePasswordForm>
             <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">

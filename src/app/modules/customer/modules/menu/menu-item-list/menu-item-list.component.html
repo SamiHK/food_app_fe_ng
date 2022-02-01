@@ -4,34 +4,82 @@
     </c-card-body>
 </c-card>
 <ng-template #loadedBlock>
-    <c-row [gutter]="3" *ngFor="let m of menus" class="mb-5">
+    <c-row [gutter]="3" *ngFor="let m of menus; let i = index" class="mb-4 animate fade-in">
         <c-col class="">
-            <h4>{{m.title}}</h4>
-            <c-card class="mb-2 d-flex justify-content-between" id="menu{{m.id}}">
-                <img [cCardImg] [src]="m.primaryImg" class="img-lg">
+            <span class="d-flex gap-2 align-items-center">
+                <h4>{{m.title}}</h4>
+                <span *ngIf="!m.isAvailable">
+                    <c-badge color="dark" class="">Not Available</c-badge>
+                </span>
+            </span>
+            <c-card id="menu-{{m.id}}" class="mb-2 d-flex justify-content-between">
+                <img [cCardImg] [src]="m.primaryImg" class="img-lg w-auto"
+                    [ngClass]="{'img-gray-scale': !m.isAvailable}">
                 <c-card-body *ngIf="m.description" class="align-self-stretch">
                     <!-- <h5 cCardTitle>{{m.title}}</h5> -->
-                    <p cCardText>{{m.description}}</p>
+                    <p cCardText class="text-truncate">{{m.description}}</p>
                 </c-card-body>
             </c-card>
-            <c-row [md]="3" [sm]="1" [gutter]="2">
+            <c-row [lg]="2" [md]="2" [sm]="1" [gutter]="2">
                 <c-col *ngFor="let mi of m.items">
-                    <c-card class="d-flex flex-row justify-content-between">
-                        <c-card-body class="align-self-stretch">
-                            <h6 cCardTitle>{{mi.title}}</h6>
-                            <p cCardText>{{mi.description}}</p>
-                            <span class="d-flex gap-2">
-                                <c-badge color="primary" shape="rounded-pill">
-                                    {{ mi.price | currency:'Pkr '}}
-                                </c-badge>
-                                <c-badge *ngIf="mi.oldPrice" color="danger" shape="rounded-pill">
-                                    <span class="text-decoration-line-through">
-                                        {{ mi.oldPrice | currency:'Pkr '}}
+                    <c-card class="d-flex flex-row rounded-0 rounded-start"
+                        [ngClass]="{'bg-secondary': !mi.isAvailable}">
+                        <img [cCardImg] [src]="mi.primaryImg" class="img-md"
+                            [ngClass]="{'img-gray-scale': !mi.isAvailable}">
+                        <c-card class="flex-grow-1 border-0 rounded-0 rounded-end"
+                            [ngClass]="{'bg-secondary': !mi.isAvailable}">
+                            <c-card-body class="d-flex flex-column">
+                                <span class="d-flex justify-content-between">
+                                    <h6 cCardTitle>{{mi.title}}</h6>
+                                </span>
+                                <p *ngIf="mi.description" cCardText class="fw-normal text-truncate mb-1">
+                                    {{mi.description}}</p>
+                                <span class="d-flex flex-grow-1"></span>
+                                <span class="d-flex flex-lg-row flex-md-row flex-column
+                                align-items-md-end align-items-center justify-content-md-between gap-2">
+                                    <span class="d-flex flex-column gap-1">
+                                        <small class="fw-semibold">{{mi.unit}}</small>
+                                        <span>
+                                            <span class="d-flex flex-column flex-md-row gap-2">
+                                                <c-badge color="primary" shape="rounded-pill">
+                                                    <span>
+                                                        {{ mi.price | currency:'Pkr '}}
+                                                    </span>
+                                                </c-badge>
+                                                <c-badge *ngIf="mi.oldPrice" color="danger" shape="rounded-pill">
+                                                    <span class="text-decoration-line-through">
+                                                        {{ mi.oldPrice | currency:'Pkr '}}
+                                                    </span>
+                                                </c-badge>
+                                            </span>
+                                        </span>
                                     </span>
-                                </c-badge>
-                            </span>
-                        </c-card-body>
-                        <img [cCardImg] [src]="mi.primaryImg" class="img-md">
+                                    <span class="d-block">
+                                        <button cButton (click)="addToCart(mi)" size="sm"
+                                            *ngIf="mi.isAvailable else notAvailable"
+                                            [ngClass]="{'btn-light': mi.quantity, 'btn-danger': !mi.quantity}"
+                                            class="position-relative">
+                                            <span *ngIf="mi.quantity && mi.quantity > 0 else addToCartBlock">
+                                                Add more
+                                            </span>
+                                            <ng-template #addToCartBlock>
+                                                Add to Cart
+                                            </ng-template>
+                                            <!-- <svg cIcon name="cilCart" size="sm"></svg> -->
+                                            <c-badge *ngIf="mi.quantity && mi.quantity > 0" color="danger"
+                                                shape="rounded-pill"
+                                                class="position-absolute top-0 start-100 translate-middle">
+                                                {{mi.quantity}}</c-badge>
+                                        </button>
+                                        <ng-template #notAvailable>
+                                            <span>
+                                                <c-badge color="light" class="text-dark">Not Available</c-badge>
+                                            </span>
+                                        </ng-template>
+                                    </span>
+                                </span>
+                            </c-card-body>
+                        </c-card>
                     </c-card>
                 </c-col>
             </c-row>

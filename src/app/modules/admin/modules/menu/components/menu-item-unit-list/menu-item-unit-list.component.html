@@ -1,18 +1,18 @@
 <c-row class="justify-content-center">
     <c-col md="8">
+        <c-card class="">
+            <c-card-body>
+                <button (click)="location.back()" color="dark" type="button" cButton variant="outline" size="sm">
+                    <svg cIcon name="cilCaretLeft" size="sm"></svg> Go Back
+                </button>
+            </c-card-body>
+        </c-card>
         <c-card *ngIf="!isEditForm else editForm" class="mb-4">
             <c-card-body  class="d-flex justify-content-end">
                 <button (click)="createUnit()" cButton>Create</button>        
             </c-card-body>
         </c-card>
         <ng-template #editForm>
-            <c-card class="">
-                <c-card-body>
-                    <button (click)="location.back()" color="dark" type="button" cButton variant="outline" size="sm">
-                        <svg cIcon name="cilCaretLeft" size="sm"></svg> Go Back
-                    </button>
-                </c-card-body>
-            </c-card>
             <c-card class="mb-4">
                 <c-card-body  class="">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">

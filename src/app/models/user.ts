@@ -1,4 +1,5 @@
 import { Audit } from "./audit";
+import { Branch } from "./branch";
 
 export class User extends Audit {
     id:string = '';
@@ -18,4 +19,12 @@ export class User extends Audit {
     lastPasswordUpdate?:string;
     profilePicture?:string;
     role?:string;
+}
+
+
+export enum USER_ROLE {
+    ADMIN = "ADMIN", 
+    MANAGER = "MANAGER", 
+    SALES_PERSON = "SALES_PERSON",
+    CUSTOMER = "CUSTOMER"
 }

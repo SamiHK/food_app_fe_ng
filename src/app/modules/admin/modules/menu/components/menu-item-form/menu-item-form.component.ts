@@ -22,7 +22,7 @@ export class MenuItemFormComponent implements OnInit {
     'description': new FormControl(null),
     'price': new FormControl(null, [Validators.required, Validators.min(1)]),
     'oldPrice': new FormControl(null),
-    'unitId': new FormControl(null, Validators.required),
+    'unitId': new FormControl(null),
   })
 
   constructor(private route: ActivatedRoute,
@@ -54,7 +54,7 @@ export class MenuItemFormComponent implements OnInit {
       this.form.controls['price'].setValue(this.menuItem.price);
       this.form.controls['oldPrice'].setValue(this.menuItem.oldPrice);
       this.form.controls['unitId'].setValue(this.menuItem.unitId);
-      console.log(this.form.value)
+      // console.log(this.form.value)
     }
   }
 

@@ -1,16 +1,8 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
   <c-container [fluid]="true">
-    <button
-      toggle="visible"
-      cHeaderToggler
-      [cSidebarToggle]="sidebarId"
-      class="ps-1"
-    >
-      <svg cIcon
-        name="cilMenu"
-        size="lg"
-      ></svg>
+    <button toggle="visible" cHeaderToggler [cSidebarToggle]="sidebarId" class="ps-1">
+      <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <!-- <c-header-nav class="d-none d-lg-flex me-auto">
       <c-nav-item>
@@ -73,24 +65,12 @@
 
 <ng-template #userDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <button
-      cButton
-      color=""
-      [caret]="false"
-      cDropdownToggle
-      class="py-0"
-    >
+    <button color="" cButton [caret]="false" cDropdownToggle class="py-0">
       <span class="px-2" *ngIf="user">
         {{user.fullName}}
       </span>
-      <c-avatar
-        cTextColor="primary"
-        shape="rounded-1"
-        size="md"
-        src="./assets/img/avatars/8.jpg"
-        status="success"
-      >
-      </c-avatar>
+      <svg cIcon name="cilUser"></svg>
+      <!-- <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success"></c-avatar> -->
     </button>
     <ul cDropdownMenu class="py-0 w-auto">
       <!-- <li>
@@ -178,4 +158,3 @@
     </ul>
   </c-dropdown>
 </ng-template>
-

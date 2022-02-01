@@ -16,6 +16,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
+import { AuthErrorModalComponent } from './components/auth-error-modal/auth-error-modal.component';
 
 const CORE_UI_MODULES = [FormModule,
   ButtonModule,
@@ -40,6 +41,7 @@ const CORE_UI_MODULES = [FormModule,
     UploadButtonComponent,
     InputSwitchComponent,
     ConfirmDeleteModalComponent,
+    AuthErrorModalComponent,
   ],
   imports: [
     CommonModule,

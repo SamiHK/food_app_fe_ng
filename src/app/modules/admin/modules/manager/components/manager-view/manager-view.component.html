@@ -21,8 +21,8 @@
             <h4>Branch</h4>
             <c-card>
                 <c-card-body>
-                    <c-row *ngIf="!isEditBranch else branchForm">
-                        <c-col>
+                    <div class="d-flex justify-content-between" *ngIf="!isEditBranch else branchForm">
+                        <span class="flex-grow-1">
                             <span *ngIf="(manager.branchId && manager.branch && manager.branch) else na">
                                 <h4>
                                     {{manager.branch.name}}
@@ -30,19 +30,19 @@
                                 <a cButton [routerLink]="['../../branch', manager.branchId]" color="light" size="sm">
                                     {{manager.branch.code}}
                                 </a>
+                            </span>
+                            <ng-template #na>N/A</ng-template>
+                            <span *ngIf="manager.salespersons">
                                 <hr>
-                                <a cButton [routerLink]="[manager.branchId, 'salespersons']" color="light" *ngIf="manager.salespersons">
+                                <a cButton [routerLink]="[manager.branchId, 'salespersons']" color="light" >
                                     Salesperson <c-badge shape="rounded-pill" color="success">{{manager.salespersons.length}}</c-badge>
                                 </a>
                             </span>
-                            <ng-template #na>N/A</ng-template>
-                        </c-col>
-                        <c-col xs="2">
-                            <span class="float-end">
-                                <button cButton (click)="editBranch()" color="light" size="sm">Edit</button>
-                            </span>
-                        </c-col>
-                    </c-row>
+                        </span>
+                        <span>
+                            <button cButton (click)="editBranch()" color="light" size="sm">Edit</button>
+                        </span>
+                    </div>
                     <ng-template #branchForm>
                         <form (ngSubmit)="saveBranch()">
                             <fieldset [disabled]="savingBranch">

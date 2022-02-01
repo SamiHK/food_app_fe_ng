@@ -1,14 +1,14 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
-<ng-container >
-  <c-container fluid="true" class="gap-2">
+<ng-container>
+  <c-container class="d-flex flex-md-row flex-column gap-2 align-items-center">
     <c-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/coreui-pro-angular-black.v1.svg',
       width: 190,
       height: 35,
-      alt: 'CoreUI Logo'
-    }" routerLink="" class="bg-white">
+      alt: 'Food App Logo'
+    }" routerLink="" class="bg-white mx-md-0 mx-auto">
     </c-sidebar-brand>
-    <c-header-nav class="d-flex mx-md-auto ms-sm-auto">
+    <c-header-nav class="d-flex ms-md-0 me-md-auto mx-auto">
       <c-nav-item>
         <a routerLink="/public/menu" cNavLink routerLinkActive="active">Menu</a>
       </c-nav-item>
@@ -19,39 +19,48 @@
         <a routerLink="/public/promos" cNavLink routerLinkActive="active">Promos</a>
       </c-nav-item>
     </c-header-nav>
-    <c-header-nav class="gap-2">
-      <c-nav-item>
-        <button cButton color="light">
-          <svg cIcon name="cilLocationPin"></svg>
-          Selected Branch
-        </button>
-      </c-nav-item>
-      <c-nav-item>
-        <button toggle="visible" cButton [cSidebarToggle]="sidebarId" class="position-relative" color="light" >
-          <svg cIcon name="cilCart" ></svg>
-          <span class="position-absolute top-0 start-100 translate-middle">
-            <c-badge color="danger" shape="rounded-pill" size="sm">0</c-badge>
-          </span>
-        </button>
-      </c-nav-item>
-    </c-header-nav>
-    <c-header-nav class="ms-xs-auto" *ngIf="user else nonAuthBlock">
-      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
-    </c-header-nav>
-    <ng-template #nonAuthBlock>
-      <c-header-nav class="">
+    <span class="d-flex flex-row align-items-center align-self-stretch gap-2">
+      <c-header-nav class="d-flex gap-2 me-auto">
         <c-nav-item>
-          <a routerLink="/register" cNavLink>
-            Register
-          </a>
+          <button cButton (click)="selectBranch()" color="light">
+            <svg cIcon name="cilLocationPin"></svg>
+            <span *ngIf="branch else elseBlock">
+              {{branch.name}}
+            </span>
+            <ng-template #elseBlock>
+              Selected Branch
+            </ng-template>
+          </button>
         </c-nav-item>
         <c-nav-item>
-          <a routerLink="/login" cNavLink>
-            Login
-          </a>
+          <button toggle="visible" cButton cSidebarToggle="sidebarId" class="position-relative" color="light" >
+            <svg cIcon name="cilCart" ></svg>
+            <span *ngIf="totalItemsInCart" class="position-absolute top-0 start-100 translate-middle">
+              <c-badge color="danger" shape="rounded-pill" size="sm">{{totalItemsInCart}}</c-badge>
+            </span>
+          </button>
         </c-nav-item>
       </c-header-nav>
-    </ng-template>
+      <c-header-nav class="d-flex" *ngIf="user else nonAuthBlock">
+        <c-nav-item>
+          <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+        </c-nav-item>
+      </c-header-nav>
+      <ng-template #nonAuthBlock>
+        <c-header-nav class="">
+          <c-nav-item>
+            <a routerLink="/register" cNavLink>
+              Register
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a routerLink="/login" cNavLink>
+              Login
+            </a>
+          </c-nav-item>
+        </c-header-nav>
+      </ng-template>
+    </span>
 
   </c-container>
   <!-- <c-header-divider></c-header-divider> -->
@@ -64,13 +73,14 @@
 <ng-template #userDropdown>
   <c-dropdown alignment="end" variant="nav-item">
     <button cButton color="" [caret]="false" cDropdownToggle class="py-0">
-      <span class="px-2" *ngIf="user">
+      <span class="" *ngIf="user">
         {{user.fullName}}
       </span>
-      <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success">
-      </c-avatar>
+      <svg cIcon name="cilUser"></svg>
+      <!-- <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success">
+      </c-avatar> -->
     </button>
-    <ul cDropdownMenu class="py-0 w-auto">
+    <ul cDropdownMenu class="w-auto">
       <li *ngFor="let m of userMenus">
         <a routerLink="{{m.url}}" href="#" cDropdownItem>
           {{m.name}}

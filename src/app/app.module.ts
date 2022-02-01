@@ -68,7 +68,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent, ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -23,8 +23,8 @@ export class MenuService {
       );
   }
 
-  getMenusAndItems() {
-    return this.http.get<Menu[]>(`${this.BASE_URL}/all`)
+  getMenusAndItems(params?: any) {
+    return this.http.get<Menu[]>(`${this.BASE_URL}/all`, { params: params })
       .pipe(
         catchError(this.commonService.catchError)
       );

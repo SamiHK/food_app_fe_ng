@@ -5,13 +5,15 @@
 </c-card>
 <ng-template #loadedBlock>
     <ng-template [ngIf]="menuItems && menuItems.length > 0" [ngIfElse]="emptyblock">
-        <c-row [md]="2" [sm]="1" [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems">
-            <c-col *ngFor="let i of menuItems" class="d-flex justify-content-stretch">
-                <c-card class="d-flex flex-grow-1">
-                    <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg">
-                    <c-card-body class="d-flex flex-column justify-content-end">
+        <c-row [sm]="1"  [gutter]="2" [(dragulaModel)]="menuItems" dragula="menuItems">
+            <c-col *ngFor="let i of menuItems">
+                <c-card class="d-flex flex-row">
+                    <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg" class="img-md">
+                    <c-card-body class="d-flex flex-column gap-2">
                         <span class="d-flex justify-content-between">
                             <h6>{{i.title}}</h6>
+                            <app-input-switch [isLoading]="i.updatingAvailability" 
+                            label="Is Available" [id]="i.id" [status]="i.isAvailable" (onChange)="onChangeMenuItemAvailability($event)"></app-input-switch>
                         </span>
                         <p>{{i.description}}</p>
                         <div class="d-flex d-grid gap-2 justify-content-between align-items-center">
@@ -20,21 +22,16 @@
                                     <c-badge color="primary" shape="rounded-pill">{{i.price |
                                         currency:'Pkr
                                         '}}</c-badge>
-                                </span>
-                                <span *ngIf="i.oldPrice">
-                                    <!-- <small>Old Price</small> -->
-                                    <c-badge color="danger" shape="rounded-pill">
-                                        <span class="text-decoration-line-through">
-                                            {{ i.oldPrice | currency:'Pkr '}}
-                                        </span>
-                                    </c-badge>
+                                    </span>
+                                    <span *ngIf="i.oldPrice">
+                                        <!-- <small>Old Price</small> -->
+                                        <c-badge color="danger" shape="rounded-pill">
+                                            <span class="text-decoration-line-through">
+                                                {{ i.oldPrice | currency:'Pkr '}}
+                                            </span>
+                                        </c-badge>
                                 </span>
                             </span>
-                            <span>
-                                <app-input-switch [isLoading]="i.updatingAvailability" 
-                                    label="Is Available" [id]="i.id" [status]="i.isAvailable" (onChange)="onChangeMenuItemAvailability($event)"></app-input-switch>
-                            </span>
-
                         </div>
                     </c-card-body>
                 </c-card>

@@ -26,6 +26,8 @@ export class MenuItem {
     updatingAvailability: boolean = false;
     unit?: string;
     unitId?: number;
+    quantity = 1;
+    total = 0;
 }
 
 export class MenuItemUnit {

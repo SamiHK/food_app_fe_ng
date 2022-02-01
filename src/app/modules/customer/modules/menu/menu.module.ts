@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MenuRoutingModule } from './menu-routing.module';
 import { MenuComponent } from './menu/menu.component';
-import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule, TooltipModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -24,6 +24,7 @@ const CORE_UI_MODULES = [
   PerfectScrollbarModule,
   NavModule,
   SidebarModule,
+  TooltipModule
 ]
 
 const NGX_BOOTSTRAP_MODULES = [

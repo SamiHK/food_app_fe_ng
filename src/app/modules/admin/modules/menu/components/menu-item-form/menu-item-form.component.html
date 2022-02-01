@@ -1,5 +1,5 @@
-<c-row class="justify-content-center mb-3" id="item-form">
-    <c-col>
+<c-row class="justify-content-center mb-3" >
+    <c-col id="item-form">
         <c-card>
             <c-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -29,12 +29,12 @@
                             </c-col>
                             <c-col sm="4">
                                 <div class="mb-3" cFormFloating>
-                                    <select cSelect formControlName="unitId" [valid]="form.controls['unitId'].valid" id="unit" placeholder="Unit" (change)="onSelectUnit($event)">
+                                    <select cSelect formControlName="unitId" id="unit" placeholder="Unit" (change)="onSelectUnit($event)">
+                                        <option [ngValue]="undefined">None</option>
                                         <option *ngFor="let miu of menuItemUnits" [value]="miu.id">{{miu.title}}</option>
                                         <option value="create">Create</option>
                                     </select>
                                     <label cLabel for="unit">Unit</label>
-                                    <app-input-error [control]="form.controls['unitId']"></app-input-error>
                                 </div>
                             </c-col>
                         </c-row>

@@ -20,7 +20,6 @@ const routes: Routes = [
   },
   {
     path: 'public',
-    component: WebLayoutComponent,
     children: [
       { path: '', loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule) }
     ]

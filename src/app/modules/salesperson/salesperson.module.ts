@@ -7,6 +7,7 @@ import { AlertModule, ButtonModule, CardModule, FormModule, GridModule, SpinnerM
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 const CORE_UI_MODULES = [
@@ -19,6 +20,7 @@ const NGX_BOOTSTRAP_MODULES = [PaginationModule.forRoot()]
 @NgModule({
   declarations: [
     SalespersonComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

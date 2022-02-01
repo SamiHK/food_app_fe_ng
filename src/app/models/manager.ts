@@ -6,6 +6,6 @@ export class Manager extends User {
     branchId?: string | null
     branchCode?: string | null
     branchName?: string | null
-    branch?: Branch | null
+    branch?: Branch
     salespersons?: SalesPerson[] 
 }

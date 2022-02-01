@@ -5,24 +5,18 @@
 </c-card>
 <ng-template #loadedBlock>
     <ng-template [ngIf]="menu" [ngIfElse]="emptyMenuBlock">
-        <c-card class="mb-3">
+        <span class="d-flex justify-content-between">
+            <h3 cCardTitle>{{menu.title}}</h3>
+            <span class="d-block-inline">
+                <app-input-switch [isLoading]="updatingAvailableStatus" 
+                    label="Is Available" [status]="menu.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
+                <!-- <a routerLink="edit" cButton color="light" size="sm">Edit</a> -->
+            </span>
+        </span>
+        <c-card class="mb-4">
+            <img *ngIf="menu.primaryImg" cImg rounded fluid [src]="menu.primaryImg" class="img-lg">
             <c-card-body class="">
-                <c-row>
-                    <c-col sm="1" md="4">
-                        <img *ngIf="menu.primaryImg" cImg rounded fluid [src]="menu.primaryImg">
-                    </c-col>
-                    <c-col sm="11" md="8">
-                        <span class="d-flex justify-content-between">
-                            <h3 cCardTitle>{{menu.title}}</h3>
-                            <span class="d-block-inline">
-                                <app-input-switch [isLoading]="updatingAvailableStatus" 
-                                    label="Is Available" [status]="menu.isAvailable" (onChange)="onChangeAvailability($event)"></app-input-switch>
-                                <!-- <a routerLink="edit" cButton color="light" size="sm">Edit</a> -->
-                            </span>
-                        </span>
-                        <p cCardText>{{menu.description}}</p>
-                    </c-col>
-                </c-row>
+                <p cCardText class="text-wrap">{{menu.description}}</p>
             </c-card-body>
         </c-card>
     </ng-template>
