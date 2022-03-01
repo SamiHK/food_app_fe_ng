@@ -1,0 +1,53 @@
+<c-row class="mb-3">
+    <c-col>
+        <c-nav variant="pills">
+            <c-nav-item>
+                <a routerLink="cart" cNavLink routerLinkActive="active">
+                    Cart
+                    <svg cIcon name="cilChevronRight"></svg>
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="customer" cNavLink routerLinkActive="active">
+                    Customer
+                    <svg cIcon name="cilChevronRight"></svg>
+                </a>
+            </c-nav-item>
+            <c-nav-item *ngIf="cart.isDelivery">
+                <a routerLink="address" cNavLink routerLinkActive="active">
+                    Address
+                    <svg cIcon name="cilChevronRight"></svg>
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="payment" cNavLink routerLinkActive="active">
+                    <!-- <svg cIcon name="cilChevronRight"></svg> -->
+                    Payment
+                </a>
+            </c-nav-item>
+        </c-nav>
+    </c-col>
+</c-row>
+<c-row>
+    <c-col md="8" sm="12">
+        <router-outlet></router-outlet>
+    </c-col>
+    <c-col md="4" sm="12">
+        <c-card>
+            <c-card-body>
+                <span class="d-flex justify-content-between">
+                    <span class="">total items</span>
+                    <span class="fw-semibold">{{cart.items.length}}</span>
+                </span>
+                <span class="d-flex justify-content-between">
+                    <span class="">total</span>
+                    <span class="fw-semibold">{{cart.total | currency : 'Pkr '}}</span>
+                </span>
+                <span class="d-flex justify-content-between">
+                    <span class="">delivery charges</span>
+                    <span class="fw-semibold">Pkr 100</span>
+                </span>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

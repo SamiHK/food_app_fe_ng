@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Location } from 'src/app/models/loaction';
+import { Address } from 'src/app/models/address';
 import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
 import { ConfirmDeleteModalComponent } from '../components/confirm-delete-modal/confirm-delete-modal.component';
 import { MapModalComponent } from '../components/map-modal/map-modal.component';
@@ -40,14 +40,14 @@ export class CommonModalService {
   }
 
 
-  showMapModal<MapModalComponent>(location?: Location){
+  showMapModal<MapModalComponent>(address?: Address){
     return this.modalService.show(MapModalComponent, {
       backdrop: true,
       animated: true,
       ignoreBackdropClick: true,
       class: 'modal-lg modal-dialog-centered',
       initialState: {
-        location: location
+        address: address
       }
     })
   }

@@ -1,5 +1,5 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
-<ng-container>
+<ng-container class="">
   <c-container class="d-flex flex-md-row flex-column gap-2 align-items-center">
     <c-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/coreui-pro-angular-black.v1.svg',
@@ -28,7 +28,7 @@
               {{branch.name}}
             </span>
             <ng-template #elseBlock>
-              Selected Branch
+              Select Branch
             </ng-template>
           </button>
         </c-nav-item>
@@ -63,6 +63,7 @@
     </span>
 
   </c-container>
+
   <!-- <c-header-divider></c-header-divider> -->
   <!-- <c-container>
     <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
@@ -86,6 +87,7 @@
           {{m.name}}
         </a>
       </li>
+      <li><hr cDropdownDivider></li>
       <li>
         <a (click)="logout()" href="#" cDropdownItem>
           Logout

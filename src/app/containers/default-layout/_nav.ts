@@ -38,13 +38,17 @@ export const salespersonNavItems: INavData[] = [
     name: 'Dashboard',
     url: '/salesperson/dashboard'
   },
-  {
-    name: 'Menu',
-    url: '/salesperson/menu'
-  },
+  // {
+  //   name: 'Menu',
+  //   url: '/salesperson/menu'
+  // },
   {
     name: 'Order',
     url: '/salesperson/order'
+  },
+  {
+    name: 'Checkout',
+    url: '/salesperson/checkout'
   }
 ]
 

@@ -24,7 +24,7 @@ export class BranchViewComponent implements OnInit {
     private abService: BranchService,
     private location: Location,
     private router: Router,
-    private cModalService: CommonModalService ) {
+    private cModalService: CommonModalService) {
     let id = this.route.snapshot.params['id'];
     if (id) {
       this.branch.id = id;
@@ -44,23 +44,36 @@ export class BranchViewComponent implements OnInit {
   }
 
   branchForm = new FormGroup({
-    'code': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(16)], ),
-    'name': new FormControl(null, [Validators.required], )
+    'code': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(16)],),
+    'name': new FormControl(null, [Validators.required],)
   })
 
 
-  editLocation(){
-    let modalRef = this.cModalService.showMapModal(this.branch.location);
+  editLocation() {
+    let modalRef = this.cModalService.showMapModal(this.branch.address);
     modalRef.onHide?.subscribe(
       async (e) => {
         // console.log(e);
-        if(e){
+        if (e) {
           // console.log(e)
           // console.log(modalRef.content?.location)
-          if(modalRef && modalRef.content && modalRef.content.location && modalRef.content.location.formattedAddress){
-            await this.abService.updateLocation(this.branch.id, modalRef.content.location)
-            .forEach(v => this.branch.location = v)
-            // this.branch.location = modalRef.content?.location
+          let location: any;
+
+          if (modalRef.content &&  modalRef.content.isSave && modalRef.content.address) {
+            if (modalRef.content.address) {
+              location = modalRef.content.address
+            }
+
+            if (modalRef.content.city)
+              location.cityId = modalRef.content.city.id;
+
+            if (location) {
+
+              await this.abService.updateAddress(this.branch.id, location)
+                .forEach(v => this.branch.address = v)
+              // this.branch.location = modalRef.content?.location
+            }
+
           }
         }
       }
@@ -68,34 +81,34 @@ export class BranchViewComponent implements OnInit {
   }
 
   isEditBranch = false;
-  editBranch(){
-    if(this.branch && this.branch.id){
+  editBranch() {
+    if (this.branch && this.branch.id) {
       this.branchForm.controls['code'].setValue(this.branch.code);
       this.branchForm.controls['name'].setValue(this.branch.name);
     }
     this.isEditBranch = true;
   }
-  cancelEditBranch(){
+  cancelEditBranch() {
     this.branchForm.reset();
-    if(this.branch && this.branch.id){
+    if (this.branch && this.branch.id) {
       this.isEditBranch = false;
     } else {
       this.location.back()
     }
   }
   savingBranch = false;
-  saveBranch(){
-    if(this.branchForm.valid){
+  saveBranch() {
+    if (this.branchForm.valid) {
       this.savingBranch = true;
 
       let b = this.branchForm.value;
-      if(this.branch && this.branch.id){
+      if (this.branch && this.branch.id) {
         b.id = this.branch.id
-      } 
+      }
 
       this.abService.save(b).forEach(v => {
-        if(v){
-          if(!this.branch.id){
+        if (v) {
+          if (!this.branch.id) {
             this.router.navigate(['admin', 'branch', v.id])
           } else {
             Object.assign(this.branch, v);
@@ -103,30 +116,30 @@ export class BranchViewComponent implements OnInit {
           }
         }
       })
-      .catch(e => {
-        if(e && e.code == "ER_DUP_ENTRY"){
-          this.branchForm.controls['code'].setErrors({else: 'this code is already registered, try another one'})
-        }
-      })
-      .finally(() => {
-        this.savingBranch = false;
-      })
+        .catch(e => {
+          if (e && e.code == "ER_DUP_ENTRY") {
+            this.branchForm.controls['code'].setErrors({ else: 'this code is already registered, try another one' })
+          }
+        })
+        .finally(() => {
+          this.savingBranch = false;
+        })
     }
   }
 
 
   isEditManager = false;
   selectedManagerId = null;
-  managerPage = new Page<Manager>();  
+  managerPage = new Page<Manager>();
   managerLoading = false;
-  loadManager(){
+  loadManager() {
     this.managerLoading = true;
     this.amService.available().forEach(v => this.managerPage = v)
-    .finally(() => this.managerLoading = false);
+      .finally(() => this.managerLoading = false);
   }
 
   editManager() {
-    if(this.managerPage && this.managerPage.items.length == 0){
+    if (this.managerPage && this.managerPage.items.length == 0) {
       this.loadManager();
     }
     this.isEditManager = true;

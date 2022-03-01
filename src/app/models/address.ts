@@ -1,8 +1,10 @@
-export class Location {
+export class Address {
     cityId?: number
     cityName?: string
+    cityShortName?:string
     stateId?: number
     stateName?: string
+    stateShortName?: string
     countryId?: number
     countryName?: string
     countryShortName?: string
@@ -22,4 +24,23 @@ export class Location {
         this._latLng = value
     }
     addressComponents?: any
+}
+
+export class City {
+    id?: number
+    name?: string
+    stateId?: number
+    state?: State
+}
+
+export class State {
+    id?: number
+    name?: string
+    countryId?: number
+    country?: Country
+}
+
+export class Country {
+    shortName?: string
+    name?: string
 }

@@ -103,3 +103,12 @@ img {
         filter: grayscale(100);
     }
 }
+
+.hover-bg-light:hover {
+    background-color: $light;
+}
+
+.label-sm {
+    margin-bottom: 0.275rem;
+    font-size: 0.875rem
+}

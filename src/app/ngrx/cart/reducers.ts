@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { Cart } from "src/app/models/cart";
 import { MenuItem } from "src/app/models/menu";
-import { addItemToCartAction, emptyCartAction, reduceItemFromCartAction, removeItemFromCartAction } from "./actions";
+import { addItemToCartAction, changeDeliveryAction, emptyCartAction, reduceItemFromCartAction, removeItemFromCartAction } from "./actions";
 
 const initialState = null;
 
@@ -89,6 +89,11 @@ const _authReducer = createReducer(
     }),
     on(emptyCartAction, () => {
         let _cart = { items: [], total: 0 };
+        localStorage.setItem('cart', JSON.stringify(_cart))
+        return _cart
+    }),
+    on(changeDeliveryAction, (state: Cart) => {
+        let _cart = { ...state, isDelivery: !state.isDelivery }
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     })

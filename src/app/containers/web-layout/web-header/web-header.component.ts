@@ -7,12 +7,15 @@ import { AuthUser } from 'src/app/models/auth-user';
 import { Branch } from 'src/app/models/branch';
 import { Cart } from 'src/app/models/cart';
 import { Manager } from 'src/app/models/manager';
+import { SalesPerson } from 'src/app/models/sales-person';
 import { USER_ROLE } from 'src/app/models/user';
 import { BranchModalComponent } from 'src/app/modules/customer/components/branch-modal/branch-modal.component';
 import { logoutAction } from 'src/app/ngrx/auth/actions';
 import { selectBranchAction } from 'src/app/ngrx/branch/actions';
 import { CommonModalService } from 'src/app/shared/services/common-modal.service';
-import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../_nav';
+import { adminNavItems, managerNavItems, salespersonNavItems } from '../../default-layout/_nav';
+import { customerNavItems } from '../_nav';
+// import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../_nav';
 
 const EXCLUDE_BRANCH_SELECT_ROLES = [USER_ROLE.MANAGER.toString(), USER_ROLE.SALES_PERSON.toString()];
 
@@ -49,7 +52,11 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
             let m = v as Manager;
             this.branchStore.dispatch(selectBranchAction({ branch: m.branch })); 
             break;
-          case 'SALES_PERSON': this.userMenus = salespersonNavItems; break;
+          case 'SALES_PERSON': 
+            this.userMenus = salespersonNavItems; 
+            let s = v as SalesPerson;
+            this.branchStore.dispatch(selectBranchAction({ branch: s.branch })); 
+            break;
           case 'CUSTOMER': this.userMenus = customerNavItems;
         }
       } else {
@@ -84,10 +91,10 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
         if (r) {
           // console.log(r);
           if (branchModalRef.content) {
-            // console.log(branchModalRef.content.selectedBranch)
-            if(this.branch
-              && branchModalRef.content.selectedBranch 
-              && this.branch.id != branchModalRef.content.selectedBranch.id){
+            console.log(branchModalRef.content.selectedBranch)
+            if(this.branch == null 
+              || branchModalRef.content.selectedBranch == null 
+              || this.branch.id != branchModalRef.content.selectedBranch.id ){
                 this.branch = branchModalRef.content.selectedBranch;
                 this.branchStore.dispatch(selectBranchAction({ branch: this.branch }))
             }

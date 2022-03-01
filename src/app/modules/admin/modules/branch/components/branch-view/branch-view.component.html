@@ -68,9 +68,21 @@
             <c-card class="mb-4">
                 <c-card-body class="d-flex justify-content-between">
                     <div class="flex-grow-1">
-                        <span *ngIf="branch && branch.location else na">
-                            <svg cIcon name="cilLocationPin"></svg>
-                            {{branch.location.formattedAddress}}
+                        <span class="d-flex gap-2" *ngIf="branch.address && (branch.address.addressLine1 
+                            || branch.address.formattedAddress) else na">
+                            <span class="">
+                                <svg cIcon name="cilLocationPin"></svg>
+                            </span>
+                            <span *ngIf="branch.address.addressLine1 else formattedAddress" class="fw-light mb-0">
+                                {{branch.address.addressLine1}}
+                                <span *ngIf="branch.address.cityName">, {{branch.address.cityName}}</span>
+                                <span *ngIf="branch.address.stateName">, {{branch.address.stateName}}</span>
+                                <span *ngIf="branch.address.countryName">, {{branch.address.countryName}}</span>
+                            </span>
+                            <ng-template #formattedAddress>
+                                <span *ngIf="branch.address.formattedAddress" class="fw-light mb-0">
+                                    {{branch.address.formattedAddress}}</span>
+                            </ng-template>
                         </span>
                         <ng-template #na>
                             N/A

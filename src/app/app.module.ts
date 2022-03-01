@@ -55,6 +55,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { WebLayoutComponent } from './containers/web-layout/web-layout.component';
 import { WebHeaderComponent } from './containers/web-layout/web-header/web-header.component';
+import { HoverColorDirective } from './directives/hover-color.directive';
+import { authReducer } from './ngrx/cart/reducers';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -68,7 +70,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent, ],
+  declarations: [AppComponent, ...APP_CONTAINERS, HttpErrorModalComponent, HoverColorDirective, ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -103,7 +105,8 @@ const APP_CONTAINERS = [
     BsModalModule.forChild(),
     StoreModule.forRoot({}, {}),
     PaginationModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    StoreModule.forFeature('cart', authReducer),
   ],
   providers: [
     {

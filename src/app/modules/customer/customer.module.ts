@@ -46,7 +46,6 @@ const NGX_BOOTSTRAP_MODULES = [
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    StoreModule.forFeature('cart', authReducer),
     StoreModule.forFeature('branch', branchReducer), 
     FormsModule,
     ... CORE_UI_MODULES, ... NGX_BOOTSTRAP_MODULES

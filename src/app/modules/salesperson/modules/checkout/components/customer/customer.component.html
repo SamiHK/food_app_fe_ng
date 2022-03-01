@@ -1,0 +1,69 @@
+<c-row>
+    <c-col>
+        <c-card>
+            <c-card-body>
+                <form>
+                    <fieldset class="d-flex flex-column gap-2">
+                        <div cFormFloating>
+                            <input cFormControl id="cellNumber" placeholder="Cell number">
+                            <label cLabel id="cellNumber">Cell number</label>
+                        </div>
+                        <c-row>
+                            <c-col class="d-flex justify-content-end">
+                                <button cButton>
+                                    <svg cIcon name="cilSearch"></svg>
+                                    Search
+                                </button>
+                            </c-col>
+                        </c-row>
+                    </fieldset>
+                </form>
+            </c-card-body>
+        </c-card>
+        <c-card class="mt-2">
+            <c-card-body>
+                <form>
+                    <fieldset class="d-flex flex-column gap-2">
+                        <c-row [gutter]="3">
+                            <c-col md="6" sm="12">
+                                <div cFormFloating>
+                                    <input cFormControl id="firstName" placeholder="First Name">
+                                    <label cLabel id="firstName">First Name</label>
+                                </div>
+                            </c-col>
+                            <c-col md="6" sm="12">
+                                <div cFormFloating>
+                                    <input cFormControl id="lastName" placeholder="Last Name">
+                                    <label cLabel id="lastName">Last Name</label>
+                                </div>
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col class="d-flex justify-content-end">
+                                <button cButton>
+                                    Register New Customer
+                                </button>
+                            </c-col>
+                        </c-row>
+                    </fieldset>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="mt-2">
+    <c-col>
+        <c-card>
+            <c-card-body class="d-flex justify-content-between">
+                <a cButton variant="outline" routerLink="../cart">
+                    <svg cIcon name="cilChevronLeft"></svg>
+                    Cart
+                </a>
+                <a cButton variant="outline" routerLink="../address">
+                    Continue
+                    <svg cIcon name="cilChevronRight"></svg>
+                </a>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

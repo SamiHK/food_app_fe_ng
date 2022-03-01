@@ -6,8 +6,8 @@
 <ng-template #loadedBlock>
     <c-row [gutter]="3" *ngFor="let m of menus; let i = index" class="mb-4 animate fade-in">
         <c-col class="">
-            <span class="d-flex gap-2 align-items-center">
-                <h4>{{m.title}}</h4>
+            <span class="d-flex gap-2 align-items-center py-2">
+                <h4 class="my-0">{{m.title}}</h4>
                 <span *ngIf="!m.isAvailable">
                     <c-badge color="dark" class="">Not Available</c-badge>
                 </span>
@@ -22,12 +22,11 @@
             </c-card>
             <c-row [lg]="2" [md]="2" [sm]="1" [gutter]="2">
                 <c-col *ngFor="let mi of m.items">
-                    <c-card class="d-flex flex-row rounded-0 rounded-start"
-                        [ngClass]="{'bg-secondary': !mi.isAvailable}">
+                    <c-card class="d-flex flex-row"
+                        [ngClass]="{'text-muted': !mi.isAvailable}">
                         <img [cCardImg] [src]="mi.primaryImg" class="img-md"
                             [ngClass]="{'img-gray-scale': !mi.isAvailable}">
-                        <c-card class="flex-grow-1 border-0 rounded-0 rounded-end"
-                            [ngClass]="{'bg-secondary': !mi.isAvailable}">
+                        <c-card class="flex-grow-1 border-0 rounded-0 rounded-end" >
                             <c-card-body class="d-flex flex-column">
                                 <span class="d-flex justify-content-between">
                                     <h6 cCardTitle>{{mi.title}}</h6>
@@ -35,8 +34,8 @@
                                 <p *ngIf="mi.description" cCardText class="fw-normal text-truncate mb-1">
                                     {{mi.description}}</p>
                                 <span class="d-flex flex-grow-1"></span>
-                                <span class="d-flex flex-lg-row flex-md-row flex-column
-                                align-items-md-end align-items-center justify-content-md-between gap-2">
+                                <span class="d-flex flex-lg-row flex-sm-row flex-column
+                                align-items-end justify-content-sm-between gap-2">
                                     <span class="d-flex flex-column gap-1">
                                         <small class="fw-semibold">{{mi.unit}}</small>
                                         <span>

@@ -5,4 +5,5 @@ export const addItemToCartAction = createAction('[Add item to Cart]', props<Menu
 export const reduceItemFromCartAction = createAction('[Reduce item from Cart]', props<{id: number}>());
 export const removeItemFromCartAction = createAction('[Remove item from Cart]', props<{id: number}>());
 export const emptyCartAction = createAction('[Empty Cart]');
+export const changeDeliveryAction = createAction('[Change Delivery]');
 // export const removeFromCart = createAction('[Auth Logout]');

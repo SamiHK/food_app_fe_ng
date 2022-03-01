@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { Branch } from 'src/app/models/branch';
-import { Location } from 'src/app/models/loaction';
+import { Address } from 'src/app/models/address';
 import { Page } from 'src/app/models/page';
 import { SalesPerson } from 'src/app/models/sales-person';
 import { CommonService } from 'src/app/services/common.service';
@@ -51,8 +51,8 @@ export class BranchService {
     );
   }
 
-  updateLocation(branchId: string, body: Location) {
-    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/location`, body)
+  updateAddress(branchId: string, body: Address) {
+    return this.http.post<Branch>(`${this.BASE_URL}/${branchId}/address`, body)
     .pipe(
       catchError(this.commonService.catchError)
     );

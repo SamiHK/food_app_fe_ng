@@ -19,53 +19,55 @@
             <c-col>
                 <form [formGroup]="form" (ngSubmit)="filter()">
                     <div cFormFloating>
-                        <input cFormControl formControlName="search" name="search" type="search" placeholder="Search by username, email or name" autofocus>
+                        <input cFormControl formControlName="search" name="search" type="search"
+                            placeholder="Search by username, email or name" autofocus>
                         <label cLabel for="search">Search by code, name or address</label>
                     </div>
                 </form>
             </c-col>
         </c-row>
-        <hr>
-        <c-row>
+        <c-row class="mt-3">
             <c-col>
-                <table cTable hover>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Manager</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="isLoading else showResult">
-                            <td colspan="5" class="text-center my-2">
-                                <c-spinner aria-hidden="true" label="Loading..."></c-spinner>
-                            </td>
-                        </tr>
-                        <ng-template #showResult>
-                            <tr *ngFor="let i of page.items">
-                                <td>
-                                    <!-- <app-user-active-switch [user]="i"></app-user-active-switch> -->
-                                </td>
-                                <td [routerLink]="[i.id]">{{i.code}}</td>
-                                <td [routerLink]="[i.id]">{{i.name}}</td>
-                                <td [routerLink]="[i.id]" class="w-50">{{i.branchAddress}}</td>
-                                <td>{{i.managerFullName}}</td>
-                            </tr>
-                            <tr *ngIf="page.items.length == 0">
-                                <td colspan="5" class="text-center">
-                                    Empty
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-                <pagination [totalItems]="page.total" [(ngModel)]="page.number"  [itemsPerPage]="page.size"
-                 (pageChanged)="onPageChange($event)"></pagination>
+                <c-card *ngIf="isLoading else showResult">
+                    <c-card-body>
+                        <c-spinner aria-hidden="true" label="Loading..."></c-spinner>
+                    </c-card-body>
+                </c-card>
+                <ng-template #showResult>
+                    <c-card *ngFor="let i of page.items; let last = last"
+                        [ngClass]="{'border-bottom': !last, 'mb-2': last}" class="border-0 hover-bg-light">
+                        <c-card-body>
+                            <span class="d-flex justify-content-md-between flex-md-row flex-column">
+                                <a class="d-flex gap-2 flex-md-grow-1 text-decoration-none text-body"
+                                    routerLink="{{i.id}}">
+                                    <span class="d-flex fw-bold">{{i.code}}</span>
+                                    <span *ngIf="i.name">{{i.name}}</span>
+                                </a>
+                                <span *ngIf="i.managerFullName"
+                                    class="text-md-end fw-semibold">{{i.managerFullName}}</span>
+                            </span>
+                            <span class="d-flex gap-2 pt-2" *ngIf="i.address && (i.address.addressLine1 || i.address.formattedAddress)">
+                                <span class="">
+                                    <svg cIcon name="cilLocationPin"></svg>
+                                </span>
+                                <p *ngIf="i.address.addressLine1 else formattedAddress" class="fw-light mb-0">
+                                    {{i.address.addressLine1}}
+                                    <span *ngIf="i.address.cityName">, {{i.address.cityName}}</span>
+                                    <span *ngIf="i.address.stateName">, {{i.address.stateName}}</span>
+                                    <span *ngIf="i.address.countryName">, {{i.address.countryName}}</span>
+                                </p>
+                                <ng-template #formattedAddress>
+                                    <p *ngIf="i.address.formattedAddress" class="fw-light mb-0">
+                                        {{i.address.formattedAddress}}</p>
+                                </ng-template>
+                            </span>
+                        </c-card-body>
+                    </c-card>
+                </ng-template>
+                <pagination *ngIf="page && page.items && page.items.length > 0" [totalItems]="page.total"
+                    [(ngModel)]="page.number" [itemsPerPage]="page.size" (pageChanged)="onPageChange($event)">
+                </pagination>
             </c-col>
         </c-row>
     </c-card-body>
 </c-card>
-

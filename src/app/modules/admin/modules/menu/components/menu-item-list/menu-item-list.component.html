@@ -9,12 +9,13 @@
             <c-col *ngFor="let i of menuItems" class="d-flex justify-content-stretch">
                 <c-card class="d-flex flex-row flex-grow-1">
                     <img *ngIf="i.primaryImg" [cCardImg] [src]="i.primaryImg" class="img-md">
-                    <c-card-body class="d-flex flex-column gap-2 text-truncate">
+                    <c-card-body class="d-flex flex-column text-truncate">
                         <h6 cCardTitle>{{i.title}}</h6>
                         <p *ngIf="i.description && i.description != ''" class="text-wrap mb-1">{{i.description}}</p>
                         <span class="flex-grow-1"></span>
-                        <div class="d-flex flex-md-row flex-column gap-2 justify-content-lg-between align-items-md-end">
-                            <span class="d-flex gap-2">
+                        <div class="d-flex flex-sm-row flex-column gap-2 justify-content-sm-between align-items-sm-end">
+                            <span class="d-flex flex-column gap-1">
+                                <small class="fw-semibold">{{i.unit}}</small>
                                 <span class="d-flex gap-2 flex-column flex-md-row">
                                     <span>
                                         <c-badge color="primary" shape="rounded-pill">{{i.price |
@@ -30,13 +31,17 @@
                                         </c-badge>
                                     </span>
                                 </span>
-                                <small class="fw-semibold">{{i.unit}}</small>
                             </span>
-                            <span class="d-flex justify-content-end gap-2">
-                                <app-upload-button (imageChange)="updateMenuItemImage($event)" size="sm"
-                                    label='Update Image' [id]="i.id"></app-upload-button>
-                                <a [routerLink]="['item', i.id, 'edit']" routerLinkActive="disabled" cButton
-                                    color="light" size="sm">Edit</a>
+                            <span class="d-flex justify-content-end">
+                                <span class="d-flex gap-2">
+                                    <app-upload-button (imageChange)="updateMenuItemImage($event)" size="sm"
+                                        label='Update Image' [id]="i.id"></app-upload-button>
+                                    <span>
+                                        <a [routerLink]="['item', i.id, 'edit']" routerLinkActive="disabled" cButton
+                                            color="light" size="sm">Edit</a>
+
+                                    </span>
+                                </span>
                             </span>
                         </div>
                     </c-card-body>

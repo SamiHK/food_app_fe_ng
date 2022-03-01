@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidebarComponent } from '@coreui/angular';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -26,14 +26,12 @@ export class WebLayoutComponent implements OnInit {
   totalItemsInCart = 0;
   branch?: Branch;
 
+  @ViewChild('sidebar') sidebar?: SidebarComponent
+
   constructor(private router: Router,
     private store: Store<{ 'auth': AuthUser }>,
     private cartStore: Store<{ 'cart': Cart }>) {
 
-    this.cartStore.select('cart').forEach(c => {
-      this.cart = c;
-      this.totalItemsInCart = this.cart.items.length;
-    })
 
   }
 
@@ -47,6 +45,10 @@ export class WebLayoutComponent implements OnInit {
         this.user = v;
       }
     });
+    this.cartStore.select('cart').forEach(c => {
+      this.cart = c;
+      this.totalItemsInCart = this.cart.items.length;
+    })
   }
 
 

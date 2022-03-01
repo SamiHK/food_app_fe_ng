@@ -1,6 +1,7 @@
 import { MenuItem } from "./menu";
 
 export class Cart {
+    isDelivery = true
     items: MenuItem[] = []
     _total = 0;
 

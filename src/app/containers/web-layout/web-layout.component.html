@@ -1,10 +1,11 @@
 <!--sidebar-->
-<c-sidebar #sidebar="cSidebar" class="sidebar sidebar-fixed sidebar-end bg-white border-start shadow-left" id="sidebarId" size="xl">
+<c-sidebar #sidebar="cSidebar" class="sidebar sidebar-fixed sidebar-end bg-white border-start shadow-left hide"
+    id="sidebarId" size="xl">
     <c-sidebar-brand class="border-bottom border-bottom-1 bg-white d-flex flex-row px-3 gap-2">
         <!-- <button cButtonClose (click)="sideBarClose()"></button> -->
         <!-- <div class="d-flex d-grid p-2 gap-2 align-items-center" *ngIf="cart"> -->
         <button cButton (click)="emptyCart()" color="danger" variant="outline" class="flex-grow-1">
-            Empty Cart
+            Remove all
         </button>
         <a cButton toggle="visible" cSidebarToggle="sidebarId" color="white" variant="outline" class="pe-0">
             <svg cIcon name="cilCaretRight"></svg>
@@ -16,9 +17,10 @@
     <ng-template [ngIf]="cart">
         <perfect-scrollbar [config]="perfectScrollbarConfig">
             <span class="d-flex flex-column px-3">
-                <c-card *ngFor="let i of cart.items" class="rounded-0 border-0 border-top border-top-1 text-dark">
-                    <c-card-body class="px-0">
-                        <span class="d-flex justify-content-between align-items-center mb-1">
+                <c-card *ngFor="let i of cart.items; let first = first" class="rounded-0 border-0 text-dark"
+                    [ngClass]="{'border-top border-top-1': !first}">
+                    <c-card-body class="px-0 flex-column gap-2">
+                        <span class="d-flex justify-content-between align-items-center">
                             <span class="d-flex align-items-center gap-2">
                                 <img cImg class="img-xs rounded-3" [src]="i.primaryImg">
                                 <h6 class="mb-0">{{i.title}}</h6>
@@ -30,17 +32,14 @@
                                 </button>
                             </span>
                         </span>
-                        <span class="d-flex justify-content-end align-items-center gap-2">
-                            <p class="fs-6 fw-medium my-0"> {{i.price | currency:'Pkr. '}}</p>
-                            <small class="fw-semibold">{{i.unit}}</small>
+                        <span class="d-flex gap-2 align-items-center">
+                            <small *ngIf="i.unit" class="fw-regular">{{i.unit}} x </small>
+                            <small *ngIf="i.price" class="fs-6 fw-regular">{{i.price | currency:'Pkr. '}}</small>
+                            <!-- <p class="fs-6 fw-medium my-0 text-end"> {{i.price | currency:'Pkr. '}}</p>
+                            <p class="fs-6 fw-medium my-0 text-end"> {{i.price | currency:'Pkr. '}}</p> -->
                         </span>
                         <span class="d-flex justify-content-between align-items-center">
-                            <span>
-                                <c-badge color="danger">
-                                    <span class="fs-6 fw-semibold">{{i.total | currency: 'Pkr. '}}</span>
-                                </c-badge>
-                            </span>
-                            <span class="d-flex align-items-center">
+                            <span class="align-items-center">
                                 <button cButton (click)="reduceItemInCart(i)" size="sm" color="danger"
                                     class="rounded-0 rounded-start">
                                     <svg cIcon name="cilMinus" size="sm"></svg>
@@ -53,6 +52,13 @@
                                     <svg cIcon name="cilPlus" size="sm"></svg>
                                 </button>
                             </span>
+                            <!-- <span class="d-flex flex-column flex-grow-1 gap-2">
+                            </span> -->
+                            <span>
+                                <c-badge color="danger">
+                                    <span class="fs-6 fw-semibold">{{i.total | currency: 'Pkr. '}}</span>
+                                </c-badge>
+                            </span>
                         </span>
                     </c-card-body>
                 </c-card>
@@ -60,7 +66,7 @@
         </perfect-scrollbar>
     </ng-template>
     <div class="border-top d-grid p-2" *ngIf="cart">
-        <button cButton (click)="checkout()" class="align-items-center text-center gap-2" variant="outline">
+        <button cButton (click)="checkout()" class="align-items-center text-center gap-2" color="danger">
             <span class="fw-bolder">
                 CHECKOUT
             </span>

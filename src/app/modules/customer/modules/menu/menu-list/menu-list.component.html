@@ -1,17 +1,30 @@
-<c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="justify-content-center">
-    <c-col *ngFor="let m of menus" class="d-flex justify-content-stretch">
-        <c-card class="d-flex flex-row flex-grow-1" [routerLink]="[m.id]" [ngClass]="{'bg-secondary': !m.isAvailable}">
-            <img [cCardImg] [src]="m.primaryImg" class="img-md" [ngClass]="{'img-gray-scale': !m.isAvailable}">
-            <c-card-body class="flex-shrink-1">
-                <span class="d-flex justify-content-between">
-                    <h6 cCardTitle class="">{{m.title}}</h6>
-                    <span>
-                        <c-badge *ngIf="!m.isAvailable" color="light" class="text-dark">Not Available</c-badge>
-                    </span>
-                </span>
-                <p cCardText *ngIf="m.description" class="text-wrap text-truncate">{{m.description}}</p>
+<c-row *ngIf="isLoading else loadedBlock">
+    <c-col >
+        <c-card>
+            <c-card-body>
+                <c-spinner size="sm"></c-spinner> Loading...
             </c-card-body>
-            <c-badge color="danger" shape="rounded-pill" class="position-absolute top-0 start-100 translate-middle">{{m.totalItems}}</c-badge>
         </c-card>
     </c-col>
 </c-row>
+<ng-template #loadedBlock>
+    <c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="justify-content-center">
+        <c-col *ngFor="let m of menus" class="d-flex justify-content-stretch">
+            <c-card class="d-flex flex-row flex-grow-1" [routerLink]="[m.id]"
+                [ngClass]="{'text-muted': !m.isAvailable}">
+                <img [cCardImg] [src]="m.primaryImg" class="img-md" [ngClass]="{'img-gray-scale': !m.isAvailable}">
+                <c-card-body class="flex-shrink-1">
+                    <span class="d-flex justify-content-between">
+                        <h6 cCardTitle class="">{{m.title}}</h6>
+                        <span>
+                            <c-badge *ngIf="!m.isAvailable" color="light" class="text-dark">Not Available</c-badge>
+                        </span>
+                    </span>
+                    <p cCardText *ngIf="m.description" class="text-wrap text-truncate">{{m.description}}</p>
+                </c-card-body>
+                <c-badge color="danger" shape="rounded-pill" class="position-absolute top-0 start-100 translate-middle">
+                    {{m.totalItems}}</c-badge>
+            </c-card>
+        </c-col>
+    </c-row>
+</ng-template>

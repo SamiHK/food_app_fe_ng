@@ -16,15 +16,16 @@ const _branchReducer = createReducer(
             }
         }
         if (!initialState) {
-            return new Branch();
+            // return null;
         }
         return initialState;
     })(),
 
     on(selectBranchAction, (state: Branch, action: { branch?: Branch }) => {
+        console.log(action.branch)
         if(action && action.branch){
             localStorage.setItem(localStorageKey, JSON.stringify(action.branch))
-            return { ...state, ...action.branch };
+            return {...action.branch };
         }
         localStorage.removeItem(localStorageKey)
         return null;
