@@ -1,5 +1,5 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
-<ng-container class="">
+<ng-container class="position-relative">
   <c-container class="d-flex flex-md-row flex-column gap-2 align-items-center">
     <c-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/coreui-pro-angular-black.v1.svg',
@@ -33,8 +33,8 @@
           </button>
         </c-nav-item>
         <c-nav-item>
-          <button toggle="visible" cButton cSidebarToggle="sidebarId" class="position-relative" color="light" >
-            <svg cIcon name="cilCart" ></svg>
+          <button toggle="visible" cButton cSidebarToggle="sidebarId" class="position-relative" color="light">
+            <svg cIcon name="cilCart"></svg>
             <span *ngIf="totalItemsInCart" class="position-absolute top-0 start-100 translate-middle">
               <c-badge color="danger" shape="rounded-pill" size="sm">{{totalItemsInCart}}</c-badge>
             </span>
@@ -63,6 +63,29 @@
     </span>
 
   </c-container>
+  <!-- <c-container fluid="" class="px-0 mt-2 position-relative ">
+    <img src="http://localhost:3000/images/3cee6e86415a27eab3c3176287fb1c07.jpg" class="img-banner">
+    <c-card class="border-0 position-absolute top-50 start-50 translate-middle bg-transparent fill-available mh mw">
+      <c-card-body class="d-flex flex-row justify-content-between p-0 ">
+        <button cButton class="rounded-0" color="danger">
+          <svg cIcon name="cilChevronLeft" size="sm"></svg>
+        </button>
+        <button cButton class="rounded-0" color="danger">
+          <svg cIcon name="cilChevronRight" size="sm"></svg>
+        </button>
+      </c-card-body>
+    </c-card>
+  </c-container>
+  <c-container class="pt-2 justify-content-start">
+    <button cButton shape="rounded-circle" color="danger">
+      <svg cIcon name="cilSearch" size="sm"></svg>
+    </button>
+    <c-header-nav class="d-flex flex-wrap">
+      <c-nav-item *ngFor="let m of menus">
+        <a routerLink="/public/menu" cNavLink routerLinkActive="active">{{m.title}}</a>
+      </c-nav-item>
+    </c-header-nav>
+  </c-container> -->
 
   <!-- <c-header-divider></c-header-divider> -->
   <!-- <c-container>
@@ -87,7 +110,9 @@
           {{m.name}}
         </a>
       </li>
-      <li><hr cDropdownDivider></li>
+      <li>
+        <hr cDropdownDivider>
+      </li>
       <li>
         <a (click)="logout()" href="#" cDropdownItem>
           Logout

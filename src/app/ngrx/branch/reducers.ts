@@ -22,7 +22,7 @@ const _branchReducer = createReducer(
     })(),
 
     on(selectBranchAction, (state: Branch, action: { branch?: Branch }) => {
-        console.log(action.branch)
+        // console.log(action.branch)
         if(action && action.branch){
             localStorage.setItem(localStorageKey, JSON.stringify(action.branch))
             return {...action.branch };

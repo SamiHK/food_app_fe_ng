@@ -1,56 +1,117 @@
-<c-row>
+<c-row *ngIf="selectedCustomer else searchAndRegisterCustomerBlock">
     <c-col>
         <c-card>
-            <c-card-body>
-                <form>
-                    <fieldset class="d-flex flex-column gap-2">
-                        <div cFormFloating>
-                            <input cFormControl id="cellNumber" placeholder="Cell number">
-                            <label cLabel id="cellNumber">Cell number</label>
-                        </div>
-                        <c-row>
-                            <c-col class="d-flex justify-content-end">
-                                <button cButton>
-                                    <svg cIcon name="cilSearch"></svg>
-                                    Search
-                                </button>
-                            </c-col>
-                        </c-row>
-                    </fieldset>
-                </form>
-            </c-card-body>
-        </c-card>
-        <c-card class="mt-2">
-            <c-card-body>
-                <form>
-                    <fieldset class="d-flex flex-column gap-2">
-                        <c-row [gutter]="3">
-                            <c-col md="6" sm="12">
-                                <div cFormFloating>
-                                    <input cFormControl id="firstName" placeholder="First Name">
-                                    <label cLabel id="firstName">First Name</label>
-                                </div>
-                            </c-col>
-                            <c-col md="6" sm="12">
-                                <div cFormFloating>
-                                    <input cFormControl id="lastName" placeholder="Last Name">
-                                    <label cLabel id="lastName">Last Name</label>
-                                </div>
-                            </c-col>
-                        </c-row>
-                        <c-row>
-                            <c-col class="d-flex justify-content-end">
-                                <button cButton>
-                                    Register New Customer
-                                </button>
-                            </c-col>
-                        </c-row>
-                    </fieldset>
-                </form>
+            <c-card-body class="d-flex flex-row justify-content-between">
+                <span>
+                    <h4>{{selectedCustomer.fullName}}</h4>
+                    <span>{{selectedCustomer.cellNumber}}</span>
+                </span>
+                <span>
+                    <button cButton (click)="removeCustomer()" color="danger" size="sm" variant="ghost">
+                        <svg cIcon name="cilX" size="sm"></svg>
+                    </button>
+                </span>
             </c-card-body>
         </c-card>
     </c-col>
 </c-row>
+<ng-template #searchAndRegisterCustomerBlock>
+    <c-row>
+        <c-col>
+            <c-card>
+                <c-card-body>
+                    <form (ngSubmit)="search()">
+                        <fieldset class="d-flex flex-column gap-2">
+                            <div cFormFloating>
+                                <input cFormControl [(ngModel)]="searchQuery" (ngModelOptions)="{updateOn: 'submit'}"
+                                    id="searchQuery" name="searchQuery" placeholder="Search by cell number">
+                                <label cLabel id="searchQuery">Search by cell number</label>
+                            </div>
+                        </fieldset>
+                    </form>
+                </c-card-body>
+            </c-card>
+            <c-row *ngIf="searchResult && searchResult.length > 0 else customerRegisterBlock" class="mt-2">
+                <c-col>
+                    <c-card *ngFor="let c of searchResult">
+                        <c-card-body >
+                            <c-form-check>
+                                <input cFormCheckInput [(ngModel)]="selectedCustomerId" [value]="c.id" name="selectedCustomer" id="{{c.id}}" type="radio"/>
+                                <label cFormCheckLabel for="{{c.id}}">
+                                    <span>
+                                        <h6 *ngIf="c.fullName">{{c.fullName}}</h6>
+                                        <span>{{c.cellNumber}}</span>
+                                    </span>
+                                </label>
+                            </c-form-check>                            
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
+            <ng-template #customerRegisterBlock>
+                <c-card class="mt-2">
+                    <c-card-body *ngIf="isRegisterNewCustomer else registerNewCustomerForm">
+                        <form [formGroup]="registerCustomerForm" (ngSubmit)="registerCustomer()">
+                            <fieldset class="d-flex flex-column gap-2">
+                                <c-row [gutter]="3">
+                                    <c-col md="4" sm="12">
+                                        <div cFormFloating>
+                                            <input cFormControl formControlName="cellNumber" id="cellNumber"
+                                                [valid]="registerCustomerForm.controls['cellNumber'].valid"
+                                                placeholder="Cell Number">
+                                            <label cLabel id="cellNumber">Cell Number</label>
+                                        </div>
+                                    </c-col>
+                                    <c-col md="4" sm="6">
+                                        <div cFormFloating>
+                                            <input cFormControl formControlName="firstName" id="firstName"
+                                                placeholder="First Name">
+                                            <label cLabel id="firstName">First Name</label>
+                                        </div>
+                                    </c-col>
+                                    <c-col md="4" sm="6">
+                                        <div cFormFloating>
+                                            <input cFormControl formControlName="lastName" id="lastName"
+                                                placeholder="Last Name">
+                                            <label cLabel id="lastName">Last Name</label>
+                                        </div>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col class="d-flex justify-content-end gap-2">
+                                        <button (click)="closeCustomerRegisterForm()" cButton color="light" type="button">
+                                            Cancel
+                                        </button>
+                                        <button cButton type="submit">
+                                            Register
+                                        </button>
+                                    </c-col>
+                                </c-row>
+                            </fieldset>
+                        </form>
+                    </c-card-body>
+                    <ng-template #registerNewCustomerForm>
+                        <c-card-body>
+                            <c-row>
+                                <c-col class="d-flex justify-content-between">
+                                    <span class="items-align-center">
+                                        <span *ngIf="registerNewCustomerCellNumber">
+                                            Not Found <span class="fw-semibold">{{registerNewCustomerCellNumber}} ?</span>
+                                        </span>
+                                    </span>
+                                    <button cButton (click)="openCustomerRegisterForm()">
+                                        Register New Customer
+                                    </button>
+                                </c-col>
+                            </c-row>
+                        </c-card-body>
+                    </ng-template>
+                </c-card>
+                <!-- Customer Search of Form -->
+            </ng-template>
+        </c-col>
+    </c-row>
+</ng-template>
 <c-row class="mt-2">
     <c-col>
         <c-card>
@@ -59,7 +120,7 @@
                     <svg cIcon name="cilChevronLeft"></svg>
                     Cart
                 </a>
-                <a cButton variant="outline" routerLink="../address">
+                <a cButton (click)="updateCartCustomer()" variant="outline" routerLink="../address">
                     Continue
                     <svg cIcon name="cilChevronRight"></svg>
                 </a>

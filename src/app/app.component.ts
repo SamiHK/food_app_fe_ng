@@ -6,6 +6,7 @@ import { iconSubset } from './icons/icon-subset';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { brandSet, freeSet } from '@coreui/icons';
+import { AppSettingService } from './services/app-setting.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private titleService: Title,
-    private iconSetService: IconSetService
+    private iconSetService: IconSetService,
+    private appSettingService: AppSettingService
   ) {
     titleService.setTitle(this.title);
     // iconSet singleton
@@ -31,5 +33,9 @@ export class AppComponent implements OnInit {
         return;
       }
     });
+    this.appSettingService.get().subscribe(s => {
+      // console.log(s)
+      localStorage.setItem('appSetting', JSON.stringify(s))
+    })
   }
 }

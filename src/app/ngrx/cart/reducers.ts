@@ -1,11 +1,13 @@
 import { Action, createReducer, on } from "@ngrx/store";
+import { Address } from "src/app/models/address";
 import { Cart } from "src/app/models/cart";
+import { Customer } from "src/app/models/customer";
 import { MenuItem } from "src/app/models/menu";
-import { addItemToCartAction, changeDeliveryAction, emptyCartAction, reduceItemFromCartAction, removeItemFromCartAction } from "./actions";
+import { addItemToCartAction, changeCustomerAction, changeDeliveryAction, changeDeliveryAddressAction, emptyCartAction, reduceItemFromCartAction, removeCustomerAction, removeItemFromCartAction } from "./actions";
 
 const initialState = null;
 
-const _authReducer = createReducer(
+const _cartReducer = createReducer(
     (() => {
         if (initialState == null) {
             let cart = localStorage.getItem('cart');
@@ -92,13 +94,28 @@ const _authReducer = createReducer(
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),
-    on(changeDeliveryAction, (state: Cart) => {
-        let _cart = { ...state, isDelivery: !state.isDelivery }
+    on(changeCustomerAction, (state: Cart, action: Customer) => {
+        let _cart = { ...state, customer: { ...action } }
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
-    })
+    }),
+    on(removeCustomerAction, (state: Cart) => {
+        let _cart = { ...state, customer: undefined }
+        localStorage.setItem('cart', JSON.stringify(_cart))
+        return _cart
+    }),
+    on(changeDeliveryAction, (state: Cart) => {
+        let _cart = { ...state, isDelivery: !state.isDelivery, address: undefined }
+        localStorage.setItem('cart', JSON.stringify(_cart))
+        return _cart
+    }),
+    on(changeDeliveryAddressAction, (state: Cart, action: Address) => {
+        let _cart = { ...state, address: { ...action } }
+        localStorage.setItem('cart', JSON.stringify(_cart))
+        return _cart
+    }),
 )
 
-export function authReducer(state: any, action: Action) {
-    return _authReducer(state, action);
+export function cartReducer(state: any, action: Action) {
+    return _cartReducer(state, action);
 }

@@ -71,12 +71,20 @@ img {
             width: auto;
         }
     }
+    &.img-banner {
+        height: 360px;
+        width: 100vw;
+        object-fit: cover;
+    }
     &.img-md {
         height: 128px;
         width: 128px;
         object-fit: cover;    
         &.w-auto {
             width: auto;
+        }
+        &.w-100 {
+            width: 100%;
         }
     }
     &.img-lg {
@@ -111,4 +119,13 @@ img {
 .label-sm {
     margin-bottom: 0.275rem;
     font-size: 0.875rem
+}
+
+.fill-available {
+    &.mh {
+        min-height: -webkit-fill-available
+    }
+    &.mw {
+        min-width: -webkit-fill-available;
+    }
 }

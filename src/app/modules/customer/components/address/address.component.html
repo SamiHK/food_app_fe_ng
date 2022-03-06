@@ -1,0 +1,92 @@
+<c-row class="justify-content-center">
+    <c-col sm="12" md="6">
+        <c-row *ngIf="addresses" class="mt-2">
+            <c-col>
+                <c-card *ngFor="let a of addresses">
+                    <c-card-body>
+                        <c-form-check>
+                            <input cFormCheckInput [(ngModel)]="selectedAddress" [value]="a" name="selectedAddress"
+                                id="{{a.id}}" type="radio" />
+                            <label cFormCheckLabel for="{{a.id}}">
+                                <span>
+                                    <h6 *ngIf="a.formattedAddress">{{a.formattedAddress}}</h6>
+                                </span>
+                            </label>
+                        </c-form-check>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <c-row class="mt-2">
+            <c-col>
+                <c-card>
+                    <c-card-body>
+                        <form (ngSubmit)="save()">
+                            <fieldset class="d-flex flex-column gap-3">
+                                <div cFormFloating>
+                                    <input cFormControl [(ngModel)]="addressLine1" id="addressLine1" name="addressLine1"
+                                        placeholder="Address">
+                                    <label cLabel id="addressLine1">Address</label>
+                                </div>
+                                <c-row [gutter]="3">
+                                    <c-col md="4" sm="12">
+                                        <div cFormFloating>
+                                            <select cSelect [(ngModel)]="selectedCountry" id="country" name="country"
+                                                placeholder="Country">
+                                                <option value="undefined"></option>
+                                                <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+                                            </select>
+                                            <label cLabel id="country">Country</label>
+                                        </div>
+                                    </c-col>
+                                    <c-col md="4" sm="12">
+                                        <div cFormFloating>
+                                            <select cSelect [(ngModel)]="selectedState" id="state" name="state"
+                                                placeholder="State" [disabled]="!selectedCountry">
+                                                <option value="undefined"></option>
+                                                <option *ngFor="let s of states" [ngValue]="s">{{s.name}}</option>
+                                            </select>
+                                            <label cLabel id="state">State</label>
+                                        </div>
+                                    </c-col>
+                                    <c-col md="4" sm="12">
+                                        <div cFormFloating>
+                                            <select cSelect [(ngModel)]="selectedCity" id="city" name="city"
+                                                placeholder="City" [disabled]="!selectedState">
+                                                <option value="undefined"></option>
+                                                <option *ngFor="let c of cities" [ngValue]="c">{{c.name}}</option>
+                                            </select>
+                                            <label cLabel id="city">City</label>
+                                        </div>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col class="d-flex justify-content-end">
+                                        <button cButton type="submit">
+                                            Register New Address
+                                        </button>
+                                    </c-col>
+                                </c-row>
+                            </fieldset>
+                        </form>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <c-row class="mt-2">
+            <c-col>
+                <c-card>
+                    <c-card-body class="d-flex justify-content-between">
+                        <a cButton variant="outline" routerLink="../customer">
+                            <svg cIcon name="cilChevronLeft"></svg>
+                            Customer
+                        </a>
+                        <a cButton (click)="createOrder()" variant="outline">
+                            Create Order
+                        </a>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+    </c-col>
+</c-row>

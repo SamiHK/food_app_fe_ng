@@ -8,6 +8,7 @@
     </c-col>
 </c-row>
 <ng-template #loadedBlock>
+    
     <c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="justify-content-center">
         <c-col *ngFor="let m of menus" class="d-flex justify-content-stretch">
             <c-card class="d-flex flex-row flex-grow-1" [routerLink]="[m.id]"

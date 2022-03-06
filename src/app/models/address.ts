@@ -1,10 +1,14 @@
 export class Address {
+    id?: string
+    city?: City
     cityId?: number
     cityName?: string
-    cityShortName?:string
+    cityShortName?: string
+    state?: State
     stateId?: number
     stateName?: string
     stateShortName?: string
+    country?: Country
     countryId?: number
     countryName?: string
     countryShortName?: string
@@ -12,16 +16,18 @@ export class Address {
     formattedAddress?: string
     lat?: number = 0
     lng?: number = 0
-    private _latLng?: { lat: number; lng: number}  | undefined
-    public get latLng(): { lat: number; lng: number}  | undefined {
+    private _latLng?: { lat: number; lng: number }
+    public get latLng(): { lat: number; lng: number } | undefined {
         return this._latLng
     }
-    public set latLng(value: { lat: number; lng: number}  | undefined) {
-        if(value){
+
+    public set latLng(value: { lat: number; lng: number } | undefined) {
+        if (value) {
             this.lat = value.lat,
             this.lng = value.lng
+        } else {
+            this._latLng = value
         }
-        this._latLng = value
     }
     addressComponents?: any
 }
@@ -41,6 +47,7 @@ export class State {
 }
 
 export class Country {
+    id?: number
     shortName?: string
     name?: string
 }

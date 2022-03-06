@@ -291,7 +291,7 @@ export class MapModalComponent implements OnInit {
   updateGeoLocation(l: google.maps.GeocoderResult) {
     // console.log(this.search);
     // console.log(l.formatted_address);
-    console.log(l)
+    // console.log(l)
     let areablock = this.getAreaBlock(l);
     // console.log(areablock);
     // let area = this.getArea(l);
@@ -347,7 +347,7 @@ export class MapModalComponent implements OnInit {
       )
       .map(ac => ac.long_name)
       .join(", ")
-    console.log(this.addressLine1)
+    // console.log(this.addressLine1)
 
     // if (this.location && areablock) {
     //   this.location.areaBlock = areablock?.long_name
@@ -377,6 +377,7 @@ export class MapModalComponent implements OnInit {
     this.isSave = false
     this.bsModalRef.hide()
   }
+  
   save() {
     this.isSave = true;
     if(this.address)

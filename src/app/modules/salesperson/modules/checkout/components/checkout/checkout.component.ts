@@ -11,9 +11,7 @@ import { addItemToCartAction, changeDeliveryAction, reduceItemFromCartAction, re
 })
 export class CheckoutComponent implements OnInit {
   cart = new Cart();
-
   constructor(private cartStore: Store<{ 'cart': Cart }>) { }
-
   ngOnInit(): void {
     this.cartStore.select('cart').forEach(c => this.cart = c);
   }

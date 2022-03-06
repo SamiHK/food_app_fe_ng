@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Address } from '../models/address';
 import { AuthUser } from '../models/auth-user';
 import { CommonService } from './common.service';
 
@@ -20,5 +21,19 @@ export class UserService {
       catchError(this.commonService.catchError)
     );
   }
+
+  getAddress() {
+    return this.http.get<Address[]>(`${this.BASE_URL}/addresses`)
+      .pipe(
+        catchError(this.commonService.catchError))
+  }
+
+  saveAddress(address: Address) {
+    return this.http.post<Address>(`${this.BASE_URL}/addresses`, address)
+      .pipe(
+        catchError(this.commonService.catchError))
+  }
+
+
   
 }

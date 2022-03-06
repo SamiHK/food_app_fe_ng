@@ -5,7 +5,7 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { DealsComponent } from './modules/deals/components/deals/deals.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { StoreModule } from '@ngrx/store';
-import { authReducer } from 'src/app/ngrx/cart/reducers';
+import { cartReducer } from 'src/app/ngrx/cart/reducers';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AlertModule, BadgeModule, ButtonModule, CardModule, FooterModule, FormModule, GridModule, HeaderModule, NavModule, SidebarModule, SpinnerModule, TableModule, TooltipModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
@@ -14,6 +14,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BranchModalComponent } from './components/branch-modal/branch-modal.component';
 import { branchReducer } from 'src/app/ngrx/branch/reducers';
 import { FormsModule } from '@angular/forms';
+import { CartComponent } from './components/cart/cart.component';
+import { AddressComponent } from './components/address/address.component';
+import { OrderDoneComponent } from './components/order-done/order-done.component';
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -41,12 +44,14 @@ const NGX_BOOTSTRAP_MODULES = [
     DealsComponent,
     CustomerComponent,
     CheckoutComponent,
-    BranchModalComponent
+    BranchModalComponent,
+    CartComponent,
+    AddressComponent,
+    OrderDoneComponent
   ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    StoreModule.forFeature('branch', branchReducer), 
     FormsModule,
     ... CORE_UI_MODULES, ... NGX_BOOTSTRAP_MODULES
   ]

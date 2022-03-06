@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
-import { City, Country, State } from 'src/app/models/address';
+import { Address, City, Country, State } from 'src/app/models/address';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 
@@ -40,7 +40,7 @@ export class AddressService {
       stateId: stateId,
     }
 
-    if(q){
+    if (q) {
       params.q = q
     }
 
@@ -50,6 +50,19 @@ export class AddressService {
       .pipe(
         catchError(this.commonService.catchError)
       );
+  }
+
+  getCustomerAddress(customerId: string) {
+    return this.http.get<Address[]>(`${this.BASE_URL}/customer/${customerId}`)
+      .pipe(
+        catchError(this.commonService.catchError))
+  }
+
+
+  saveCustomerAddress(customerId: string, address: Address) {
+    return this.http.post<Address>(`${this.BASE_URL}/customer/${customerId}`, address)
+      .pipe(
+        catchError(this.commonService.catchError))
   }
 
 }

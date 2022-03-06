@@ -1,0 +1,60 @@
+<c-row>
+    <c-col>
+        <c-nav variant="pills">
+            <c-nav-item *ngFor="let n of statusNav">
+                <a [routerLink]="['../', n.status]" cNavLink routerLinkActive="active">
+                    {{ n.status }}
+                    <span>
+                        <c-badge color="danger" shape="rounded-pill">
+                            {{n.total}}
+                        </c-badge>
+                    </span>
+                </a>
+            </c-nav-item>
+            <!-- <c-nav-item>
+                <a routerLink="../PENDING" cNavLink routerLinkActive="active">
+                    Pending
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="../ACCEPTED" cNavLink routerLinkActive="active">
+                    Accepted
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="../IN_PROGRESS" cNavLink routerLinkActive="active">
+                    In Progress
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="../DISPATCH" cNavLink routerLinkActive="active">
+                    Dispatched
+                </a>
+            </c-nav-item>
+            <c-nav-item>
+                <a routerLink="../DELIVERED" cNavLink routerLinkActive="active">
+                    Delivered
+                </a>
+            </c-nav-item> -->
+        </c-nav>
+    </c-col>
+</c-row>
+<c-row class="mt-3">
+    <c-col>
+        <c-card *ngFor="let o of orders">
+            <c-card-body>
+                <h6>
+                    <span *ngIf="o.customer else orderIdBlock">
+                        {{o.customer.fullName}}
+                    </span>
+                    <ng-template #orderIdBlock>
+                        {{o.id}}
+                    </ng-template>
+                </h6>
+                <span *ngIf="o.isDelivery && o.address">
+                    <span>{{o.address.formattedAddress}}</span>
+                </span>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
