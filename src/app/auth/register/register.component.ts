@@ -43,8 +43,8 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.form.value)
         .forEach(v => {
           console.log(v)
-          if (v && v.error) {
-            this.alertService.showAlert(this.alert, v.error.name, v.error.message);
+          if (v && v.code) {
+            this.alertService.showAlert(this.alert, v.code, v.message);
           } else if (v) {
             this.alertService.showAlert(this.alert, 'LOGGED IN', `Welcome back ${v.fullName}`, 'success');
             this.store.dispatch(loginAction(v));
@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
         })
         .catch(e => {
           console.log(e);
+          this.alertService.showAlert(this.alert, e.code, e.message);
         })
         .finally(() => this.isLoading = false);
     }

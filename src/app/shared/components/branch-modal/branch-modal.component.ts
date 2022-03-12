@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Branch } from 'src/app/models/branch';
-import { BranchService } from '../../services/branch.service';
+import { BranchService } from 'src/app/modules/customer/services/branch.service';
 
 @Component({
   selector: 'app-branch-modal',
@@ -22,7 +22,7 @@ export class BranchModalComponent implements OnInit {
   }
 
   loadingBranches = false;
-  loadBranches(){
+  loadBranches() {
     this.loadingBranches = true;
     this.branchService.getBranches()
       .forEach(v => this.branches = v)
@@ -33,8 +33,12 @@ export class BranchModalComponent implements OnInit {
 
   compareBranch(b1: Branch, b2: Branch): boolean {
     return b1 && b2 ? b1.id === b2.id : b1 === b2;
-}
+  }
 
-  
+  select(){
+    if(this.selectedBranch){
+      this.bsModalRef.hide();
+    }
+  }
 
 }

@@ -12,18 +12,28 @@ export class OrderService {
 
   private BASE_URL = `${environment.BASE_URL}/order`;
 
-  constructor(private http: HttpClient, private commonService: CommonService) {}
+  constructor(private http: HttpClient, private commonService: CommonService) { }
 
   create(order: Order) {
     return this.http.post<Order>(`${this.BASE_URL}`, order)
-    .pipe(
-      catchError(this.commonService.catchError)
-    );
+      .pipe(
+        catchError(this.commonService.catchError)
+      );
   }
 
   get(status?: string) {
     return this.http.get<Order[]>(`${this.BASE_URL}/${status}`)
-    .pipe(
-      catchError(this.commonService.catchError)
-    );
-  }}
+      .pipe(
+        catchError(this.commonService.catchError)
+      );
+  }
+
+  getById(id: number) {
+    return this.http.get<Order>(`${this.BASE_URL}/detail/${id}`)
+      .pipe(
+        catchError(this.commonService.catchError)
+      );
+  }
+}
+
+

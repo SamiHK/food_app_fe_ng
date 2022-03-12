@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OrderRoutingModule } from './order-routing.module';
-import { OrderListComponent } from './components/order-list/order-list.component';
-import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { CheckoutRoutingModule } from './checkout-routing.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule, TooltipModule } from '@coreui/angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconModule } from '@coreui/icons-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddressComponent } from './components/address/address.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 const CORE_UI_MODULES = [
   CardModule,
   ButtonModule,
@@ -21,7 +23,7 @@ const CORE_UI_MODULES = [
   PerfectScrollbarModule,
   NavModule,
   SidebarModule,
-  TooltipModule,
+  TooltipModule
 ]
 
 const NGX_BOOTSTRAP_MODULES = [
@@ -31,13 +33,15 @@ const NGX_BOOTSTRAP_MODULES = [
 
 @NgModule({
   declarations: [
-    OrderListComponent,
-    OrderDetailComponent
+    AddressComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
-    OrderRoutingModule,
-    ...CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES
+    CheckoutRoutingModule,
+    ... CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES,
+    FormsModule, ReactiveFormsModule
   ]
 })
-export class OrderModule { }
+export class CheckoutModule { }

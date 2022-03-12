@@ -24,7 +24,7 @@ export class AppSettingService {
     let appSettingString = localStorage.getItem('appSetting');
     if (appSettingString) {
       let appSetting = JSON.parse(appSettingString);
-      console.log(appSetting)
+      // console.log(appSetting)
       let setting = appSetting.find((s:any) => s.propKey == key)
       if(setting){
         return setting.propVal

@@ -56,10 +56,14 @@ export const salespersonNavItems: INavData[] = [
 export const customerNavItems: INavData[] = [
     {
         name: 'Profile',
-        url: '/public/profile'
+        url: '/customer/profile'
     },
     {
         name: 'Orders',
-        url: '/public/orders'
+        url: '/customer/orders'
+    },
+    {
+        name: 'Checkout',
+        url: '/customer/checkout'
     },
 ]

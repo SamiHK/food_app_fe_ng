@@ -20,8 +20,9 @@ const routes: Routes = [
   },
   {
     path: 'public',
+    component: WebLayoutComponent,
     children: [
-      { path: '', loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule) }
+      { path: '', loadChildren: () => import('./modules/public-web/public-web.module').then(m => m.PublicWebModule) }
     ]
   },
   {
@@ -48,6 +49,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
+      },
+      {
+        path: 'customer',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/customer/customer.module').then((m) => m.CustomerModule)
       },
       {
         path: 'widgets',

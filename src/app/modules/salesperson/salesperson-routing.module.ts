@@ -5,8 +5,8 @@ import { SalespersonComponent } from './components/salesperson/salesperson.compo
 const routes: Routes = [{
   path: '', component: SalespersonComponent, children: [
     { path: 'dashboard', data: { title: 'Dashboard' }, loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
-    { path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule) },
-    { path: 'order', loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
+    // { path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule) },
+    { path: 'order', data: { title: 'Order' }, loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
     { path: 'checkout', data: { title: 'Checkout' }, loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule) },
   ]
 }];

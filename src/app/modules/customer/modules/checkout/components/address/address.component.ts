@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Address, City, Country, State } from 'src/app/models/address';
 import { Branch } from 'src/app/models/branch';
@@ -7,7 +8,7 @@ import { Order, OrderStatus } from 'src/app/models/order';
 import { changeDeliveryAddressAction, emptyCartAction } from 'src/app/ngrx/cart/actions';
 import { UserService } from 'src/app/services/user.service';
 import { AddressService } from 'src/app/shared/services/address.service';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from '../../../../services/order.service';
 
 @Component({
   selector: 'app-address',
@@ -20,6 +21,7 @@ export class AddressComponent implements OnInit {
     private addressService: AddressService,
     private userService: UserService,
     private orderService: OrderService,
+    private router: Router,
     private branchStore: Store<{ 'branch': Branch }>,
     private cartStore: Store<{ 'cart': Cart }>) { }
 
@@ -43,8 +45,14 @@ export class AddressComponent implements OnInit {
     })
     this.branchStore.select('branch').subscribe(b => {
       // console.log('branch')
-      // console.log(b)
+      console.log(b)
       this.branch = b
+      if (this.branch && this.branch.countryId) {
+        this.selectedCountry = this.countries?.find(f => f.id == this.branch?.countryId)
+        if (this.selectedCountry && this.selectedCountry.shortName) {
+          this.loadStates(this.selectedCountry?.shortName)
+        }
+      }
       // if(this.)
     })
   }
@@ -52,8 +60,12 @@ export class AddressComponent implements OnInit {
   loadAddresses() {
     this.userService.getAddress().subscribe(r => {
       this.addresses = r;
-      if (this.cart && this.cart.address) {
-        this.selectedAddress = this.addresses?.find(a => a.id == this.cart?.address?.id)
+      if (this.addresses) {
+        if (this.cart && this.cart.address) {
+          this.selectedAddress = this.addresses?.find(a => a.id == this.cart?.address?.id)
+        } else {
+          this.selectedAddress = this.addresses[0]
+        }
       }
     })
   }
@@ -73,7 +85,6 @@ export class AddressComponent implements OnInit {
   }
 
   onSelectCountry(event: any) {
-    // console.log(this.country)
     if (event && this.selectedCountry && this.selectedCountry.shortName) {
       this.loadStates(this.selectedCountry.shortName)
     }
@@ -125,7 +136,17 @@ export class AddressComponent implements OnInit {
         stateName: this.selectedState?.name,
         countryName: this.selectedCountry?.name,
         latLng: undefined
-      }).subscribe(r => this.addresses = r)
+      }).subscribe(r => {
+        this.addresses = r;
+        this.addressLine1 = undefined;
+        if (this.addresses) {
+          if (!this.selectedAddress) {
+            this.selectedAddress = this.addresses[0]
+          } else {
+            this.selectedAddress = this.addresses?.find(a => a.id == this.selectedAddress?.id)
+          }
+        }
+      })
     }
   }
 
@@ -133,17 +154,20 @@ export class AddressComponent implements OnInit {
   createOrder() {
     if (this.cart && this.selectedAddress) {
       let order: Order = { ...this.cart, subTotal: this.cart.total, address: this.selectedAddress }
-      order.orderStatus = OrderStatus.IN_PROGRESS
+      // console.log(this.cart)
+      console.log(order)
+      order.orderStatus = OrderStatus.PENDING
       this.orderService.create(order)
         .forEach(r => {
           this.cartStore.dispatch(emptyCartAction())
-          
+          // console.log(r)
+          this.router.navigate(['/public', 'orders', 'detail', r.id])
         }).catch(e => {
           if (this.selectedAddress)
             this.cartStore.dispatch(changeDeliveryAddressAction(this.selectedAddress))
         })
     } else {
-      
+
     }
 
   }

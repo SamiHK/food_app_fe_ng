@@ -21,6 +21,11 @@ export class WebLayoutComponent implements OnInit {
     suppressScrollX: true,
   };
 
+  slides = [
+    { title: '', src : 'assets/img/2.jpg' },
+    { title: '', src : 'assets/img/3.jpg' },
+    { title: '', src : 'assets/img/4.jpg' }
+  ]
   user?: AuthUser;
   cart?: Cart;
   totalItemsInCart = 0;
@@ -84,7 +89,7 @@ export class WebLayoutComponent implements OnInit {
     if (this.user && this.user.role && this.user.role == USER_ROLE.SALES_PERSON) {
       this.router.navigate(['salesperson', 'checkout']);
     } else {
-      this.router.navigate(['public', 'checkout']);
+      this.router.navigate(['customer', 'checkout']);
     }
   }
 

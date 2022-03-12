@@ -31,7 +31,7 @@
                                 <c-row [gutter]="3">
                                     <c-col md="4" sm="12">
                                         <div cFormFloating>
-                                            <select cSelect [(ngModel)]="selectedCountry" id="country" name="country"
+                                            <select cSelect [(ngModel)]="selectedCountry" (ngModelChange)="onSelectCountry($event)" id="country" name="country"
                                                 placeholder="Country">
                                                 <option value="undefined"></option>
                                                 <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
@@ -41,7 +41,7 @@
                                     </c-col>
                                     <c-col md="4" sm="12">
                                         <div cFormFloating>
-                                            <select cSelect [(ngModel)]="selectedState" id="state" name="state"
+                                            <select cSelect [(ngModel)]="selectedState"  (ngModelChange)="onSelectState($event)" id="state" name="state"
                                                 placeholder="State" [disabled]="!selectedCountry">
                                                 <option value="undefined"></option>
                                                 <option *ngFor="let s of states" [ngValue]="s">{{s.name}}</option>
@@ -81,7 +81,7 @@
                             <svg cIcon name="cilChevronLeft"></svg>
                             Customer
                         </a>
-                        <a cButton (click)="createOrder()" variant="outline">
+                        <a cButton (click)="createOrder()" variant="outline" [disabled]="!selectedAddress">
                             Create Order
                         </a>
                     </c-card-body>

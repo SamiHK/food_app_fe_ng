@@ -44,7 +44,7 @@
         <c-card *ngFor="let o of orders">
             <c-card-body>
                 <h6>
-                    <span *ngIf="o.customer else orderIdBlock">
+                    <span *ngIf="o.customer else orderIdBlock" class="">
                         {{o.customer.fullName}}
                     </span>
                     <ng-template #orderIdBlock>

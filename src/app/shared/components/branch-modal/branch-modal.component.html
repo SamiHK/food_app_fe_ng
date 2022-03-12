@@ -1,0 +1,17 @@
+<c-card class="position-relative">
+    <img src="assets/img/brand/coreui-pro-angular-black.v1.svg" cImg thumbnail rounded fluid class="position-absolute translate-middle top-0 start-50 bg-white rounded-1">
+    <c-card-body class="d-flex flex-column gap-2 mt-3 p-5">
+        <!-- <div class="d-flex justify-content-between">
+            <h4>Select Branch</h4>
+            <button cButtonClose (click)="bsModalRef.hide()"></button>
+        </div> -->
+        <div class="">
+            <label cLabel="">Select Branch</label>
+            <select cSelect [compareWith]="compareBranch" [(ngModel)]="selectedBranch">
+                <option [ngValue]="null" >None</option>
+                <option *ngFor="let b of branches" [ngValue]="b">{{b.name}}</option>
+            </select>
+        </div>
+        <button cButton (click)="select()" color="danger">Select</button>
+    </c-card-body>
+</c-card>

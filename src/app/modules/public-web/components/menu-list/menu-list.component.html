@@ -1,5 +1,5 @@
-<c-row *ngIf="isLoading else loadedBlock">
-    <c-col >
+<c-row *ngIf="isLoading else loadedBlock" class="mt-4">
+    <c-col>
         <c-card>
             <c-card-body>
                 <c-spinner size="sm"></c-spinner> Loading...
@@ -8,8 +8,7 @@
     </c-col>
 </c-row>
 <ng-template #loadedBlock>
-    
-    <c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="justify-content-center">
+    <c-row [lg]="3" [md]="2" [sm]="1" [gutter]="3" class="mt-4 justify-content-center">
         <c-col *ngFor="let m of menus" class="d-flex justify-content-stretch">
             <c-card class="d-flex flex-row flex-grow-1" [routerLink]="[m.id]"
                 [ngClass]="{'text-muted': !m.isAvailable}">

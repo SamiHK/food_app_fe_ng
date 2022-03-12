@@ -1,9 +1,10 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { Address } from "src/app/models/address";
+import { Branch } from "src/app/models/branch";
 import { Cart } from "src/app/models/cart";
 import { Customer } from "src/app/models/customer";
 import { MenuItem } from "src/app/models/menu";
-import { addItemToCartAction, changeCustomerAction, changeDeliveryAction, changeDeliveryAddressAction, emptyCartAction, reduceItemFromCartAction, removeCustomerAction, removeItemFromCartAction } from "./actions";
+import { addItemToCartAction, changeBranchAction, changeCustomerAction, changeDeliveryAction, changeDeliveryAddressAction, emptyCartAction, reduceItemFromCartAction, removeCustomerAction, removeItemFromCartAction } from "./actions";
 
 const initialState = null;
 
@@ -89,8 +90,8 @@ const _cartReducer = createReducer(
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),
-    on(emptyCartAction, () => {
-        let _cart = { items: [], total: 0 };
+    on(emptyCartAction, (state: Cart) => {
+        let _cart = { items: [], total: 0, branch: state.branch, branchId: state.branchId };
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),
@@ -111,6 +112,11 @@ const _cartReducer = createReducer(
     }),
     on(changeDeliveryAddressAction, (state: Cart, action: Address) => {
         let _cart = { ...state, address: { ...action } }
+        localStorage.setItem('cart', JSON.stringify(_cart))
+        return _cart
+    }),
+    on(changeBranchAction, (state: Cart, action: Branch) => {
+        let _cart = { ...state, branch: { ...action }, branchId: action.id }
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),

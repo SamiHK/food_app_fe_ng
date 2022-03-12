@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthUser } from 'src/app/models/auth-user';
 import { environment } from 'src/environments/environment';
+import { customerNavItems } from '../web-layout/_nav';
 import { adminNavItems, managerNavItems, navItems, salespersonNavItems } from './_nav';
 
 @Component({
@@ -33,6 +34,7 @@ export class DefaultLayoutComponent implements OnInit {
           case 'ADMIN': this.navItems = adminNavItems; break;
           case 'MANAGER': this.navItems = managerNavItems; break;
           case 'SALES_PERSON': this.navItems = salespersonNavItems; break;
+          case 'CUSTOMER': this.navItems = customerNavItems; break;
           // default: 
         }
       }

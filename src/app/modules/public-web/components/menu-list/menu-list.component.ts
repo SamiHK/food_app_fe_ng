@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Branch } from 'src/app/models/branch';
 import { Menu } from 'src/app/models/menu';
-import { MenuService } from '../services/menu.service';
+import { MenuService } from '../../../customer/modules/menu/services/menu.service';
 
 @Component({
   selector: 'app-menu-list',

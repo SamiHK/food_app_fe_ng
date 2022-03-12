@@ -10,10 +10,11 @@ import { Manager } from 'src/app/models/manager';
 import { Menu } from 'src/app/models/menu';
 import { SalesPerson } from 'src/app/models/sales-person';
 import { USER_ROLE } from 'src/app/models/user';
-import { BranchModalComponent } from 'src/app/modules/customer/components/branch-modal/branch-modal.component';
 import { MenuService } from 'src/app/modules/customer/modules/menu/services/menu.service';
 import { logoutAction } from 'src/app/ngrx/auth/actions';
 import { selectBranchAction } from 'src/app/ngrx/branch/actions';
+import { changeBranchAction } from 'src/app/ngrx/cart/actions';
+import { BranchModalComponent } from 'src/app/shared/components/branch-modal/branch-modal.component';
 import { CommonModalService } from 'src/app/shared/services/common-modal.service';
 import { adminNavItems, managerNavItems, salespersonNavItems } from '../../default-layout/_nav';
 import { customerNavItems } from '../_nav';
@@ -51,6 +52,7 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private mService: MenuService,
+    private cartStore: Store<{ 'cart': Cart }>,
     private authStore: Store<{ 'auth': AuthUser }>,
     private branchStore: Store<{ 'branch': Branch }>) {
     super();
@@ -66,11 +68,15 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
             this.userMenus = managerNavItems;
             let m = v as Manager;
             this.branchStore.dispatch(selectBranchAction({ branch: m.branch }));
+            if (m.branch)
+              this.cartStore.dispatch(changeBranchAction(m.branch))
             break;
           case 'SALES_PERSON':
             this.userMenus = salespersonNavItems;
             let s = v as SalesPerson;
             this.branchStore.dispatch(selectBranchAction({ branch: s.branch }));
+            if (s.branch)
+              this.cartStore.dispatch(changeBranchAction(s.branch))
             break;
           case 'CUSTOMER': this.userMenus = customerNavItems;
         }
@@ -78,7 +84,12 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
         this.userMenus = [];
       }
     });
-    this.branchStore.select('branch').forEach(v => this.branch = v);
+    this.branchStore.select('branch').forEach(v => {
+      this.branch = v;
+      if(!this.branch || !this.branch.id){
+        this.selectBranch()
+      }
+    });
     this.loadMenus();
   }
 
@@ -113,6 +124,8 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
               || this.branch.id != branchModalRef.content.selectedBranch.id) {
               this.branch = branchModalRef.content.selectedBranch;
               this.branchStore.dispatch(selectBranchAction({ branch: this.branch }))
+              if (this.branch)
+                this.cartStore.dispatch(changeBranchAction(this.branch))
             }
           }
         }

@@ -6,6 +6,9 @@ export class Branch {
     id: string = '';
     name: string = '';
     code: string = '';
+    cityId?: number
+    stateId?: number
+    countryId?: number
     address?: Address
     branchFullAddress?: string
     branchAddressLine1?: string

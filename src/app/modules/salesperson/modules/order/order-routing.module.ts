@@ -11,9 +11,11 @@ import { OrderPendingComponent } from './components/order-pending/order-pending.
 import { OrderReturnedComponent } from './components/order-returned/order-returned.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'PENDING', },
-  { path: ':status', component: OrderListComponent, data: { title: 'List' }, },
-  { path: 'detail/:id', component: OrderDetailComponent, data: { title: 'Detail' } }
+  { path: '', children: [
+    { path: '', redirectTo: 'PENDING' },
+    { path: ':status', component: OrderListComponent, data: { title: 'List' }, },
+    { path: 'detail/:id', component: OrderDetailComponent, data: { title: 'Detail' } }
+  ]}
 ];
 
 @NgModule({

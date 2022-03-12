@@ -7,7 +7,6 @@ import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridMod
 import { IconModule } from '@coreui/icons-angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { MenuListComponent } from './menu-list/menu-list.component';
 import { MenuItemListComponent } from './menu-item-list/menu-item-list.component';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 
@@ -38,7 +37,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     MenuComponent,
-    MenuListComponent,
     MenuItemListComponent
   ],
   imports: [
