@@ -14,6 +14,8 @@ import { addItemToCartAction } from 'src/app/ngrx/cart/actions';
 })
 export class MenuItemsComponent implements OnInit {
 
+  searchQuery?: string
+  isSearch = false;
   menus: Menu[] = []
   cart: Cart = new Cart();
 
@@ -52,11 +54,11 @@ export class MenuItemsComponent implements OnInit {
       })
     })
   }
-  
+
   addToCart(m: MenuItem) {
     this.cartStore.dispatch(addItemToCartAction(m))
   }
-  
+
   ngAfterViewChecked(): void {
     // console.log(this.cards)
     if (!this.selectedMenu) {
@@ -65,7 +67,7 @@ export class MenuItemsComponent implements OnInit {
         let element = document.querySelector(`#menu-${menuId}`);
         if (element) {
           element.scrollIntoView({
-            behavior: 'smooth', block: 'center'
+            behavior: 'smooth', block: 'start'
           })
           this.selectedMenu = true;
         }
@@ -73,9 +75,11 @@ export class MenuItemsComponent implements OnInit {
       }
     }
   }
-  
+
   isLoading = false;
+  branch? : Branch
   async loadMenuItems(b?: Branch) {
+    this.branch = b
     this.isLoading = true;
     let params = {};
     if (b && b.id) {
@@ -86,6 +90,53 @@ export class MenuItemsComponent implements OnInit {
     await this.mService.getMenusAndItems(params).forEach(v => this.menus = v);
     this.isLoading = false;
     this.updateMenuByCart()
+  }
+
+  isSearching = false;
+  async searchMenu() {
+    if(this.searchQuery){
+      this.isSearching = true;
+      let params: {
+        q: string, branchId?: string
+      } = {
+        q: this.searchQuery
+      };
+  
+      if (this.branch && this.branch.id) {
+        params.branchId = this.branch.id
+      }
+      await this.mService.getMenusAndItems(params).forEach(v => this.menus = v);
+      this.isSearching = false;
+      this.updateMenuByCart()
+    }
+  }
+
+  hideSearch(){
+    this.isSearch = false;
+    this.loadMenuItems(this.branch)
+    this.searchQuery = undefined;
+  }
+
+  searchToggle() {
+    if(!this.isSearch){
+      this.isSearch = true
+    } else {
+      this.searchMenu();
+    }
+  }
+
+
+
+  scrollTo(menu: Menu) {
+    if (menu && menu.id) {
+      let element = document.querySelector(`#menu-${menu.id}`);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth', block: 'start'
+        })
+        this.selectedMenu = true;
+      }
+    }
   }
 
 }

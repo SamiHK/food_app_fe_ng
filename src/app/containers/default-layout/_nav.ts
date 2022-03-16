@@ -17,6 +17,10 @@ export const adminNavItems: INavData[] = [
     name: 'Menu',
     url: '/admin/menu'
   },
+  {
+    name: 'Setting',
+    url: '/admin/settings'
+  },
 ]
 export const managerNavItems: INavData[] = [
   {
@@ -35,6 +39,7 @@ export const managerNavItems: INavData[] = [
 
 export const salespersonNavItems: INavData[] = [
   {
+    
     name: 'Dashboard',
     url: '/salesperson/dashboard'
   },
@@ -51,6 +56,22 @@ export const salespersonNavItems: INavData[] = [
     url: '/salesperson/checkout'
   }
 ]
+
+export const customerNavItems: INavData[] = [
+  {
+    name: 'Profile',
+    url: '/customer/profile'
+  },
+  {
+    name: 'Orders',
+    url: '/customer/orders'
+  },
+  {
+    name: 'Checkout',
+    url: '/customer/checkout'
+  },
+]
+
 
 export const navItems: INavData[] = [
   {

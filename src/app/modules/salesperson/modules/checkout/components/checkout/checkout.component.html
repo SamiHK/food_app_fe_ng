@@ -48,19 +48,32 @@
                 <router-outlet></router-outlet>
             </c-col>
             <c-col md="4" sm="12">
+                <c-card *ngIf="cart.customer">
+                    <c-card-body>
+                        <span class="fw-semibold">{{cart.customer.fullName}}</span>
+                    </c-card-body>
+                </c-card>
                 <c-card>
                     <c-card-body>
                         <span class="d-flex justify-content-between">
-                            <span class="">total items</span>
+                            <span class="">Total items</span>
                             <span class="fw-semibold">{{cart.items.length}}</span>
                         </span>
                         <span class="d-flex justify-content-between">
-                            <span class="">total</span>
-                            <span class="fw-semibold">{{cart.total | currency : 'Pkr '}}</span>
+                            <span class="">Sub total</span>
+                            <span class="fw-semibold">{{cart.subTotal | currency : 'Pkr '}}</span>
                         </span>
                         <span class="d-flex justify-content-between">
-                            <span class="">delivery charges</span>
-                            <span class="fw-semibold">Pkr 100</span>
+                            <span class="">Delivery charges</span>
+                            <span class="fw-semibold">{{deliveryCharges | currency: 'Pkr '}}</span>
+                        </span>
+                        <span class="d-flex justify-content-between" *ngIf="gst">
+                            <span class="">GST</span>
+                            <span class="fw-semibold">{{gst}}% - {{cart.subTotal * (gst / 100)  | currency: 'Pkr '}}</span>
+                        </span>
+                        <span class="d-flex justify-content-between">
+                            <span class="fw-bold">Total</span>
+                            <span class="fw-bold">{{total  | currency: 'Pkr '}}</span>
                         </span>
                     </c-card-body>
                 </c-card>

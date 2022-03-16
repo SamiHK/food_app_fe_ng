@@ -11,50 +11,21 @@
                     </span>
                 </a>
             </c-nav-item>
-            <!-- <c-nav-item>
-                <a routerLink="../PENDING" cNavLink routerLinkActive="active">
-                    Pending
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a routerLink="../ACCEPTED" cNavLink routerLinkActive="active">
-                    Accepted
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a routerLink="../IN_PROGRESS" cNavLink routerLinkActive="active">
-                    In Progress
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a routerLink="../DISPATCH" cNavLink routerLinkActive="active">
-                    Dispatched
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a routerLink="../DELIVERED" cNavLink routerLinkActive="active">
-                    Delivered
-                </a>
-            </c-nav-item> -->
         </c-nav>
     </c-col>
 </c-row>
 <c-row class="mt-3">
     <c-col>
-        <c-card *ngFor="let o of orders">
+        <c-card *ngFor="let o of page.items">
             <c-card-body>
-                <h6>
-                    <span *ngIf="o.customer else orderIdBlock" class="">
-                        {{o.customer.fullName}}
-                    </span>
-                    <ng-template #orderIdBlock>
-                        {{o.id}}
-                    </ng-template>
-                </h6>
-                <span *ngIf="o.isDelivery && o.address">
-                    <span>{{o.address.formattedAddress}}</span>
-                </span>
+                <app-order-list-item-card [cart]="o"></app-order-list-item-card>
             </c-card-body>
         </c-card>
+    </c-col>
+</c-row>
+<c-row class="mt-2" *ngIf="page && page.items && page.items.length > 0">
+    <c-col>
+        <pagination *ngIf="page && page.items && page.items.length > 0" [totalItems]="page.total"
+            [(ngModel)]="page.number" [itemsPerPage]="page.size" (pageChanged)="onPageChange($event)"></pagination>
     </c-col>
 </c-row>

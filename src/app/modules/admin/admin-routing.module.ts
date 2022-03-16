@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'manager', data: { title: 'Manager'},  loadChildren: () => import('./modules/manager/manager.module').then(m => m.ManagerModule)},
   { path: 'branch', data: { title: 'Branch'}, loadChildren: () => import('./modules/branch/branch.module').then(m => m.BranchModule)},
   { path: 'menu', data: { title: 'Menu'}, loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule)},
+  { path: 'settings', data: { title: 'Settings'}, loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule)},
 ];
 
 @NgModule({

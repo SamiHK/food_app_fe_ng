@@ -4,17 +4,32 @@
     </c-card-body>
 </c-card>
 <ng-template #loadedBlock>
-    <c-container class="mb-4 d-flex p-2 justify-content-start bg-white header-sticky">
-        <button cButton shape="rounded-circle" color="danger" size="">
-            <svg cIcon name="cilSearch" size="sm"></svg>
-        </button>
-        <c-nav class="d-flex flex-wrap">
+    <c-container class="mb-4 d-flex p-2 flex-md-row flex-column justify-content-start bg-white sticky-top">
+        <form class="d-flex flex-row gap-2" (ngSubmit)="searchToggle()">
+            <span *ngIf="isSearch" class="d-flex flex-grow-1">
+                <c-input-group>
+                    <button cButton type="button" (click)="hideSearch()" color="light" size="">
+                        <svg cIcon name="cilX" size="sm"></svg>
+                    </button>
+                    <input cFormControl [(ngModel)]="searchQuery" name="searchQuery" placeholder="Search">
+                </c-input-group>
+            </span>
+            <span>
+                <button cButton type="submit" color="danger" size="">
+                    <c-spinner size="sm" *ngIf="isSearching else searchIconBlock"></c-spinner>
+                    <ng-template #searchIconBlock>
+                        <svg cIcon name="cilSearch" size="sm"></svg>
+                    </ng-template>
+                </button>
+            </span>
+        </form>
+        <c-nav class="">
             <c-nav-item *ngFor="let m of menus">
-                <a routerLink="/public/menu" cNavLink routerLinkActive="active">{{m.title}}</a>
+                <a (click)="scrollTo(m)" cNavLink routerLinkActive="active">{{m.title}}</a>
             </c-nav-item>
         </c-nav>
     </c-container>
-    <c-row [gutter]="3" *ngFor="let m of menus; let i = index" class="mb-4 animate fade-in">
+    <c-row [gutter]="3" *ngFor="let m of menus; let i = index" class="mb-4 animate fade-in" id="menu-{{m.id}}">
         <c-col class="">
             <span class="d-flex gap-2 align-items-center py-2">
                 <h4 class="my-0">{{m.title}}</h4>
@@ -22,7 +37,7 @@
                     <c-badge color="dark" class="">Not Available</c-badge>
                 </span>
             </span>
-            <c-card id="menu-{{m.id}}" class="mb-2 d-flex justify-content-between">
+            <c-card class="mb-2 d-flex justify-content-between">
                 <img [cCardImg] [src]="m.primaryImg" class="img-lg w-auto"
                     [ngClass]="{'img-gray-scale': !m.isAvailable}">
                 <c-card-body *ngIf="m.description" class="align-self-stretch">

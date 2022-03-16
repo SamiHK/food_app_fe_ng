@@ -8,6 +8,7 @@ import { Order, OrderStatus } from 'src/app/models/order';
 import { changeDeliveryAddressAction, emptyCartAction } from 'src/app/ngrx/cart/actions';
 import { UserService } from 'src/app/services/user.service';
 import { AddressService } from 'src/app/shared/services/address.service';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 import { OrderService } from '../../../../services/order.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class AddressComponent implements OnInit {
     private addressService: AddressService,
     private userService: UserService,
     private orderService: OrderService,
+    private settingService: AppSettingService,
     private router: Router,
     private branchStore: Store<{ 'branch': Branch }>,
     private cartStore: Store<{ 'cart': Cart }>) { }
@@ -45,7 +47,7 @@ export class AddressComponent implements OnInit {
     })
     this.branchStore.select('branch').subscribe(b => {
       // console.log('branch')
-      console.log(b)
+      // console.log(b)
       this.branch = b
       if (this.branch && this.branch.countryId) {
         this.selectedCountry = this.countries?.find(f => f.id == this.branch?.countryId)
@@ -153,15 +155,25 @@ export class AddressComponent implements OnInit {
 
   createOrder() {
     if (this.cart && this.selectedAddress) {
-      let order: Order = { ...this.cart, subTotal: this.cart.total, address: this.selectedAddress }
+      let order: Order = { ...this.cart, subTotal: this.cart.subTotal, address: this.selectedAddress }
       // console.log(this.cart)
-      console.log(order)
-      order.orderStatus = OrderStatus.PENDING
+      // console.log(order)
+      order.status = OrderStatus.PENDING
+      order.gst = this.settingService.getGST()
+      order.deliveryCharges = this.settingService.getDeliveryCharges()
+
+      if(order.total){
+        if(order.subTotal && order.gst)
+          order.total += (order.subTotal * (order.gst / 100))
+        if(order.subTotal && order.deliveryCharges)
+          order.total += order.deliveryCharges;
+      }
+
       this.orderService.create(order)
         .forEach(r => {
           this.cartStore.dispatch(emptyCartAction())
           // console.log(r)
-          this.router.navigate(['/public', 'orders', 'detail', r.id])
+          this.router.navigate(['/customer', 'orders', 'detail', r.id])
         }).catch(e => {
           if (this.selectedAddress)
             this.cartStore.dispatch(changeDeliveryAddressAction(this.selectedAddress))

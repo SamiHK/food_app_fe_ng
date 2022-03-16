@@ -1,5 +1,10 @@
 <c-row class="justify-content-center">
     <c-col sm="12" md="6">
+        <c-row>
+            <c-col>
+                <h4>Select Address</h4>
+            </c-col>
+        </c-row>
         <c-row *ngIf="addresses" class="mt-2">
             <c-col>
                 <c-card *ngFor="let a of addresses">
@@ -77,9 +82,9 @@
             <c-col>
                 <c-card>
                     <c-card-body class="d-flex justify-content-between">
-                        <a cButton variant="outline" routerLink="../customer">
+                        <a cButton variant="outline" routerLink="../">
                             <svg cIcon name="cilChevronLeft"></svg>
-                            Customer
+                            Cart
                         </a>
                         <a cButton (click)="createOrder()" variant="outline" [disabled]="!selectedAddress">
                             Create Order

@@ -51,7 +51,7 @@ const routes: Routes = [
           import('./modules/salesperson/salesperson.module').then((m) => m.SalespersonModule)
       },
       {
-        path: 'customer',
+        path: 'customer', 
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/customer/customer.module').then((m) => m.CustomerModule)

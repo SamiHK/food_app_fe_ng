@@ -13,7 +13,9 @@ export class Order {
     items: MenuItem[] = []
     subTotal = 0;
     deliveryCharges?: number;
-    orderStatus?: OrderStatus
+    gst?: number;
+    total?: number;
+    status?: OrderStatus
     createdOn?: string
     updatedOn?: string
 }

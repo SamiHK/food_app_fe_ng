@@ -25,7 +25,7 @@ const _cartReducer = createReducer(
 
     on(addItemToCartAction, (state: Cart, action: MenuItem) => {
         let _items: MenuItem[] = [];
-        let _total = 0;
+        let _subTotal = 0;
         if (state.items && state.items.length > 0) {
             let added = false;
             state.items.forEach(ci => {
@@ -35,21 +35,21 @@ const _cartReducer = createReducer(
                     _ci.total = _ci.quantity * _ci.price;
                     added = true;
                 }
-                _total += _ci.total;
+                _subTotal += _ci.total;
                 _items.push(_ci)
             })
             if (!added) {
                 let _i = { ...action, quantity: 1, total: action.price };
-                _total += _i.total;
+                _subTotal += _i.total;
                 _items.push(_i)
             }
         } else {
             let _i = { ...action, quantity: 1, total: action.price };
-            _total += _i.total;
+            _subTotal += _i.total;
             _items.push(_i)
         }
 
-        let _cart = { ...state, items: _items, total: _total };
+        let _cart = { ...state, items: _items, subTotal: _subTotal };
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart;
         // state.username = action.username;
@@ -57,7 +57,7 @@ const _cartReducer = createReducer(
 
     on(reduceItemFromCartAction, (state: Cart, action: { id: number }) => {
         let _items: MenuItem[] = [];
-        let _total = 0;
+        let _subTotal = 0;
         state.items.forEach(i => {
             let _i = { ...i };
             if (_i.id == action.id && _i.quantity > 0) {
@@ -66,32 +66,32 @@ const _cartReducer = createReducer(
 
             }
             _i.total = _i.quantity * _i.price;
-            _total += _i.total;
+            _subTotal += _i.total;
             if (_i.quantity > 0)
                 _items.push(_i)
         })
-        let _cart = { ...state, items: _items, total: _total }
+        let _cart = { ...state, items: _items, subTotal: _subTotal }
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),
 
     on(removeItemFromCartAction, (state: Cart, action: { id: number }) => {
         let _items: MenuItem[] = [];
-        let _total = 0;
+        let _subTotal = 0;
         state.items.forEach(i => {
             let _i = { ...i };
             if (_i.id != action.id) {
                 _i.total = _i.quantity * _i.price;
-                _total += _i.total;
+                _subTotal += _i.total;
                 _items.push(_i)
             }
         })
-        let _cart = { ...state, items: _items, total: _total }
+        let _cart = { ...state, items: _items, total: _subTotal }
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),
     on(emptyCartAction, (state: Cart) => {
-        let _cart = { items: [], total: 0, branch: state.branch, branchId: state.branchId };
+        let _cart = { items: [], subTotal: 0, branch: state.branch, branchId: state.branchId };
         localStorage.setItem('cart', JSON.stringify(_cart))
         return _cart
     }),

@@ -17,8 +17,8 @@ const routes: Routes = [
   //     { path: 'menu', loadChildren: () => import('./modules/menu/menu.module').then(m => m.MenuModule) },
   //   ]
   // },
-  { path: 'orders', loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
-  { path: 'checkout', loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule) },
+  { path: 'orders', data: { title: 'Orders' }, loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
+  { path: 'checkout', data: { title: 'Checkout' }, loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule) },
   // {
   //   path: '', component: DefaultLayoutComponent, children: [
   //     {

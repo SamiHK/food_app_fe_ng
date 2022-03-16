@@ -7,6 +7,7 @@ import { Cart } from 'src/app/models/cart';
 import { Order, OrderStatus } from 'src/app/models/order';
 import { OrderService } from 'src/app/modules/salesperson/services/order.service';
 import { changeDeliveryAction, changeDeliveryAddressAction, emptyCartAction } from 'src/app/ngrx/cart/actions';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 import { AddressService } from 'src/app/shared/services/address.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class AddressComponent implements OnInit, OnDestroy {
   constructor(
     private addressService: AddressService,
     private orderService: OrderService,
+    private settingService: AppSettingService,
     private branchStore: Store<{ 'branch': Branch }>,
     private cartStore: Store<{ 'cart': Cart }>) { }
 
@@ -139,8 +141,18 @@ export class AddressComponent implements OnInit, OnDestroy {
 
   createOrder() {
     if (this.cart) {
-      let order: Order = { ...this.cart, subTotal: this.cart.total, address: this.selectedAddress }
-      order.orderStatus = OrderStatus.ACCEPTED
+      let order: Order = { ...this.cart, subTotal: this.cart.subTotal, address: this.selectedAddress }
+      order.status = OrderStatus.ACCEPTED
+      order.gst = this.settingService.getGST()
+      order.deliveryCharges = this.settingService.getDeliveryCharges()
+
+      if(order.total){
+        if(order.subTotal && order.gst)
+          order.total += (order.subTotal * (order.gst / 100))
+        if(order.subTotal && order.deliveryCharges)
+          order.total += order.deliveryCharges;
+      }
+
       this.orderService.create(order)
         .forEach(r => {
           this.cartStore.dispatch(emptyCartAction())

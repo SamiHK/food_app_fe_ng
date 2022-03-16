@@ -70,7 +70,7 @@
             <span class="fw-bolder">
                 CHECKOUT
             </span>
-            <span class="fs-6 fw-bolder">{{cart.total | currency: 'Pkr. '}}</span>
+            <span class="fs-6 fw-bolder">{{cart.subTotal | currency: 'Pkr. '}}</span>
             <!-- <c-badge color="danger" class="">
             </c-badge> -->
         </button>
@@ -81,8 +81,7 @@
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
     <!--app-header-->
-    <app-web-header [user]="user" [totalItemsInCart]="totalItemsInCart" class="d-print-none header header-sticky"
-        position="sticky" sidebarId="sidebar"></app-web-header>
+    <app-web-header [user]="user" [totalItemsInCart]="totalItemsInCart" class="header" sidebarId="sidebar"></app-web-header>
 
     <c-carousel [interval]="5000" transition="slide" class="">
         <c-carousel-indicators></c-carousel-indicators>

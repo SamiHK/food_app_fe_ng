@@ -15,6 +15,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule, TabsModule, TooltipModule } from '@coreui/angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconModule } from '@coreui/icons-angular';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -33,6 +36,7 @@ const CORE_UI_MODULES = [
 ]
 
 const NGX_BOOTSTRAP_MODULES = [
+  PaginationModule.forRoot(),
   ModalModule.forRoot()
 ]
 
@@ -52,7 +56,9 @@ const NGX_BOOTSTRAP_MODULES = [
   imports: [
     CommonModule,
     OrderRoutingModule,
-    ...CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES
+    ...CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES,
+    FormsModule,
+    SharedModule
   ]
 })
 export class OrderModule { }

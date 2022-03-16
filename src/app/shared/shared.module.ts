@@ -18,6 +18,9 @@ import { InputSwitchComponent } from './components/input-switch/input-switch.com
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
 import { AuthErrorModalComponent } from './components/auth-error-modal/auth-error-modal.component';
 import { BranchModalComponent } from './components/branch-modal/branch-modal.component';
+import { IconModule } from '@coreui/icons-angular';
+import { OrderListItemCardComponent } from './components/order-list-item-card/order-list-item-card.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 const CORE_UI_MODULES = [FormModule,
   ButtonModule,
@@ -26,7 +29,8 @@ const CORE_UI_MODULES = [FormModule,
   CardModule,
   ButtonModule,
   AlertModule,
-  TableModule
+  TableModule,
+  IconModule
 ]
 
 @NgModule({
@@ -44,6 +48,8 @@ const CORE_UI_MODULES = [FormModule,
     ConfirmDeleteModalComponent,
     AuthErrorModalComponent,
     BranchModalComponent,
+    OrderListItemCardComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +63,8 @@ const CORE_UI_MODULES = [FormModule,
   exports: [
     InputErrorComponent, UserProfileFormComponent, UploadButtonComponent,
     InputSwitchComponent,
-    UserActiveSwitchComponent, XcButtonDirective, SalespersonListComponent
+    UserActiveSwitchComponent, XcButtonDirective, SalespersonListComponent,
+    OrderListItemCardComponent
   ]
 })
 export class SharedModule { }

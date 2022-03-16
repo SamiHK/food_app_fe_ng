@@ -4,9 +4,14 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'PENDING', },
-  { path: ':status', component: OrderListComponent, data: { title: 'List' }, },
-  { path: 'detail/:id', component: OrderDetailComponent, data: { title: 'Detail' } }
+  // { path: '', redirectTo: 'PENDING', },
+  {
+    path: '', children: [
+      { path: '', redirectTo: 'PENDING' },
+      { path: ':status', component: OrderListComponent, data: { title: 'List' }, },
+      { path: 'detail/:id', component: OrderDetailComponent, data: { title: 'Detail' } }
+    ]
+  }
 ];
 
 @NgModule({

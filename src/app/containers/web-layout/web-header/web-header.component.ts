@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterState } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent, INavData } from '@coreui/angular';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -15,9 +15,7 @@ import { logoutAction } from 'src/app/ngrx/auth/actions';
 import { selectBranchAction } from 'src/app/ngrx/branch/actions';
 import { changeBranchAction } from 'src/app/ngrx/cart/actions';
 import { BranchModalComponent } from 'src/app/shared/components/branch-modal/branch-modal.component';
-import { CommonModalService } from 'src/app/shared/services/common-modal.service';
-import { adminNavItems, managerNavItems, salespersonNavItems } from '../../default-layout/_nav';
-import { customerNavItems } from '../_nav';
+import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../../default-layout/_nav';
 // import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../_nav';
 
 const EXCLUDE_BRANCH_SELECT_ROLES = [USER_ROLE.MANAGER.toString(), USER_ROLE.SALES_PERSON.toString()];
@@ -86,7 +84,7 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
     });
     this.branchStore.select('branch').forEach(v => {
       this.branch = v;
-      if(!this.branch || !this.branch.id){
+      if (!this.branch || !this.branch.id) {
         this.selectBranch()
       }
     });

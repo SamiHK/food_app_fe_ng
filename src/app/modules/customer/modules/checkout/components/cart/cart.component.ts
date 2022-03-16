@@ -19,10 +19,10 @@ export class CartComponent implements OnInit {
   get total(){
     this._total = 0
     if(this.cart){
-      this._total += this.cart.total
+      this._total += this.cart.subTotal
     }
     if(this.gst){
-      this._total += this.cart.total * (this.gst/100)
+      this._total += this.cart.subTotal * (this.gst/100)
     }
     if(this.deliveryCharges){
       this._total += this.deliveryCharges

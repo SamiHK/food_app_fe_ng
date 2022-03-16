@@ -1,86 +1,100 @@
 <c-row class="justify-content-center mt-3">
-    <c-col sm="12" md="6">
+    <c-col sm="12" md="8">
         <c-row>
             <c-col>
-                <c-card *ngFor="let i of cart.items; let first = first">
-                    <c-card-body class="d-flex flex-column gap-2">
-                        <span class="d-flex justify-content-between align-items-center">
-                            <span class="d-flex align-items-center gap-2">
-                                <img cImg class="img-xs rounded-3" [src]="i.primaryImg">
-                                <h6 class="mb-0">{{i.title}}</h6>
+                <h4>Cart</h4>
+            </c-col>
+        </c-row>
+        <ng-template #emptyCartBlock>
+            <c-card>
+                <c-card-body>
+                    Cart is Empty
+                </c-card-body>
+            </c-card>
+        </ng-template>
+        <ng-template [ngIf]="cart && cart.items && cart.items.length > 0" [ngIfElse]="emptyCartBlock">
+            <c-row >
+                <c-col>
+                    <c-card *ngFor="let i of cart.items; let first = first">
+                        <c-card-body class="d-flex flex-column gap-2">
+                            <span class="d-flex justify-content-between align-items-center">
+                                <span class="d-flex align-items-center gap-2">
+                                    <img cImg class="img-xs rounded-3" [src]="i.primaryImg">
+                                    <h6 class="mb-0">{{i.title}}</h6>
+                                </span>
+                                <span class="d-flex">
+                                    <button (click)="removeItemFromCart(i)" cButton color="danger" variant="ghost"
+                                        size="sm">
+                                        <svg cIcon name="cilX" size="sm"></svg>
+                                    </button>
+                                </span>
                             </span>
-                            <span class="d-flex">
-                                <button (click)="removeItemFromCart(i)" cButton color="danger" variant="ghost"
-                                    size="sm">
-                                    <svg cIcon name="cilX" size="sm"></svg>
-                                </button>
+                            <span class="d-flex gap-2 align-items-center">
+                                <small *ngIf="i.unit" class="fw-regular">{{i.unit}} x </small>
+                                <small *ngIf="i.price" class="fs-6 fw-regular">{{i.price | currency:'Pkr. '}}</small>
                             </span>
-                        </span>
-                        <span class="d-flex gap-2 align-items-center">
-                            <small *ngIf="i.unit" class="fw-regular">{{i.unit}} x </small>
-                            <small *ngIf="i.price" class="fs-6 fw-regular">{{i.price | currency:'Pkr. '}}</small>
-                        </span>
-                        <span class="d-flex justify-content-between align-items-center">
-                            <span class="align-items-center">
-                                <button cButton (click)="reduceItemInCart(i)" size="sm" color="danger"
-                                    class="rounded-0 rounded-start">
-                                    <svg cIcon name="cilMinus" size="sm"></svg>
-                                </button>
-                                <a cButton color="light" class="border broder-0 rounded-0" size="sm">
-                                    {{i.quantity}}
-                                </a>
-                                <button cButton (click)="addItemToCart(i)" size="sm" color="danger"
-                                    class="rounded-0 rounded-end">
-                                    <svg cIcon name="cilPlus" size="sm"></svg>
-                                </button>
+                            <span class="d-flex justify-content-between align-items-center">
+                                <span class="align-items-center">
+                                    <button cButton (click)="reduceItemInCart(i)" size="sm" color="danger"
+                                        class="rounded-0 rounded-start">
+                                        <svg cIcon name="cilMinus" size="sm"></svg>
+                                    </button>
+                                    <a cButton color="light" class="border broder-0 rounded-0" size="sm">
+                                        {{i.quantity}}
+                                    </a>
+                                    <button cButton (click)="addItemToCart(i)" size="sm" color="danger"
+                                        class="rounded-0 rounded-end">
+                                        <svg cIcon name="cilPlus" size="sm"></svg>
+                                    </button>
+                                </span>
+                                <span>
+                                    <c-badge color="danger" size="sm">
+                                        <small class="fs-6 fw-semibold">{{i.total | currency: 'Pkr. '}}</small>
+                                    </c-badge>
+                                </span>
                             </span>
-                            <span>
-                                <c-badge color="danger" size="sm">
-                                    <small class="fs-6 fw-semibold">{{i.total | currency: 'Pkr. '}}</small>
+                        </c-card-body>
+                    </c-card>
+                    <c-card>
+                        <c-card-body>
+                            <span class="d-flex justify-content-between">
+                                <span>Sub total</span>
+                                <span class="fw-semibold">{{cart.subTotal | currency: 'Pkr '}}</span>
+                            </span>
+                            <span *ngIf="deliveryCharges" class="d-flex justify-content-between">
+                                <span>Delivery Charges</span>
+                                <span class="fw-semibold">{{deliveryCharges | currency: 'Pkr '}}</span>
+                            </span>
+                            <span *ngIf="gst" class="d-flex justify-content-between">
+                                <span>GST</span>
+                                <span class="fw-semibold">({{gst}}%) - {{cart.subTotal * (gst/100) | currency: 'Pkr '}}</span>
+                            </span>
+                            <span *ngIf="gst" class="d-flex justify-content-between">
+                                <span class="fw-semibold">Total</span>
+                                <c-badge color="danger">
+                                    <span class="fs-6 fw-semibold">{{total | currency: 'Pkr. '}}</span>
                                 </c-badge>
                             </span>
-                        </span>
-                    </c-card-body>
-                </c-card>
-                <c-card>
-                    <c-card-body>
-                        <span class="d-flex justify-content-between">
-                            <span>Sub total</span>
-                            <span class="fw-semibold">{{cart.total | currency: 'Pkr '}}</span>
-                        </span>
-                        <span *ngIf="deliveryCharges" class="d-flex justify-content-between">
-                            <span>Delivery Charges</span>
-                            <span class="fw-semibold">{{deliveryCharges | currency: 'Pkr '}}</span>
-                        </span>
-                        <span *ngIf="gst" class="d-flex justify-content-between">
-                            <span>GST</span>
-                            <span class="fw-semibold">({{gst}}%) - {{cart.total * (gst/100) | currency: 'Pkr '}}</span>
-                        </span>
-                        <span *ngIf="gst" class="d-flex justify-content-between">
-                            <span class="fw-semibold">Total</span>
-                            <c-badge color="danger">
-                                <span class="fs-6 fw-semibold">{{total | currency: 'Pkr. '}}</span>
-                            </c-badge>
-                        </span>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-        <c-row class="mt-2">
-            <c-col>
-                <c-card>
-                    <c-card-body class="d-flex justify-content-between">
-                        <a cButton variant="outline" routerLink="/public/menu">
-                            <svg cIcon name="cilChevronLeft"></svg>
-                            Add Item
-                        </a>
-                        <a cButton variant="outline" routerLink="address">
-                            Continue
-                            <svg cIcon name="cilChevronRight"></svg>
-                        </a>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
+            <c-row class="mt-2">
+                <c-col>
+                    <c-card>
+                        <c-card-body class="d-flex justify-content-between">
+                            <a cButton variant="outline" routerLink="/public/menu">
+                                <svg cIcon name="cilChevronLeft"></svg>
+                                Add Item
+                            </a>
+                            <a cButton variant="outline" routerLink="../address">
+                                Continue
+                                <svg cIcon name="cilChevronRight"></svg>
+                            </a>
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
+        </ng-template>
     </c-col>
 </c-row>

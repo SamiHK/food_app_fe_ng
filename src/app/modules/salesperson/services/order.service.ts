@@ -21,8 +21,12 @@ export class OrderService {
     );
   }
 
-  get(status?: string) {
-    return this.http.get<Order[]>(`${this.BASE_URL}/${status}`)
+  get(status?: string, page: number = 1) {
+    return this.http.get<Order[]>(`${this.BASE_URL}/${status}`, {
+      params: {
+        page: page
+      }
+    })
     .pipe(
       catchError(this.commonService.catchError)
     );

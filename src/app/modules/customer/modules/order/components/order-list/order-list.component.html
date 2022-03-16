@@ -1,1 +1,35 @@
-<p>order-list works!</p>
+<c-row>
+    <c-col>
+        <c-nav variant="pills">
+            <c-nav-item *ngFor="let n of statusNav">
+                <a [routerLink]="['../', n.status]" cNavLink routerLinkActive="active">
+                    {{ n.status }}
+                    <span>
+                        <c-badge color="danger" shape="rounded-pill">
+                            {{n.total}}
+                        </c-badge>
+                    </span>
+                </a>
+            </c-nav-item>
+        </c-nav>
+    </c-col>
+</c-row>
+<c-row class="mt-3">
+    <c-col>
+        <c-card *ngFor="let o of orders">
+            <c-card-body>
+                <h6>
+                    <span *ngIf="o.customer else orderIdBlock" class="">
+                        {{o.customer.fullName}}
+                    </span>
+                    <ng-template #orderIdBlock>
+                        {{o.id}}
+                    </ng-template>
+                </h6>
+                <span *ngIf="o.isDelivery && o.address">
+                    <span>{{o.address.formattedAddress}}</span>
+                </span>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
