@@ -4,13 +4,6 @@ import { CommonModule } from '@angular/common';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
-import { OrderPendingComponent } from './components/order-pending/order-pending.component';
-import { OrderAcceptedComponent } from './components/order-accepted/order-accepted.component';
-import { OrderInProgressComponent } from './components/order-in-progress/order-in-progress.component';
-import { OrderDispatchComponent } from './components/order-dispatch/order-dispatch.component';
-import { OrderCanceledComponent } from './components/order-canceled/order-canceled.component';
-import { OrderDeliveredComponent } from './components/order-delivered/order-delivered.component';
-import { OrderReturnedComponent } from './components/order-returned/order-returned.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule, TabsModule, TooltipModule } from '@coreui/angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -45,13 +38,6 @@ const NGX_BOOTSTRAP_MODULES = [
   declarations: [
     OrderListComponent,
     OrderDetailComponent,
-    OrderPendingComponent,
-    OrderAcceptedComponent,
-    OrderInProgressComponent,
-    OrderDispatchComponent,
-    OrderCanceledComponent,
-    OrderDeliveredComponent,
-    OrderReturnedComponent
   ],
   imports: [
     CommonModule,

@@ -31,4 +31,23 @@ export class OrderService {
       catchError(this.commonService.catchError)
     );
   }
+  
+  changeStatus(orderId: number, status: String){
+    return this.http.put<any>(`${this.BASE_URL}/status`, {
+      orderId: orderId,
+      status: status
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+
+  }
+
+  getById(id: number) {
+    return this.http.get<Order>(`${this.BASE_URL}/detail/${id}`)
+      .pipe(
+        catchError(this.commonService.catchError)
+      );
+  }
+
 }

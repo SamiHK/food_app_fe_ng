@@ -129,3 +129,7 @@ img {
         min-width: -webkit-fill-available;
     }
 }
+
+[ng-reflect-router-link]:hover {
+    cursor: pointer;
+}

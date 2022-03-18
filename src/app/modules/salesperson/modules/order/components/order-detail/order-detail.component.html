@@ -1,1 +1,66 @@
-<p>order-detail works!</p>
+<c-row>
+    <c-col>
+        <h4>Order Details</h4>
+    </c-col>
+</c-row>
+<c-row>
+    <c-col *ngIf="order">
+        <c-card>
+            <c-card-body>
+                <span class="d-flex justify-content-between">
+                    <h4>#{{order.id}}</h4>
+                    <span class="d-flex flex-column">
+                        <span class="d-flex justify-content-end">
+                            <c-badge size="sm" color="danger">{{order.status}}</c-badge>
+                        </span>
+                        <span class="fw-light">
+                            <span *ngIf="order.updatedOn else createdOnBlock">{{order.updatedOn | date:'hh:mm a  / MMM dd, YYYY'}}</span>
+                            <ng-template #createdOnBlock>
+                                <span>{{order.createdOn | date:'hh:mm a  / MMM dd, YYYY' }}</span>
+                            </ng-template>
+                        </span>
+                    </span>
+                </span>
+                <span *ngIf="order.branch">
+                    <span>{{order.branch.name}}</span>
+                </span>
+            </c-card-body>
+        </c-card>
+        <h4 class="mt-2">Items</h4>
+        <c-card *ngFor="let i of order.items">
+            <c-card-body>
+                <span class="d-flex justify-content-between">
+                    <h6>{{i.title}}</h6>
+                    <span class="fw-semibold">
+                        <!-- <c-badge color="primary" > -->
+                            {{i.total | currency: 'Pkr '}}
+                        <!-- </c-badge> -->
+                    </span>
+                </span>
+                <span>
+                    {{i.price | currency: 'Pkr '}} {{i.unit}} x <span class="fw-semibold">{{i.quantity}}</span>
+                </span>
+            </c-card-body>
+        </c-card>
+        <c-card>
+            <c-card-body>
+                <span class="d-flex justify-content-between">
+                    <span class="fw-semibold">Sub total</span>
+                    <span class="fw-bold">{{order.subTotal | currency: 'Pkr '}}</span>
+                </span>
+                <span *ngIf="order.gst" class="d-flex justify-content-between">
+                    <span class="fw-semibold">GST</span>
+                    <span class="fw-bold">{{order.gst}}% - {{order.subTotal * (order.gst/100) | currency: 'Pkr '}}</span>
+                </span>
+                <span class="d-flex justify-content-between">
+                    <span class="fw-semibold">Total</span>
+                    <span>
+                        <c-badge color="danger">
+                            <span class="fs-6 fw-bold">{{order.total | currency: 'Pkr '}}</span>
+                        </c-badge>
+                    </span>
+                </span>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

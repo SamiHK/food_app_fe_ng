@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Order } from 'src/app/models/order';
+import { Page } from 'src/app/models/page';
 import { OrderService } from 'src/app/modules/customer/services/order.service';
 
 @Component({
@@ -9,10 +10,9 @@ import { OrderService } from 'src/app/modules/customer/services/order.service';
   styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent implements OnInit {
-
+  
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
-
-  orders?: Order[]
+  page: Page<Order> = new Page()
   statusNav: {
     status: string
     total: number
@@ -23,13 +23,28 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.forEach((p: Params) => {
-      console.log(p)
-      console.log(p['status'])
-      this.orderService.get(p['status']).forEach(r => {
-        this.statusNav = r.orderStatus
-        this.orders = r.orders;
-      })
+      this.loadOrders(1, p['status'])
     })
+  }
+
+  isLoading = false;
+  status?: string;
+  async loadOrders(page?: number, status?: string) {
+    this.isLoading = true;
+    this.status = status;
+    await this.orderService.get(this.status, page).forEach(r => {
+      this.statusNav = r.orderStatus
+      this.page = r.page;
+    })
+    this.isLoading = false;
+  }
+
+  onPageChange(event: any) {
+    this.loadOrders(event.page, this.status)
+  }
+
+  cancelOrder(orderId: number){
+    this.orderService.cancelOrder(orderId).forEach(v => this.loadOrders())
   }
 
 }

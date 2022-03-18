@@ -21,6 +21,7 @@
                                 </span>
                             </span>
                             <p *ngIf="m.description" cCardText class="text-wrap">{{m.description}}</p>
+                            <span class="flex-grow-1"></span>
                             <span class="d-flex justify-content-between">
                                 <a cButton [routerLink]="[m.id]" color="light" size="sm" class="position-relative">
                                     <c-badge color="primary" shape="rounded-pill" class="position-absolute top-0 start-100 translate-middle">{{m.totalItems}}</c-badge>

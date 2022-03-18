@@ -35,6 +35,10 @@ export const managerNavItems: INavData[] = [
     name: 'Menu',
     url: '/manager/menu'
   },
+  {
+    name: 'Order',
+    url: '/manager/order'
+  },
 ]
 
 export const salespersonNavItems: INavData[] = [

@@ -1,42 +1,41 @@
-<c-row>
-    <c-col>
-        <c-nav variant="pills">
-            <c-nav-item *ngFor="let n of statusNav">
-                <a [routerLink]="['../', n.status]" cNavLink routerLinkActive="active">
-                    {{ n.status }}
-                    <span>
-                        <c-badge color="danger" shape="rounded-pill">
-                            {{n.total}}
-                        </c-badge>
-                    </span>
-                </a>
-            </c-nav-item>
-        </c-nav>
-    </c-col>
-</c-row>
 <c-row class="mt-3">
-    <c-col>
+    <ng-template #emptyBlock>
+        <c-col>
+            <c-card >
+                <c-card-body>
+                    Empty
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </ng-template>
+    <c-col *ngIf="(page && page.items && page.items.length > 0) else emptyBlock">
         <c-card *ngFor="let order of page.items">
-            <c-card-body [routerLink]="['../', 'detail', order.id]">
+            <c-card-body>
                 <span class="d-flex justify-content-between">
                     <span class="d-flex gap-2 flex-row">
                         <span class="fw-bold">
                             #{{order.id}}
                         </span>
                         <span class="d-flex flex-column">
-                            <span *ngIf="order.salesperson" class="fw-semibold">
-                                {{order.salesperson.fullName}}
+                            <span class="d-flex gap-2 align-items-center">
+                                <span *ngIf="order.salesperson" class="fw-semibold" [routerLink]="['/manager/salesperson', order.salesperson.id]">
+                                    {{order.salesperson.fullName}}
+                                </span>
+                                <small *ngIf="!order.isDelivery">
+                                    <c-badge color="info">
+                                        In Branch Order
+                                    </c-badge>
+                                </small>
                             </span>
-                            <span *ngIf="order.branch" class="fw-regular" cTooltip="Branch">
-                                <!-- <svg cIcon name="cilPhone"></svg> -->
-                                {{order.branch.name}}
+                            <span *ngIf="order.customer" class="d-flex flex-column">
+                                <span class="fw-regular">{{order.customer.fullName}}</span>
+                                <span class="fw-regular" cTooltip="Contant Number">
+                                    <svg cIcon name="cilPhone"></svg>
+                                    {{order.customer.cellNumber}}
+                                </span>
                             </span>
-                            <span *ngIf="order.customer" class="fw-regular" cTooltip="Contant Number">
-                                <svg cIcon name="cilPhone"></svg>
-                                {{order.customer.cellNumber}}
-                            </span>
-                            <span *ngIf="order.isDelivery && order.address" class="fw-regular" cTooltip="Delivery Address">
-                                <span class="">
+                            <span *ngIf="order.isDelivery" class="fw-regular" cTooltip="Delivery Address">
+                                <span class="" *ngIf="order.address">
                                     <svg cIcon name="cilLocationPin"></svg>
                                     {{order.address.formattedAddress}}
                                 </span>
@@ -44,6 +43,9 @@
                         </span>
                     </span>
                     <span class="d-flex flex-column align-items-end">
+                        <span>
+                            <c-badge color="danger">{{order.status}}</c-badge>
+                        </span>
                         <span class="fw-semibold">
                             {{order.total | currency: 'Pkr '}}
                         </span>
@@ -57,9 +59,6 @@
                     </span>
                 </span>
             </c-card-body>
-            <c-card-footer *ngIf="order.id && order.status == 'PENDING'" class="d-flex justify-content-end">
-                <button (click)="cancelOrder(order.id)" cButton color="danger" size="sm">Cancel</button>
-            </c-card-footer>
         </c-card>
     </c-col>
 </c-row>

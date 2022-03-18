@@ -1,40 +1,36 @@
 <ng-template [ngIf]="order">
-    <!-- <c-card>
-        <c-card-body> -->
-            <span class="d-flex justify-content-between">
-                <span class="d-flex gap-2 flex-row">
-                    <span class="fw-bold">
-                        #{{order.id}}
-                    </span>
-                    <span *ngIf="order.customer" class="d-flex flex-column">
-                        <span class="fw-semibold">
-                            {{order.customer.fullName}}
-                        </span>
-                        <span class="fw-regular" cTooltip="Cell Number">
-                            <svg cIcon name="cilPhone"></svg>
-                            {{order.customer.cellNumber}}
-                        </span>
-                        <span *ngIf="order.isDelivery && order.address" class="fw-regular" cTooltip="Address">
-                            <span class="">
-                                <svg cIcon name="cilLocationPin"></svg>
-                                {{order.address.formattedAddress}}
-                            </span>
-                        </span>
-                    </span>
+    <span class="d-flex justify-content-between">
+        <span class="d-flex gap-2 flex-row">
+            <span class="fw-bold">
+                #{{order.id}}
+            </span>
+            <span *ngIf="order.customer" class="d-flex flex-column">
+                <span class="fw-semibold">
+                    {{order.customer.fullName}}
                 </span>
-                <span class="d-flex flex-column align-items-end">
-                    <span class="fw-semibold">
-                        {{order.total | currency: 'Pkr '}}
-                    </span>
-                    <span class="d-flex gap-2 align-items-center">
-                        <svg cIcon name="cilClock"></svg>
-                        <small *ngIf="order.updatedOn else createdOnBlock">{{order.updatedOn | date:'hh:mm a / MMM dd, YYYY'}}</small>
-                        <ng-template #createdOnBlock>
-                            <small>{{order.createdOn | date:'hh:mm a / MMM dd, YYYY'}}</small>
-                        </ng-template>
+                <span class="fw-regular" cTooltip="Contact Number">
+                    <svg cIcon name="cilPhone"></svg>
+                    {{order.customer.cellNumber}}
+                </span>
+                <span *ngIf="order.isDelivery && order.address" class="fw-regular" cTooltip="Delivery Address">
+                    <span class="">
+                        <svg cIcon name="cilLocationPin"></svg>
+                        {{order.address.formattedAddress}}
                     </span>
                 </span>
             </span>
-        <!-- </c-card-body>
-    </c-card> -->
+        </span>
+        <span class="d-flex flex-column align-items-end">
+            <span class="fw-semibold">
+                {{order.total | currency: 'Pkr '}}
+            </span>
+            <span class="d-flex gap-2 align-items-center">
+                <svg cIcon name="cilClock"></svg>
+                <small *ngIf="order.updatedOn else createdOnBlock">{{order.updatedOn | date:'hh:mm a / MMM dd, YYYY'}}</small>
+                <ng-template #createdOnBlock>
+                    <small>{{order.createdOn | date:'hh:mm a / MMM dd, YYYY'}}</small>
+                </ng-template>
+            </span>
+        </span>
+    </span>
 </ng-template>

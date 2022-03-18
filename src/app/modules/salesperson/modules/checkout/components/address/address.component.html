@@ -1,5 +1,6 @@
 <c-row>
-    <c-col class="d-flex justify-content-end">
+    <c-col class="d-flex gap-2 justify-content-end">
+        <!-- <label cFormCheckLabel for="isDelivery"></label> -->
         <c-form-check [switch]="true">
             <input cFormCheckInput [(ngModel)]="isDelivery" (ngModelChange)="updateCardDelivery()" type="checkbox" />
             <label cFormCheckLabel for="isDelivery">Is Delivery</label>

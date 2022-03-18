@@ -2,6 +2,7 @@ import { Address } from "./address";
 import { Branch } from "./branch";
 import { Customer } from "./customer";
 import { MenuItem } from "./menu";
+import { SalesPerson } from "./sales-person";
 
 export class Order {
     id?: number
@@ -9,6 +10,7 @@ export class Order {
     address?: Address
     branchId?: string
     branch?: Branch
+    salesperson?: SalesPerson
     customer?: Customer
     items: MenuItem[] = []
     subTotal = 0;
@@ -26,8 +28,9 @@ export enum OrderStatus {
     PENDING = 'PENDING',
     ACCEPTED = 'ACCEPTED',
     IN_PROGRESS = 'IN_PROGRESS',
-    DISPATCH = 'DISPATCH',
+    DISPATCHED = 'DISPATCHED',
     DELIVERED = 'DELIVERED',
-    RETURN = 'RETURN',
-    CANCELED = 'CANCELED'
+    RETURNED = 'RETURNED',
+    CANCELED = 'CANCELED',
+    COMPLETED = 'COMPLETED'
 }

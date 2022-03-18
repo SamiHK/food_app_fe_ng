@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule, BadgeModule, ButtonModule, CardModule, FormModule, GridModule, NavModule, SidebarModule, SpinnerModule, TableModule, TooltipModule } from '@coreui/angular';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconModule } from '@coreui/icons-angular';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -35,14 +35,13 @@ const NGX_BOOTSTRAP_MODULES = [
 
 @NgModule({
   declarations: [
-    OrderListComponent,
-    OrderDetailComponent
+    OrderListComponent
   ],
   imports: [
     CommonModule,
     OrderRoutingModule,
-    ...CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES,
-    FormsModule,
+    ...CORE_UI_MODULES, ...NGX_BOOTSTRAP_MODULES, 
+    FormsModule
   ]
 })
 export class OrderModule { }

@@ -142,7 +142,12 @@ export class AddressComponent implements OnInit, OnDestroy {
   createOrder() {
     if (this.cart) {
       let order: Order = { ...this.cart, subTotal: this.cart.subTotal, address: this.selectedAddress }
-      order.status = OrderStatus.ACCEPTED
+      
+      if(order.isDelivery)
+        order.status = OrderStatus.ACCEPTED
+      else
+        order.status = OrderStatus.COMPLETED
+
       order.gst = this.settingService.getGST()
       order.deliveryCharges = this.settingService.getDeliveryCharges()
 

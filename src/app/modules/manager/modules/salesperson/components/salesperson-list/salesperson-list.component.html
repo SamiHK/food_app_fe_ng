@@ -21,9 +21,40 @@
                 </form>
             </c-col>
         </c-row>
-        <hr>
-        <c-row>
-            <c-col>
+        <c-row class="mt-3">
+            <c-col *ngIf="isLoading else loadedBlock">
+                <c-card *ngFor="let i of page.items">
+                    <c-card-body>
+                        <c-spinner size="sm"></c-spinner>    
+                    </c-card-body>
+                </c-card>
+            </c-col>
+            <ng-template #loadedBlock>
+                <c-col>
+                    <c-card *ngFor="let i of page.items" class="mb-1">
+                        <c-card-body>
+                            <span class="d-flex justify-content-between">
+                                <span class="d-flex flex-grow-1 gap-2 align-items-center" [routerLink]="[i.id]">
+                                    @{{i.username}}
+                                    <h6 class="m-0">
+                                        <span *ngIf="i.fullName">
+                                            {{i.fullName}}
+                                        </span>
+                                    </h6>
+                                </span>
+                                <app-user-active-switch [user]="i"></app-user-active-switch>
+                            </span>
+                        </c-card-body>
+                    </c-card>
+                    <c-card *ngIf="page.items.length == 0">
+                        <c-card-body>
+                            Empty Block
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+                <pagination class="mt-2" [totalItems]="page.total" [(ngModel)]="page.number" (pageChanged)="onPageChange($event)"></pagination>
+            </ng-template>
+            <!-- <c-col>
                 <table cTable hover>
                     <thead>
                         <tr>
@@ -42,7 +73,6 @@
                         <ng-template #showResult>
                             <tr *ngFor="let i of page.items" [ngClass]="{'table-dark': !i.enabled}">
                                 <td>
-                                    <app-user-active-switch [user]="i"></app-user-active-switch>
                                 </td>
                                 <td [routerLink]="[i.id]">{{i.username}}</td>
                                 <td [routerLink]="[i.id]">{{i.email}}</td>
@@ -56,9 +86,8 @@
                         </ng-template>
                     </tbody>
                 </table>
-                <pagination [totalItems]="page.total" [(ngModel)]="page.number" 
-                 (pageChanged)="onPageChange($event)"></pagination>
-            </c-col>
+                
+            </c-col> -->
         </c-row>
     </c-card-body>
 </c-card>

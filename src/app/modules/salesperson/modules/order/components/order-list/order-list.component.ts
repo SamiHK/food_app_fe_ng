@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Order } from 'src/app/models/order';
+import { Order, OrderStatus } from 'src/app/models/order';
 import { Page } from 'src/app/models/page';
 import { OrderService } from 'src/app/modules/salesperson/services/order.service';
 
@@ -41,6 +41,30 @@ export class OrderListComponent implements OnInit {
 
   onPageChange(event: any) {
     this.loadOrders(event.page, this.status)
+  }
+
+  changingStatus = false;
+  async changeStatus(orderId?: number, status?: String){
+    // console.log(orderId);
+    // console.log(status);
+    if(orderId && status){
+      if(status == OrderStatus.PENDING){
+        status = OrderStatus.ACCEPTED;
+      } else if(status == OrderStatus.ACCEPTED){
+        status = OrderStatus.IN_PROGRESS;
+      } else if(status == OrderStatus.IN_PROGRESS){
+        status = OrderStatus.DISPATCHED
+      }
+      this.changingStatus = true;
+      await this.orderService.changeStatus(orderId, status).forEach(o => console.log(o))
+      // this.page.items = this.page.items.filter(i => i.id != orderId) 
+      this.changingStatus = false;
+      this.loadOrders(this.page.number, this.status)
+    }
+  }
+
+  orderCancel(orderId?: number){
+    this.changeStatus(orderId, OrderStatus.CANCELED)
   }
 
 }

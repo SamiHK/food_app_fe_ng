@@ -21,19 +21,32 @@ export class OrderService {
       );
   }
 
-  get(status?: string) {
-    return this.http.get<Order[]>(`${this.BASE_URL}/${status}`)
-      .pipe(
-        catchError(this.commonService.catchError)
-      );
+  get(status?: string, page: number = 1) {
+    return this.http.get<Order[]>(`${this.BASE_URL}/${status}`, {
+      params: {
+        page: page
+      }
+    })
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
   }
-
+  
   getById(id: number) {
     return this.http.get<Order>(`${this.BASE_URL}/detail/${id}`)
       .pipe(
         catchError(this.commonService.catchError)
       );
   }
+
+  cancelOrder(orderId: number){
+    return this.http.get(`${this.BASE_URL}/cancel/${orderId}`)
+    .pipe(
+      catchError(this.commonService.catchError)
+    );
+
+  }
+
 }
 
 

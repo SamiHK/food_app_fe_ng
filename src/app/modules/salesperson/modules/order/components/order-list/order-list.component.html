@@ -16,10 +16,37 @@
 </c-row>
 <c-row class="mt-3">
     <c-col>
-        <c-card *ngFor="let o of page.items">
-            <c-card-body>
+        <c-card *ngFor="let o of page.items" class="mb-2">
+            <c-card-body [routerLink]="['../', 'detail', o.id]">
                 <app-order-list-item-card [cart]="o"></app-order-list-item-card>
             </c-card-body>
+            <ng-template [ngIf]="o.isDelivery" [ngIfElse]="elseIsDeliveryBlock">
+                <span [ngSwitch]="status">
+                    <c-card-footer *ngSwitchCase="'PENDING'" class="d-flex gap-2 justify-content-end">
+                        <button cButton size="sm" (click)="orderCancel(o.id)" color="danger">
+                            Cancel
+                        </button>
+                        <button cButton size="sm" (click)="changeStatus(o.id, o.status)">
+                            Accept
+                        </button>
+                    </c-card-footer>
+                    <c-card-footer *ngSwitchCase="'ACCEPTED'" class="d-flex justify-content-end">
+                        <button cButton size="sm" (click)="changeStatus(o.id, o.status)">
+                            In Progress
+                        </button>
+                    </c-card-footer>
+                    <c-card-footer *ngSwitchCase="'IN_PROGRESS'" class="d-flex justify-content-end">
+                        <button cButton size="sm" (click)="changeStatus(o.id, o.status)">
+                            Dispatch
+                        </button>
+                    </c-card-footer>
+                </span>
+            </ng-template>
+            <ng-template #elseIsDeliveryBlock>
+                <c-card-footer class="d-flex justify-content-end">
+                    In Branch Order
+                </c-card-footer>
+            </ng-template>
         </c-card>
     </c-col>
 </c-row>

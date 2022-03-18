@@ -18,6 +18,15 @@
                 </c-col>
             </c-row>
             <app-user-profile [user]="salesperson"></app-user-profile>
+            <c-row>
+                <c-col>
+                    <c-card>
+                        <c-card-body>
+                            <a cButton [routerLink]="['/manager', 'order']" [queryParams]="{ salespersonId: salesperson.id }" color="dark" variant="outline" type="button" >Order</a>
+                        </c-card-body>
+                    </c-card>
+                </c-col>
+            </c-row>
         </c-col>
     </c-row>
 </ng-template>
