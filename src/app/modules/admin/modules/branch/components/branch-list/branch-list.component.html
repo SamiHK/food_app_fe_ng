@@ -38,7 +38,7 @@
                         [ngClass]="{'border-bottom': !last, 'mb-2': last}" class="border-0 hover-bg-light">
                         <c-card-body>
                             <span class="d-flex justify-content-md-between flex-md-row flex-column">
-                                <a class="d-flex gap-2 flex-md-grow-1 text-decoration-none text-body"
+                                <a class="d-flex flex-column flex-md-grow-1 text-decoration-none text-body"
                                     routerLink="{{i.id}}">
                                     <span class="d-flex fw-bold">{{i.code}}</span>
                                     <span *ngIf="i.name">{{i.name}}</span>

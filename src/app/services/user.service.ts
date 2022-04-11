@@ -11,7 +11,7 @@ import { CommonService } from './common.service';
 })
 export class UserService {
 
-  private BASE_URL = `${environment.BASE_URL}/user`;
+  private BASE_URL = `${environment.API_BASE_URL}/user`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 

@@ -4,7 +4,7 @@
     </c-card-body>
 </c-card>
 <ng-template #loadedBlock>
-    <c-container class="mb-4 d-flex p-2 flex-md-row flex-column justify-content-start bg-white sticky-top">
+    <c-container class="mb-4 d-flex gap-2 p-2 flex-md-row flex-column justify-content-start bg-white sticky-top">
         <form class="d-flex flex-row gap-2" (ngSubmit)="searchToggle()">
             <span *ngIf="isSearch" class="d-flex flex-grow-1">
                 <c-input-group>
@@ -15,7 +15,7 @@
                 </c-input-group>
             </span>
             <span>
-                <button cButton type="submit" color="danger" size="">
+                <button cButton type="submit" color="primary" size="">
                     <c-spinner size="sm" *ngIf="isSearching else searchIconBlock"></c-spinner>
                     <ng-template #searchIconBlock>
                         <svg cIcon name="cilSearch" size="sm"></svg>
@@ -23,9 +23,9 @@
                 </button>
             </span>
         </form>
-        <c-nav class="">
+        <c-nav class="d-flex gap-1" variant="pills">
             <c-nav-item *ngFor="let m of menus">
-                <a (click)="scrollTo(m)" cNavLink routerLinkActive="active">{{m.title}}</a>
+                <a (click)="scrollTo(m)" cNavLink class="menu-nav" id="menu-nav-{{m.id}}">{{m.title}}</a>
             </c-nav-item>
         </c-nav>
     </c-container>
@@ -45,42 +45,41 @@
                     <p cCardText class="text-truncate">{{m.description}}</p>
                 </c-card-body>
             </c-card>
-            <c-row [lg]="2" [md]="2" [sm]="1" [gutter]="2">
+            <c-row [lg]="3" [md]="3" [sm]="1" [gutter]="2">
                 <c-col *ngFor="let mi of m.items">
-                    <c-card class="d-flex flex-row" [ngClass]="{'text-muted': !mi.isAvailable}">
+                    <c-card class="d-flex flex-row hover-primary" [ngClass]="{'text-muted': !mi.isAvailable}">
                         <img [cCardImg] [src]="mi.primaryImg" class="img-md"
                             [ngClass]="{'img-gray-scale': !mi.isAvailable}">
-                        <c-card class="flex-grow-1 border-0 rounded-0 rounded-end">
-                            <c-card-body class="d-flex flex-column">
+                        <!-- <c-card class="flex-grow-1 border-0 rounded-0 rounded-end"> -->
+                            <c-card-body class="d-flex flex-column text-truncate">
                                 <span class="d-flex justify-content-between">
                                     <h6 cCardTitle>{{mi.title}}</h6>
                                 </span>
-                                <p *ngIf="mi.description" cCardText class="fw-normal text-truncate mb-1">
-                                    {{mi.description}}</p>
+                                <p *ngIf="mi.description" cCardText class="fw-normal mb-1" 
+                                    [ngClass]="{'text-truncate': mi.descriptionTruncated, 'text-wrap': !mi.descriptionTruncated}"  (click)="changeDescriptionStyle(mi)" >{{mi.description}}</p>
                                 <span class="d-flex flex-grow-1"></span>
-                                <span class="d-flex flex-lg-row flex-sm-row flex-column
-                                align-items-end justify-content-sm-between gap-2">
+                                <small class="fw-semibold">{{mi.unit}}</small>
+                                <span class="d-flex flex-lg-row flex-sm-row flex-column align-items-end justify-content-sm-between gap-2">
                                     <span class="d-flex flex-column gap-1">
-                                        <small class="fw-semibold">{{mi.unit}}</small>
                                         <span>
-                                            <span class="d-flex flex-column flex-md-row gap-2">
-                                                <c-badge color="primary" shape="rounded-pill">
-                                                    <span>
-                                                        {{ mi.price | currency:'Pkr '}}
-                                                    </span>
-                                                </c-badge>
-                                                <c-badge *ngIf="mi.oldPrice" color="danger" shape="rounded-pill">
-                                                    <span class="text-decoration-line-through">
-                                                        {{ mi.oldPrice | currency:'Pkr '}}
-                                                    </span>
-                                                </c-badge>
-                                            </span>
+                                            <c-badge *ngIf="mi.oldPrice" color="dark" shape="rounded-pill">
+                                                <span class="text-decoration-line-through">
+                                                    {{ mi.oldPrice | currency:'Pkr '}}
+                                                </span>
+                                            </c-badge>
+                                        </span>
+                                        <span>
+                                            <c-badge color="primary" shape="rounded-pill">
+                                                <span>
+                                                    {{ mi.price | currency:'Pkr '}}
+                                                </span>
+                                            </c-badge>
                                         </span>
                                     </span>
                                     <span class="d-block">
                                         <button cButton (click)="addToCart(mi)" size="sm"
                                             *ngIf="mi.isAvailable else notAvailable"
-                                            [ngClass]="{'btn-light': mi.quantity, 'btn-danger': !mi.quantity}"
+                                            [ngClass]="{'btn-light': mi.quantity, 'btn-primary': !mi.quantity}"
                                             class="position-relative">
                                             <span *ngIf="mi.quantity && mi.quantity > 0 else addToCartBlock">
                                                 Add more
@@ -89,7 +88,7 @@
                                                 Add to Cart
                                             </ng-template>
                                             <!-- <svg cIcon name="cilCart" size="sm"></svg> -->
-                                            <c-badge *ngIf="mi.quantity && mi.quantity > 0" color="danger"
+                                            <c-badge *ngIf="mi.quantity && mi.quantity > 0" color="primary"
                                                 shape="rounded-pill"
                                                 class="position-absolute top-0 start-100 translate-middle">
                                                 {{mi.quantity}}</c-badge>
@@ -102,7 +101,7 @@
                                     </span>
                                 </span>
                             </c-card-body>
-                        </c-card>
+                        <!-- </c-card> -->
                     </c-card>
                 </c-col>
             </c-row>

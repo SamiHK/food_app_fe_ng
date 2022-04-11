@@ -10,7 +10,7 @@ import { CommonService } from './common.service';
 })
 export class ProfileService {
 
-  private BASE_URL = `${environment.BASE_URL}/profile`;
+  private BASE_URL = `${environment.API_BASE_URL}/profile`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 

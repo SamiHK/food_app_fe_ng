@@ -16,6 +16,7 @@ export class MenuItem {
     id: number | null = null;
     title: string | null = null;
     description: string | null = null;
+    descriptionTruncated = true
     menuId: number | null = null;
     primaryImg: string | null = null;
     price: number = 0;

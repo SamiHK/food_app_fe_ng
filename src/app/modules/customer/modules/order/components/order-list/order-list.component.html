@@ -16,7 +16,7 @@
 </c-row>
 <c-row class="mt-3">
     <c-col>
-        <c-card *ngFor="let order of page.items">
+        <c-card *ngFor="let order of page.items" class="mb-2">
             <c-card-body [routerLink]="['../', 'detail', order.id]">
                 <span class="d-flex justify-content-between">
                     <span class="d-flex gap-2 flex-row">

@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class BranchService {
 
-  private BASE_URL = `${environment.BASE_URL}/branch`;
+  private BASE_URL = `${environment.API_BASE_URL}/branch`;
 
   constructor(private http: HttpClient, private commonService: CommonService) { }
 

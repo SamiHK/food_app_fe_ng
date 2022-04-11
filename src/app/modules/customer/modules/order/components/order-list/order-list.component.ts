@@ -44,7 +44,7 @@ export class OrderListComponent implements OnInit {
   }
 
   cancelOrder(orderId: number){
-    this.orderService.cancelOrder(orderId).forEach(v => this.loadOrders())
+    this.orderService.cancelOrder(orderId).forEach(v => this.loadOrders(this.page.number, this.status))
   }
 
 }

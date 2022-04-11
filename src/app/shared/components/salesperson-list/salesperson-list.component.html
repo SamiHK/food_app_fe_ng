@@ -10,42 +10,33 @@
                 </form>
             </c-col>
         </c-row>
-        <hr>
-        <c-row>
+        <!-- <hr> -->
+        <c-row class="mt-3">
             <c-col>
-                <table cTable hover>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Full name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="isLoading else showResult">
-                            <td colspan="5" class="text-center my-2">
-                                <c-spinner aria-hidden="true" label="Loading..."></c-spinner>
-                            </td>
-                        </tr>
-                        <ng-template #showResult>
-                            <tr *ngFor="let i of page.items" [ngClass]="{'table-dark': !i.enabled}">
-                                <td>
-                                    <app-user-active-switch [user]="i"></app-user-active-switch>
-                                </td>
-                                <td>{{i.username}}</td>
-                                <td>{{i.email}}</td>
-                                <td>{{i.fullName}}</td>
-                            </tr>
-                            <tr *ngIf="page.items.length == 0">
-                                <td colspan="5" class="text-center">
-                                    Empty
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-                <pagination [totalItems]="page.total" [(ngModel)]="page.number" 
+                <c-card *ngIf="isLoading else showResult">
+                    <c-card-body>
+                        <c-spinner aria-hidden="true" label="Loading..."></c-spinner>
+                    </c-card-body>
+                </c-card>
+                <ng-template #showResult>
+                    <c-card *ngFor="let i of page.items; let last = last" [ngClass]="{'table-dark': !i.enabled, 'border-bottom': !last, 'mb-2': last}" class="border-0 hover-bg-light">
+                        <c-card-body>
+                            <span class="d-flex justify-content-md-between flex-md-row flex-column">
+                                <span class="flex-md-grow-1">
+                                    <span class="d-flex gap-2">
+                                        <app-user-active-switch [user]="i"></app-user-active-switch>
+                                        <span class="d-flex flex-column gap-2">
+                                            <a class="d-flex text-decoration-none text-body fw-bold">@{{i.username}}</a>
+                                            <span *ngIf="i.fullName">{{i.fullName}}</span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <!-- <span class="d-flex text-end fw-semibold">{{i.fullName}}</span> -->
+                            </span>
+                        </c-card-body>
+                    </c-card>
+                </ng-template>
+                <pagination *ngIf="page && page.items && page.items.length > 0" [totalItems]="page.total" [(ngModel)]="page.number" [itemsPerPage]="page.size"
                  (pageChanged)="onPageChange($event)"></pagination>
             </c-col>
         </c-row>

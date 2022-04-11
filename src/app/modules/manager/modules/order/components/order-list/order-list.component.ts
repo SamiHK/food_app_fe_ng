@@ -20,7 +20,7 @@ export class OrderListComponent implements OnInit {
       if(queryParams['salespersonId']){
         this.salespersonId = queryParams['salespersonId']
       }
-      this.loadOrders()
+      this.loadOrders(1)
     })
   }
 

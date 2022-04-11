@@ -6,6 +6,7 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import { Store } from '@ngrx/store';
 import { AuthUser } from 'src/app/models/auth-user';
 import { logoutAction } from 'src/app/ngrx/auth/actions';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 
 @Component({
   selector: 'app-default-header',

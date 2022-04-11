@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Branch } from 'src/app/models/branch';
 import { BranchService } from 'src/app/modules/customer/services/branch.service';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 
 @Component({
   selector: 'app-branch-modal',
@@ -10,14 +11,17 @@ import { BranchService } from 'src/app/modules/customer/services/branch.service'
 })
 export class BranchModalComponent implements OnInit {
 
+  darkLogo?: string
   selectedBranch?: Branch;
   branches: Branch[] = [];
 
   constructor(
     private branchService: BranchService,
+    private appSettingService: AppSettingService,
     public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+    this.darkLogo = this.appSettingService.getDarkLogo();
     this.loadBranches()
   }
 

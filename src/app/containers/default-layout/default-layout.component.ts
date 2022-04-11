@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthUser } from 'src/app/models/auth-user';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 import { environment } from 'src/environments/environment';
 import { adminNavItems, customerNavItems, managerNavItems, navItems, salespersonNavItems } from './_nav';
 
@@ -17,10 +18,18 @@ export class DefaultLayoutComponent implements OnInit {
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };
+  
+  brandFull?: any;
 
-  constructor(private router: Router, private store: Store<{ 'auth': AuthUser }>) {}
+  constructor(private router: Router, private store: Store<{ 'auth': AuthUser }>, private appSettingService: AppSettingService) {}
 
   ngOnInit(): void {
+    this.brandFull = {
+      src: this.appSettingService.getLightLogo(),
+      width: 190,
+      height: 35,
+      alt: 'Food App Logo'
+    }
     this.store.select('auth').forEach(v => {
       // console.log(v);
       if (v == null) {

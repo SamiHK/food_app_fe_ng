@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SalespersonService {
 
-  private BASE_URL = `${environment.BASE_URL}/manager/salesperson`;
+  private BASE_URL = `${environment.API_BASE_URL}/manager/salesperson`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 

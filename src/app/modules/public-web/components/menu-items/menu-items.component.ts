@@ -58,21 +58,25 @@ export class MenuItemsComponent implements OnInit {
   addToCart(m: MenuItem) {
     this.cartStore.dispatch(addItemToCartAction(m))
   }
-
+  
   ngAfterViewChecked(): void {
     // console.log(this.cards)
     if (!this.selectedMenu) {
       let menuId = this.route.snapshot.params['id'];
+      // console.log(menuId);
       if (menuId) {
         let element = document.querySelector(`#menu-${menuId}`);
+        // console.log(element)
         if (element) {
+          // this.scrollTo()
           element.scrollIntoView({
             behavior: 'smooth', block: 'start'
           })
           this.selectedMenu = true;
+          document.querySelector(`#menu-nav-${menuId}`)?.classList.add('active');
         }
         // console.log(menuId);
-      }
+      }        
     }
   }
 
@@ -129,6 +133,8 @@ export class MenuItemsComponent implements OnInit {
 
   scrollTo(menu: Menu) {
     if (menu && menu.id) {
+      document.querySelectorAll(`.menu-nav`).forEach(e => e.classList.remove('active'));
+      document.querySelector(`#menu-nav-${menu.id}`)?.classList.add('active');
       let element = document.querySelector(`#menu-${menu.id}`);
       if (element) {
         element.scrollIntoView({
@@ -137,6 +143,10 @@ export class MenuItemsComponent implements OnInit {
         this.selectedMenu = true;
       }
     }
+  }
+
+  changeDescriptionStyle(mi: MenuItem){
+    mi.descriptionTruncated = !mi.descriptionTruncated
   }
 
 }

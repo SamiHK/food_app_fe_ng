@@ -12,6 +12,8 @@ export class UploadButtonComponent implements OnInit {
   @Input('label') public label : string = 'Choose Image';
   @Input('loading') public loading = false;
   @Input('loadingLabel') public loadingLabel = '';
+  @Input('color') public color = 'dark'
+  @Input('variant') public variant?: 'ghost' | 'outline';
 
   @Output('imageChange')
   public imageChange = new EventEmitter<{

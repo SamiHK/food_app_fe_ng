@@ -50,10 +50,14 @@
     filter: alpha(opacity=20);
 }
 
-.card[ng-reflect-router-link] {
-    &:hover {
+.card {
+    &[ng-reflect-router-link]:hover {
         cursor: pointer;
-        border: 1px solid $gray-700;
+        border: 2px solid $primary;
+    }
+    
+    &.hover-primary:hover {
+        border: 2px solid $primary;
     }
 }
 

@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuService {
 
-  private BASE_URL = `${environment.BASE_URL}/manager/menu`;
+  private BASE_URL = `${environment.API_BASE_URL}/manager/menu`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 

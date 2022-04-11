@@ -9,7 +9,7 @@ import { CommonService } from './common.service';
 })
 export class AdminFileService {
 
-  private BASE_URL = `${environment.BASE_URL}/admin/file`;
+  private BASE_URL = `${environment.API_BASE_URL}/admin/file`;
 
   constructor(private http: HttpClient, private commonService: CommonService) {}
 

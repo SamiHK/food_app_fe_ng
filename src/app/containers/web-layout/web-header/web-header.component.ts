@@ -14,6 +14,7 @@ import { MenuService } from 'src/app/modules/customer/modules/menu/services/menu
 import { logoutAction } from 'src/app/ngrx/auth/actions';
 import { selectBranchAction } from 'src/app/ngrx/branch/actions';
 import { changeBranchAction } from 'src/app/ngrx/cart/actions';
+import { AppSettingService } from 'src/app/services/app-setting.service';
 import { BranchModalComponent } from 'src/app/shared/components/branch-modal/branch-modal.component';
 import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../../default-layout/_nav';
 // import { adminNavItems, customerNavItems, managerNavItems, salespersonNavItems } from '../_nav';
@@ -28,6 +29,7 @@ const EXCLUDE_BRANCH_SELECT_ROLES = [USER_ROLE.MANAGER.toString(), USER_ROLE.SAL
 export class WebHeaderComponent extends HeaderComponent implements OnInit {
 
   branch?: Branch;
+  brandFull? : any;
   // @Input() sidebarId: string = "sidebar";
   @Input() user?: AuthUser;
   @Input() totalItemsInCart = 0;
@@ -52,12 +54,19 @@ export class WebHeaderComponent extends HeaderComponent implements OnInit {
     private mService: MenuService,
     private cartStore: Store<{ 'cart': Cart }>,
     private authStore: Store<{ 'auth': AuthUser }>,
-    private branchStore: Store<{ 'branch': Branch }>) {
+    private branchStore: Store<{ 'branch': Branch }>,
+    private appSettingService: AppSettingService) {
     super();
   }
 
   userMenus: INavData[] = customerNavItems;
   ngOnInit() {
+    this.brandFull = {
+      src: this.appSettingService.getDarkLogo(),
+      width: 190,
+      height: 35,
+      alt: 'Food App Logo'
+    }
     this.authStore.select('auth').forEach(v => {
       if (v && v.role) {
         switch (v.role) {

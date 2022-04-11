@@ -33,9 +33,6 @@ export class AppComponent implements OnInit {
         return;
       }
     });
-    this.appSettingService.get().subscribe(s => {
-      // console.log(s)
-      localStorage.setItem('appSetting', JSON.stringify(s))
-    })
+    this.appSettingService.updateAppSettingCache()
   }
 }

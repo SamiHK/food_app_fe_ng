@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, map } from 'rxjs';
 import { Menu, MenuItem } from 'src/app/models/menu';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuService {
 
-  private BASE_URL = `${environment.BASE_URL}/menu`;
+  private BASE_URL = `${environment.API_BASE_URL}/menu`;
 
   constructor(private http: HttpClient, private commonService: CommonService) { }
 
@@ -26,6 +26,10 @@ export class MenuService {
   getMenusAndItems(params?: any) {
     return this.http.get<Menu[]>(`${this.BASE_URL}/all`, { params: params })
       .pipe(
+        map(v => {
+          v.forEach(m => m.items.forEach(mi => mi.descriptionTruncated = true))
+          return v;
+        }),
         catchError(this.commonService.catchError)
       );
   }

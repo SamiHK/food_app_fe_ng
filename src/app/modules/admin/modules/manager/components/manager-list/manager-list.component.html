@@ -36,7 +36,7 @@
                                 <span class="flex-md-grow-1">
                                     <span class="d-flex gap-2">
                                         <app-user-active-switch [user]="i"></app-user-active-switch>
-                                        <span class="d-flex flex-column flex-sm-row gap-2">
+                                        <span class="d-flex flex-column gap-2">
                                             <a class="d-flex text-decoration-none text-body fw-bold" routerLink="{{i.id}}">{{i.username}}</a>
                                             <span *ngIf="i.fullName">{{i.fullName}}</span>
                                         </span>

@@ -10,6 +10,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DealsComponent } from './components/deals/deals.component';
+import { PromosComponent } from './components/promos/promos.component';
 
 const CORE_UI_MODULES = [
   CardModule,
@@ -37,6 +39,8 @@ const NGX_BOOTSTRAP_MODULES = [
   declarations: [
     MenuListComponent,
     MenuItemsComponent,
+    DealsComponent,
+    PromosComponent,
   ],
   imports: [
     CommonModule,
